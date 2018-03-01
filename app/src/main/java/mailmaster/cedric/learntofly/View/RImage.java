@@ -17,7 +17,8 @@ public class RImage implements RObject{
     private int yPos;
 
 
-    private int width = 500;
+    private int width;
+    private int height;
 
     private float rotation;
 
@@ -26,25 +27,25 @@ public class RImage implements RObject{
     private Matrix matrix;
 
 
-    public RImage(int xPos, int yPos, float rotation, Bitmap image) {
+    public RImage(int xPos, int yPos, int width, int height, float rotation, Bitmap image) {
         this.xPos = xPos;
         this.yPos = yPos;
+        this.width = width;
+        this.height = height;
         this.rotation = rotation;
-        this.image = image;
-        int t = 500/image.getWidth();
-
-
-        this.matrix = createMatrix();
-
+        this.image  = Bitmap.createScaledBitmap(
+                image, width, height, false);
+        this.matrix = new Matrix();
+        rotateObject(rotation);
     }
 
-    private Matrix createMatrix(){
-        Matrix matrix = new Matrix();
-        //matrix.setRotate (rotation, calcXPos(xPos), calcXPos(yPos));
-        matrix.postScale(1, 1);
-        matrix.preRotate(rotation, xPos, yPos);
-        return matrix;
+    public void rotateObject(float rotation){
+        this.rotation = rotation;
+        this.matrix.setRotate(rotation,this.image.getWidth()/2,this.image.getHeight()/2);
+        matrix.postTranslate(xPos, yPos);
     }
+
+
 
     private int calcXPos(int x){
         x = x;
