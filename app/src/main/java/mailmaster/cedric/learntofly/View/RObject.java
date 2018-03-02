@@ -14,5 +14,6 @@ public interface RObject {
      */
     public void drawObject(Canvas canvas, Context context);
     public void rotateObject(float rotation);
+    public void applyForce();
 
 }

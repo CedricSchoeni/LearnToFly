@@ -8,13 +8,14 @@ import android.graphics.Matrix;
 import mailmaster.cedric.learntofly.R;
 
 /**
- * Created by adriano.campiotti on 01.03.2018.
+ * Created by cedric.schoeni on 01.03.2018.
  */
 
-public class RImage implements RObject{
+public class RImage implements RObject {
 
     private int xPos;
     private int yPos;
+
 
 
     private int width;
@@ -45,6 +46,10 @@ public class RImage implements RObject{
         matrix.postTranslate(xPos, yPos);
     }
 
+    @Override
+    public void applyForce() {
+
+    }
 
 
     private int calcXPos(int x){
@@ -60,6 +65,5 @@ public class RImage implements RObject{
     @Override
     public void drawObject(Canvas canvas, Context context) {
         canvas.drawBitmap(image, matrix, null);
-
     }
 }

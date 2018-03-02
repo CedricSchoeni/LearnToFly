@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -24,6 +25,7 @@ public class Renderer extends View {
 
     ResourceManager rm;
     Context context;
+    Handler handler;
 
     public List<RObject> renderList;
 
@@ -35,6 +37,7 @@ public class Renderer extends View {
 
         renderList = new ArrayList<RObject>();
 
+        handler = new Handler();
 
         /**
          * most important code
@@ -55,12 +58,15 @@ public class Renderer extends View {
          renderList.add(roi5);
          renderList.add(roi6);
          renderList.add(roi7);
-         renderList.add(roi8);
-         */
+         renderList.add(roi8);*/
 
 
+        startRendering();
     }
 
+    public void startRendering(){
+        handler.postDelayed(periodicUpdate, 33);
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         //super.onDraw(canvas);
@@ -80,4 +86,14 @@ public class Renderer extends View {
             c.drawLine(i * 25,0, i * 25, 600, p);
         }
     }
+
+    private Runnable periodicUpdate = new Runnable () {
+        @Override
+        public void run() {
+            // scheduled another events to be in 10 seconds later
+            handler.postDelayed(periodicUpdate, 33);
+            // below is whatever you want to do
+            invalidate();
+        }
+    };
 }
