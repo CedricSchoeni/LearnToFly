@@ -4,8 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.Log;
 
-import mailmaster.cedric.learntofly.R;
+import mailmaster.cedric.learntofly.Physics.FVector;
+import mailmaster.cedric.learntofly.Physics.PhysicEngine;
 
 /**
  * Created by cedric.schoeni on 01.03.2018.
@@ -13,57 +15,81 @@ import mailmaster.cedric.learntofly.R;
 
 public class RImage implements RObject {
 
-    private int xPos;
-    private int yPos;
 
 
+    private FVector position;
 
     private int width;
     private int height;
 
     private float rotation;
 
+    public float getRotation() {
+        return rotation;
+    }
+
     private Bitmap image;
 
     private Matrix matrix;
 
 
-    public RImage(int xPos, int yPos, int width, int height, float rotation, Bitmap image) {
-        this.xPos = xPos;
-        this.yPos = yPos;
+    public RImage(float xPos, float yPos, int width, int height, float rotation, Bitmap image) {
+
+        position = new FVector(xPos, yPos);
+
+
         this.width = width;
         this.height = height;
         this.rotation = rotation;
         this.image  = Bitmap.createScaledBitmap(
                 image, width, height, false);
         this.matrix = new Matrix();
-        rotateObject(rotation);
+        setRotation(rotation);
     }
 
-    public void rotateObject(float rotation){
+    public void addRotation(float rotation){
+        this.rotation += rotation;
+        this.matrix.setRotate(this.rotation,this.image.getWidth()/2,this.image.getHeight()/2);
+        matrix.postTranslate(position.x, position.y);
+    }
+
+    public void setRotation(float rotation){
         this.rotation = rotation;
         this.matrix.setRotate(rotation,this.image.getWidth()/2,this.image.getHeight()/2);
-        matrix.postTranslate(xPos, yPos);
-    }
-
-    @Override
-    public void applyForce() {
-
+        matrix.postTranslate(position.x, position.y);
     }
 
 
-    private int calcXPos(int x){
-        x = x;
-        return x;
-    }
 
-    private int calcYPos(int y){
-        y = y;
-        return y;
-    }
+
+
 
     @Override
     public void drawObject(Canvas canvas, Context context) {
+
         canvas.drawBitmap(image, matrix, null);
     }
+
+    @Override
+    public boolean outOfScreen(int width, int height) {
+        if (position.x > width + this.width || position.x < 0 - this.width  || position.y > height  + this.height || this.height < 0 - this.width ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updatePosition(FVector v){
+        position.add(v);
+        matrix.postTranslate(v.x, v.y);
+    }
+
+    @Override
+    public void setPosition(FVector v) {
+
+        matrix.postTranslate(v.x - position.x, v.y - position.y);
+        position.set(v.x, v.y);
+    }
+
+
 }

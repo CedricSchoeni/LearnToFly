@@ -3,17 +3,22 @@ package mailmaster.cedric.learntofly.View;
 import android.content.Context;
 import android.graphics.Canvas;
 
+import mailmaster.cedric.learntofly.Physics.FVector;
+
 /**
  * Created by adriano.campiotti on 01.03.2018.
  */
 
 public interface RObject {
 
-    /**
-     * this drawings doesed
-     */
     public void drawObject(Canvas canvas, Context context);
-    public void rotateObject(float rotation);
-    public void applyForce();
+    public boolean outOfScreen(int width, int height);
+    public void updatePosition(FVector v);
+    public void setPosition(FVector v);
+
+    public float getRotation();
+    public void addRotation(float rotation);
+    public void setRotation(float rotation);
+
 
 }
