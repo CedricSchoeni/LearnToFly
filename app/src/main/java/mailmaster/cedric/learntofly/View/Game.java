@@ -85,7 +85,7 @@ public class Game{
     }
 
     private void initForeGround(){
-        player = new Player(new RImage(CANVAS_WIDTH/2,CANVAS_HEIGHT/2,50, 50, 45, rm.drawableToBitmap(r.context, R.drawable.elkenholz)), 10);
+        player = new Player(new RImage(CANVAS_WIDTH/2,CANVAS_HEIGHT/2,50, 50, 0, rm.drawableToBitmap(r.context, R.drawable.elkenholz)), 10);
         r.addObjectToForeground(player.model);
     }
 
@@ -141,8 +141,8 @@ public class Game{
         lastScreenPosition.set(screenPosition.x, screenPosition.y);
         screenPosition.set(gamePosition.x, gamePosition.y);
         screenPosition.mult(screenFactor);
-        screenPosition.x = screenPosition.x % CANVAS_WIDTH * -1;
-        screenPosition.y = screenPosition.y % CANVAS_HEIGHT;
+        screenPosition.x = screenPosition.x * -1;
+        screenPosition.y = screenPosition.y;
         screenDiff.set(screenPosition.x - lastScreenPosition.x, screenPosition.y - lastScreenPosition.y);
     }
 
@@ -160,11 +160,11 @@ public class Game{
 
     public void handlePushDown(){
         //player.addRotation(5);
-        player.addPower(5);
+        player.addPower(25);
     }
 
     public void handleReleaseUp(){
-        player.subPower(5);
+        player.subPower(25);
     }
 
 
