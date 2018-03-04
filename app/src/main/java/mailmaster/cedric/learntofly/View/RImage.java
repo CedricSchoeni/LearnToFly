@@ -29,15 +29,15 @@ public class RImage implements RObject {
     }
 
     private Bitmap image;
+    public int imageID;
 
     private Matrix matrix;
 
 
-    public RImage(float xPos, float yPos, int width, int height, float rotation, Bitmap image) {
+    public RImage(float xPos, float yPos, int width, int height, float rotation, Bitmap image, int id) {
 
         position = new FVector(xPos, yPos);
-
-
+        this.imageID = id;
         this.width = width;
         this.height = height;
         this.rotation = rotation;
@@ -58,11 +58,6 @@ public class RImage implements RObject {
         this.matrix.setRotate(rotation,this.image.getWidth()/2,this.image.getHeight()/2);
         matrix.postTranslate(position.x, position.y);
     }
-
-
-
-
-
 
     @Override
     public void drawObject(Canvas canvas, Context context) {

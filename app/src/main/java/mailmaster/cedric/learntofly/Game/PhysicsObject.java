@@ -13,21 +13,18 @@ import mailmaster.cedric.learntofly.Physics.PhysicEngine;
 public class PhysicsObject {
 
     private FVector position;
-    private FVector velocity;
+    public FVector velocity;
     private FVector acceleration;
 
-    private float mass;
+    public float mass;
     private float power;
-    private final float MAX_POWER_INCREMENT = 30;
-
+    private final float MAX_POWER_EFFICIENCY = 100;
 
     private float maxSpeed;
     private float currSpeed;
     private float speedIncrement;
     private float speedDecrement;
     private FVector lastSpeed;
-
-    private float currentRotation;
 
 
     public float rotation;
@@ -41,7 +38,6 @@ public class PhysicsObject {
         this.power = 0;
         this.mass = mass;
         this.rotation = rotation;
-        this.currentRotation = rotation;
         updatePower();
     }
 
@@ -55,19 +51,14 @@ public class PhysicsObject {
             }
             updateVelocity(currSpeed);
         } else {
-            if (currSpeed >= maxSpeed){
-                if (currSpeed - speedDecrement < maxSpeed){
-                    currSpeed = 0;
-                } else {
+            if (currSpeed > maxSpeed){
+                if (currSpeed > maxSpeed){
                     currSpeed -= speedDecrement;
                 }
-
                 updateVelocity(currSpeed);
-
             } else {
                 updateVelocity(maxSpeed);
-
-        }
+            }
         }
 
         velocity.add(PhysicEngine.GRAVITY);
@@ -88,7 +79,7 @@ public class PhysicsObject {
         //Log.e("Power", Float.toString(power));
 
 
-        velocity.add(acceleration);
+        //velocity.add(acceleration);
 
         //velocity.scale(PhysicEngine.AIR_DRAG);
         position.add(velocity);
@@ -136,11 +127,11 @@ public class PhysicsObject {
     }
 
     private void updatePower(){
+        speedDecrement = maxSpeed / 100;
         maxSpeed = ((power * 10) - mass) / 5;
-        maxSpeed = (maxSpeed > 0) ? maxSpeed : 0;
-        speedDecrement = speedIncrement;
-        speedIncrement = maxSpeed / 50;
-
+        maxSpeed = (maxSpeed > 0) ? maxSpeed : 0.0000001f;
+        float powerDelay = (maxSpeed > MAX_POWER_EFFICIENCY) ? 5 : maxSpeed / MAX_POWER_EFFICIENCY * 5;
+        speedIncrement = maxSpeed / powerDelay;
     }
 
 

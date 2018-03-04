@@ -42,8 +42,9 @@ import mailmaster.cedric.learntofly.Physics.FVector;
 
 public class Renderer extends View {
 
-    public final int FPS = 30;
-    public final int FPS_DELAY = 1000 / FPS;
+    public static final int FPS = 60;
+    public static final int FPS_DELAY = 1000 / FPS;
+    public boolean playing = false;
 
 
 
@@ -95,6 +96,11 @@ public class Renderer extends View {
 
     public void startRendering(){
         this.setOnTouchListener(handleTouch);
+    }
+
+    public void startGame(){
+        playing = true;
+        g.startGame();
         handler.postDelayed(periodicUpdate, FPS_DELAY);
     }
 
@@ -145,7 +151,13 @@ public class Renderer extends View {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     //Log.i("TAG", "touched down");
-                    g.handlePushDown();
+
+                    if (playing)
+                        if (x > getWidth()/2)
+                            g.rightSideClick();
+                        else
+                            g.leftSideClick();
+                        g.handlePushDown();
                     break;
                 case MotionEvent.ACTION_MOVE:
                     //Log.i("TAG", "moving: (" + x + ", " + y + ")");

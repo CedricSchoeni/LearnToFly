@@ -19,7 +19,7 @@ public class ResourceManager extends AppCompatActivity {
 
 
 
-    public Bitmap drawableToBitmap(Context c, int d){
+    public static Bitmap drawableToBitmap(Context c, int d){
         return BitmapFactory.decodeResource(c.getResources(),d);
     }
 
