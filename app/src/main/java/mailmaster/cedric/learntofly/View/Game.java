@@ -35,7 +35,7 @@ public class Game{
 
     private Renderer r;
 
-    private final int CLOUD_DELAY = 2500;
+    private final int CLOUD_DELAY = 1000;
     private int cloudTimer = 0;
 
     private int wind_delay = 2500;
