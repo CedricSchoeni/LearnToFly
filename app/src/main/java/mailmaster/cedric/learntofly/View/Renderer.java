@@ -1,6 +1,7 @@
 package mailmaster.cedric.learntofly.View;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mailmaster.cedric.learntofly.MainActivity;
+import mailmaster.cedric.learntofly.MainMenu;
 import mailmaster.cedric.learntofly.Physics.FVector;
 
 /**
@@ -102,6 +104,13 @@ public class Renderer extends View {
         playing = true;
         g.startGame();
         handler.postDelayed(periodicUpdate, FPS_DELAY);
+
+    }
+
+    public void stopGame(){
+        handler.removeCallbacksAndMessages(null);
+        Intent intent = new Intent(main,MainMenu.class);
+        main.startActivity(intent);
     }
 
     @Override

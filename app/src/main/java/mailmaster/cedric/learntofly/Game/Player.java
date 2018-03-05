@@ -38,6 +38,7 @@ public class Player extends PhysicsObject implements MovableObject {
 
         stages.add(new Stage_Rocket_v1());
         stages.add(new Stage_Rocket_v2());
+        stages.add(new Stage_Rocket_v1());
         launcher = new Launcher_Canon_v1();
 
     }
@@ -78,9 +79,10 @@ public class Player extends PhysicsObject implements MovableObject {
     }
 
     public void update(){
+        boolean empty = true;
         frameCounter += Renderer.FPS_DELAY;
         for (Stages s : stages){
-
+            if (s.getFuel() > 0)
             if (s.getFuel() <= frameCounter && s.getActive()) {
                 s.setActive(false);
                 subPower(s.getPower());

@@ -22,7 +22,6 @@ public class MainMenu extends AppCompatActivity {
 
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Code here executes on main thread after user presses button
                 Intent intent = new Intent(MainMenu.this,MainActivity.class);
                 startActivity(intent);
             }

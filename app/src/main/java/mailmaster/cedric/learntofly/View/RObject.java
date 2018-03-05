@@ -12,7 +12,7 @@ import mailmaster.cedric.learntofly.Physics.FVector;
 public interface RObject {
 
     public void drawObject(Canvas canvas, Context context);
-    public boolean outOfScreen(int width, int height);
+    public boolean outOfScreen(int width, int height, int startx, int starty);
     public void updatePosition(FVector v);
     public void setPosition(FVector v);
 

@@ -81,7 +81,7 @@ public class PhysicsObject {
 
         //velocity.add(acceleration);
 
-        //velocity.scale(PhysicEngine.AIR_DRAG);
+        velocity.scale(PhysicEngine.AIR_DRAG);
         position.add(velocity);
         return position;
     }

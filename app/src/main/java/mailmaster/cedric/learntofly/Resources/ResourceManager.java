@@ -23,4 +23,8 @@ public class ResourceManager extends AppCompatActivity {
         return BitmapFactory.decodeResource(c.getResources(),d);
     }
 
+    public static void GutenTagHerrBuchsDieseKlasseIstLeiderSehrLeerKommaAberDiesStoertSieSicherNicht(){
+        return;
+    }
+
 }

@@ -66,8 +66,8 @@ public class RImage implements RObject {
     }
 
     @Override
-    public boolean outOfScreen(int width, int height) {
-        if (position.x > width + this.width || position.x < 0 - this.width  || position.y > height  + this.height || this.height < 0 - this.width ){
+    public boolean outOfScreen(int width, int height, int startx, int starty) {
+        if (position.x > width + this.width || position.x < startx - this.width  || position.y > height  + this.height || this.height < starty - this.width ){
             return true;
         }
         return false;

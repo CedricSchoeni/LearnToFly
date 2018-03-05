@@ -35,18 +35,25 @@ public class Game{
 
     private Renderer r;
 
-    private final int CLOUD_DELAY = 1000;
-    private int cloudTimer = 0;
+
 
     private int wind_delay = 2500;
     private int windTimer = 0;
     private FVector wind = new FVector(0,0);
     private float windRotation = 0;
 
-    private final int CLOUD_LIMIT = 4;
+    private final int CLOUD_DELAY = 250;
+    private int cloudTimer = 0;
+    private final int CLOUD_LIMIT = 8;
     private List<Cloud> clouds;
 
     private Player player;
+    float rotation = 0;
+
+    private final int END_DELAY = 2500;
+    private int endTimer = 0;
+    private int oldVelocity = 0;
+    private final int END_VELOCITY = 2; // this value changes with the fps - 30fps = ??
 
 
     private RObject background_image;
@@ -87,7 +94,7 @@ public class Game{
     ImageButton stage2;
     ImageButton stage3;
     ImageButton stage4;
-
+    int temp=0;
     public Game(Renderer r){
         this.r = r;
 
@@ -163,6 +170,7 @@ public class Game{
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+               int a =temp;
                 player.startStage();
             }
         });
@@ -181,7 +189,7 @@ public class Game{
     }
 
     private void initForeGround(){
-        player = new Player(new RImage(CANVAS_WIDTH/2 - 25,CANVAS_HEIGHT*1.75f/3 - 25,50, 50, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.elkenholz), R.drawable.elkenholz), 10);
+        player = new Player(new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1), R.drawable.character_beta_v1), 10);
     }
 
 
@@ -228,7 +236,7 @@ public class Game{
         Iterator<Cloud> i = clouds.iterator();
         while (i.hasNext()) {
             RObject a = i.next().model;
-            if (a.outOfScreen(CANVAS_WIDTH, CANVAS_HEIGHT)) {
+            if (a.outOfScreen(CANVAS_WIDTH + 250, CANVAS_HEIGHT + 125, -250, -125)) {
                 i.remove();
                 r.removeObjectFromBackground(a);
             }
@@ -238,8 +246,9 @@ public class Game{
         if (cloudTimer >= CLOUD_DELAY){
             cloudTimer = 0;
             if (clouds.size() < CLOUD_LIMIT){
-                int x = (int) (Math.random() * CANVAS_WIDTH);
-                int y = (int) (Math.random() * CANVAS_HEIGHT);
+
+                int x = (player.velocity.x > 0) ? CANVAS_WIDTH + 250 : -250;
+                int y = (player.velocity.y > 0) ? -125 : CANVAS_HEIGHT + 125;
 
                 Cloud cloud = new Cloud(new RImage(x,y,250, 125, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.cloud_v1), R.drawable.cloud_v1));
                 r.addObjectToBackground(cloud.model);
@@ -247,6 +256,27 @@ public class Game{
 
             }
         }
+
+        checkForEnd();
+
+    }
+
+    private void checkForEnd(){
+        endTimer += r.FPS_DELAY;
+        if (endTimer >= END_DELAY) {
+            endTimer = 0;
+            int currentVelocity = (int) player.velocity.mag();
+            if (currentVelocity == oldVelocity && oldVelocity == END_VELOCITY){
+                stopGame();
+                r.stopGame();
+            }
+            oldVelocity = (int) player.velocity.mag();
+
+        }
+    }
+
+    private void stopGame(){
+        handler.removeCallbacksAndMessages(null);
     }
 
     private void wind(){
@@ -290,8 +320,6 @@ public class Game{
     public void handleReleaseUp(){
         rotation = 0;
     }
-
-    float rotation = 0;
 
     public void leftSideClick(){
         rotation = -4f;
