@@ -1,18 +1,16 @@
 package mailmaster.cedric.learntofly.Game;
 
 import android.os.Handler;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mailmaster.cedric.learntofly.Game._Launchers.Launcher_Canon_v1;
 import mailmaster.cedric.learntofly.Game._Launchers.Launchers;
-import mailmaster.cedric.learntofly.Game._Stages.Stage_Rocket_v1;
-import mailmaster.cedric.learntofly.Game._Stages.Stage_Rocket_v2;
-import mailmaster.cedric.learntofly.Game._Stages.Stages;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v2;
+import mailmaster.cedric.learntofly.Game.FlightDevices.FlightDevice;
 import mailmaster.cedric.learntofly.Physics.FVector;
-import mailmaster.cedric.learntofly.Physics.PhysicEngine;
 import mailmaster.cedric.learntofly.View.RObject;
 import mailmaster.cedric.learntofly.View.Renderer;
 
@@ -24,7 +22,7 @@ public class Player extends PhysicsObject implements MovableObject {
 
     public RObject model;
 
-    public List<Stages> stages;
+    public List<FlightDevice> stages;
     public Launchers launcher;
 
     public boolean stagesActive = false;
@@ -32,7 +30,7 @@ public class Player extends PhysicsObject implements MovableObject {
 
     public Player(RObject model, float mass) {
         super(mass, model.getRotation());
-        stages = new ArrayList<Stages>();
+        stages = new ArrayList<FlightDevice>();
         this.model = model;
 
 
@@ -61,7 +59,7 @@ public class Player extends PhysicsObject implements MovableObject {
 
     public void startStage(){
         if (!stagesActive){
-            for (Stages s : stages){
+            for (FlightDevice s : stages){
                 super.mass += s.getMass();
                 super.addPower(s.getPower());
                 s.setActive(true);
@@ -81,7 +79,7 @@ public class Player extends PhysicsObject implements MovableObject {
     public void update(){
         boolean empty = true;
         frameCounter += Renderer.FPS_DELAY;
-        for (Stages s : stages){
+        for (FlightDevice s : stages){
             if (s.getFuel() > 0)
             if (s.getFuel() <= frameCounter && s.getActive()) {
                 s.setActive(false);

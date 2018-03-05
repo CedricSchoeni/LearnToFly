@@ -1,4 +1,4 @@
-package mailmaster.cedric.learntofly.Game._Stages;
+package mailmaster.cedric.learntofly.Game.FlightDevices;
 
 import mailmaster.cedric.learntofly.View.RImage;
 
@@ -6,7 +6,7 @@ import mailmaster.cedric.learntofly.View.RImage;
  * Created by Cedric on 04.03.2018.
  */
 
-public interface Stages {
+public interface FlightDevice {
 
     public RImage getModel();
 

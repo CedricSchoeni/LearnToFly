@@ -59,10 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar1"
@@ -81,10 +81,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="88dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -104,10 +104,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="168dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
@@ -127,10 +127,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="248dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout"
-        android:layout_marginLeft="8dp" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar4"
@@ -143,5 +143,93 @@
         app:layout_constraintEnd_toEndOf="@+id/imageButton1"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageButton1" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar5"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="8dp"
+        android:progressTint="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/imageButton5" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="88dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar6"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="80dp"
+        android:progressTint="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar5"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/imageButton5" />
+
+    <ImageButton
+        android:id="@+id/imageButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="168dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar7"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="160dp"
+        android:progressTint="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar5"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/imageButton5" />
+
+    <ImageButton
+        android:id="@+id/imageButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="248dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+
+    <ProgressBar
+        android:id="@+id/progressBar8"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        android:layout_marginBottom="240dp"
+        android:progressTint="@android:color/holo_orange_dark"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBar5"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton5"
+        app:layout_constraintStart_toStartOf="@+id/imageButton5" />
 
 </android.support.constraint.ConstraintLayout>
