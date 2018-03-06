@@ -82,7 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("DROP TABLE IF EXISTS ");
         sb.append(item.TABLE);
         sqLiteDatabase.execSQL(sb.toString());
-        
+
         onCreate(sqLiteDatabase);
     }
 

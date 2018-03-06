@@ -40,6 +40,7 @@ public class Shop extends AppCompatActivity {
 
         listView=(ListView)findViewById(R.id.list);
         DatabaseHelper dbhelper = new DatabaseHelper(this);
+        dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         List<Stage> stages = dbhelper.getAllStages();
         dataModels= new ArrayList<>();
         dataModels.add(new DataModel("Empty","none","none","none"));
