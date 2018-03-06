@@ -72,8 +72,4 @@ public class FVector {
     public float mag(){
         return (float)(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
     }
-    private float direction;
-
-
-
 }

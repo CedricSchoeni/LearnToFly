@@ -62,7 +62,7 @@ public class Game{
 
     public FVector gamePosition = new FVector(0,0);
     public FVector screenPosition = new FVector(0,0);
-    public final float screenFactor = 0.1f; // actual position of background objects is screenFactor * gamePosition
+    public final float screenFactor = 0.01f; // actual position of background objects is screenFactor * gamePosition
 
     Handler handler;
 
@@ -252,6 +252,12 @@ public class Game{
                 new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
                         RImage.combine(ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
                                 ResourceManager.drawableToBitmap(r.context, R.drawable.rocket_v1)), R.drawable.character_beta_v1), 10);*/
+        /*
+        RObject ro = new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
+                ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
+                R.drawable.character_beta_v1);
+        ro = ro.combine()*/
+
         player = new Player(
                 new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
                         ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
@@ -306,7 +312,6 @@ public class Game{
         cloudTimer += r.FPS_DELAY;
         if (cloudTimer >= CLOUD_DELAY){
             CLOUD_DELAY = (player.getSpeed() < 10) ? 750 : (int)(75000/player.getSpeed());
-            Log.e("Speed", Float.toString(player.getSpeed()));
             cloudTimer = 0;
             if (clouds.size() < CLOUD_LIMIT){
                 int xHalf = CANVAS_WIDTH/2;

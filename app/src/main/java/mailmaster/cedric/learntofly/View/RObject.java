@@ -1,6 +1,7 @@
 package mailmaster.cedric.learntofly.View;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import mailmaster.cedric.learntofly.Physics.FVector;
@@ -19,6 +20,8 @@ public interface RObject {
     public float getRotation();
     public void addRotation(float rotation);
     public void setRotation(float rotation);
+
+    public Bitmap combine(Bitmap bmp2);
 
 
 }
