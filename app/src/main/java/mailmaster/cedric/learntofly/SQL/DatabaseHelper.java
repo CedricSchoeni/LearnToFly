@@ -26,21 +26,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sb = new StringBuilder();
         sb.append("CREATE TABLE ");
-        sb.append(player.TABLE);
-        sb.append("(");
-        sb.append(player.COL1);
-        sb.append(" INT PRIMARY KEY, ");
-        sb.append(player.COL2);
-        sb.append(" VARCHAR(16), ");
-        sb.append(player.COL3);
-        sb.append(" INT, ");
-        sb.append(player.COL4);
-        sb.append(" INT);");
+        sb.append(player.TABLE+"(");
+        sb.append(player.COL1+" INT PRIMARY KEY, ");
+        sb.append(player.COL2+" VARCHAR(16), ");
+        sb.append(player.COL3+" INT, ");
+        sb.append(player.COL4+" INT);");
         sqLiteDatabase.execSQL(sb.toString());
         sb = new StringBuilder();
         sb.append("CREATE TABLE ");
-        sb.append(item.TABLE);
-        sb.append("(");
+        sb.append(item.TABLE+"(");
         sb.append(item.COL1+" INT PRIMARY KEY, ");
         sb.append(item.COL2+" VARCHAR(50), ");
         sb.append(item.COL3+" FLOAT, ");
