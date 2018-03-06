@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">LearnToFly</string>
+    <string name="infoImageDesc">an info button</string>
+    <string name="playButtonDesc">the Play button</string>
+    <string name="btnStage1">Stage 1</string>
+    <string name="btnStage2">Stage 2</string>
+    <string name="btnStage3">Stage 3</string>
+    <string name="btnStage4">Stage 4</string>
+    <string name="btnBoost1">Boost 1</string>
+    <string name="btnBoost2">Boost 2</string>
+    <string name="btnBoost3">Boost 3</string>
+    <string name="btnBoost4">Boost 4</string>
+
 </resources>
