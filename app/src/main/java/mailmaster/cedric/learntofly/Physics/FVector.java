@@ -3,7 +3,7 @@ package mailmaster.cedric.learntofly.Physics;
 
 /**
  * Created by cedric.schoeni on 02.03.2018.
- * This is a 2 Dimensional Vector class with the methods required to be used by the game.
+ * This is a 2 Dimensional Vector class with the methods required to be used by the game.<
  */
 
 public class FVector {
