@@ -12,5 +12,6 @@ class Item {
     final String COL3="power";
     final String COL4="fuel";
     final String COL5="mass";
-    final String COL6="price";
+    final String COL6="image";
+    final String COL7="price";
 }
