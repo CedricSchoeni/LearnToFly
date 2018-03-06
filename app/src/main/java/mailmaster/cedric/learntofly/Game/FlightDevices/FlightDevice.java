@@ -9,30 +9,30 @@ import mailmaster.cedric.learntofly.View.RImage;
 public interface FlightDevice {
 
 
-    public RImage getModel();
+    RImage getModel();
 
-    public float getPower();
-    public float getFuel();
-    public float getMass();
-    public boolean getActive();
-    public void setActive(boolean b);
+    float getPower();
+    float getFuel();
+    float getMass();
+    boolean getActive();
+    void setActive(boolean b);
 
-    public void updateTimeCounter(float t);
-    public float getTimeCounter();
+    void updateTimeCounter(float t);
+    float getTimeCounter();
 
-    public int getDrawable();
-    public void setDrawable(int drawable);
-    public void setPower(float power);
-    public void setFuel(float fuel);
-    public void setMass(float mass);
-    public void setTimeCounter(float timeCounter);
-    public void setModel(int drawableID);
-    public void setName(String name);
-    public String getName();
-    public void setId(int id);
-    public int getId();
-    public int getPrice();
-    public void setPrice(int price);
+    int getDrawable();
+    void setDrawable(int drawable);
+    void setPower(float power);
+    void setFuel(float fuel);
+    void setMass(float mass);
+    void setTimeCounter(float timeCounter);
+    void setModel(int drawableID);
+    void setName(String name);
+    String getName();
+    void setId(int id);
+    int getId();
+    int getPrice();
+    void setPrice(int price);
 
 
 
