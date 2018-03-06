@@ -117,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
-        sb.append(" WHERE "+item.COL8+" = 1");
+        sb.append(" WHERE "+item.COL8+" = 0");
 
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){

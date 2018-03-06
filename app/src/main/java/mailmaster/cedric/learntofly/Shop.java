@@ -61,7 +61,7 @@ public class Shop extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 DataModel dataModel= dataModels.get(position);
-
+                setProfileVal(Integer.parseInt(dataModel.getFeature()));
                 //Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
                 //        .setAction("No action", null).show();
                 //Log.e("Item", "Hello");
@@ -110,7 +110,7 @@ public class Shop extends AppCompatActivity {
             dataModels.add(new DataModel(stage.getName(),
                     "Fuel: "+stage.getFuel(),
                     "Power:"+stage.getPower(),
-                    "Mass:"+stage.getMass()));
+                    ""+stage.getId()));
         }
     }
     private void setBoostsList(){
@@ -120,16 +120,16 @@ public class Shop extends AppCompatActivity {
             dataModels.add(new DataModel(boost.getName(),
                     "Fuel: "+boost.getFuel(),
                     "Power:"+boost.getPower(),
-                    "Mass:"+boost.getMass()));
+                    ""+boost.getId()));
         }
     }
     private void addFunctionality(Button tmp, int current){
         this.current=current;
-        listView.clearChoices();
         if(current>0&&current<=4){
             tmp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dataModels.clear();
                     listView.setVisibility(View.VISIBLE);
                     listView.bringToFront();
                     setStagesList();
@@ -140,15 +140,48 @@ public class Shop extends AppCompatActivity {
             tmp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    dataModels.clear();
+                    Log.e("boost","cleared");
                     listView.setVisibility(View.VISIBLE);
                     listView.bringToFront();
                     setBoostsList();
+                    Log.e("boost","listed");
                     listView.setOnItemClickListener(null);
                 }
             });
+
         }
 
 
+
+    }
+    private void setProfileVal(int ID){
+        switch(this.current){
+            case 1:
+                profile.stage1=ID;
+                break;
+            case 2:
+                profile.stage2=ID;
+                break;
+            case 3:
+                profile.stage3=ID;
+                break;
+            case 4:
+                profile.stage4=ID;
+                break;
+            case 5:
+                profile.boost1=ID;
+                break;
+            case 6:
+                profile.boost2=ID;
+                break;
+            case 7:
+                profile.boost3=ID;
+                break;
+            case 8:
+                profile.boost4=ID;
+                break;
+        }
     }
 
 
