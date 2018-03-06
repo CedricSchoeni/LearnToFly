@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         sb = new StringBuilder();
         sb.append("DROP TABLE IF EXISTS ");
         sb.append(inventory.TABLE);
@@ -82,6 +82,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("DROP TABLE IF EXISTS ");
         sb.append(item.TABLE);
         sqLiteDatabase.execSQL(sb.toString());
+        
+        onCreate(sqLiteDatabase);
     }
 
     public List<Stage> getAllStages(){
