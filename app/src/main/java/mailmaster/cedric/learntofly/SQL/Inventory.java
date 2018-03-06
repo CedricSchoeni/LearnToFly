@@ -5,8 +5,8 @@ package mailmaster.cedric.learntofly.SQL;
  */
 
 class Inventory {
-    static final String TABLE="Inventory";
-    public static final String COL1="ID";
-    public static final String COL2="playerFK";
-    public static final String COL3="itemFK";
+    final String TABLE="Inventory";
+    final String COL1="ID";
+    final String COL2="playerFK";
+    final String COL3="itemFK";
 }
