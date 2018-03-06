@@ -8,7 +8,8 @@ import mailmaster.cedric.learntofly.View.RImage;
 import mailmaster.cedric.learntofly.View.RObject;
 
 /**
- * Created by lucac on 06.03.2018.
+ * Created by campiotti on 06.03.2018.
+ * Base class for all Boosts
  */
 
 public class Boost implements FlightDevice{
@@ -22,6 +23,7 @@ public class Boost implements FlightDevice{
     private int id=0;
     private int price=0;
     private int drawable=0;
+    private int type=0;
     @Override
     public float getTimeCounter() {
         return frameCounter;
@@ -125,5 +127,15 @@ public class Boost implements FlightDevice{
     @Override
     public void setDrawable(int drawable) {
         this.drawable = drawable;
+    }
+
+    @Override
+    public int getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(int type) {
+        this.type = type;
     }
 }

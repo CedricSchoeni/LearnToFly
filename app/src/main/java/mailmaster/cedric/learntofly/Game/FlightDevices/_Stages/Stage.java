@@ -8,7 +8,8 @@ import mailmaster.cedric.learntofly.View.RImage;
 import mailmaster.cedric.learntofly.View.RObject;
 
 /**
- * Created by adriano.campiotti on 06.03.2018.
+ * Created by campiotti on 06.03.2018.
+ * Base Class for all Stages
  */
 
 public class Stage implements FlightDevice{
@@ -22,6 +23,7 @@ public class Stage implements FlightDevice{
     private int price=0;
     private RObject model= (MainActivity.context==null)? null : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
     private int drawable=0;
+    private int type=1;
 
     @Override
     public RImage getModel() {
@@ -117,5 +119,15 @@ public class Stage implements FlightDevice{
     @Override
     public void setDrawable(int drawable) {
         this.drawable = drawable;
+    }
+
+    @Override
+    public int getType() {
+        return type;
+    }
+
+    @Override
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -19,14 +19,16 @@ import mailmaster.cedric.learntofly.R;
 
 /**
  * Created by adriano.campiotti on 06.03.2018.
+ * The DatabaseHelper allows access to the SQLite Database without much hassle and contains per-made functions
+ * as well as a creation, deletion and base insert script.
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    Context context;
-    Player player = new Player();
-    Item item = new Item();
-    Inventory inventory = new Inventory();
-    StringBuilder sb = new StringBuilder();
+    private Context context;
+    private Player player = new Player();
+    private Item item = new Item();
+    private Inventory inventory = new Inventory();
+    private StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
         super(context,"Item", null, 1);
         this.context=context;
@@ -110,7 +112,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stages;
     }
 
-    void insertBaseData(SQLiteDatabase sqLiteDatabase){
+    private void insertBaseData(SQLiteDatabase sqLiteDatabase){
+        insertBaseStages(sqLiteDatabase);
+    }
+    private void insertBaseStages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
         values.put(item.COL2,"Super Rocket 5000");
         values.put(item.COL3,(float)100);
@@ -129,6 +134,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL7,66);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
+    }
+    private void insertBaseBoosts(SQLiteDatabase sqLiteDatabase){
+        ContentValues values = new ContentValues();
     }
 
 
