@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sb = new StringBuilder();
-        sb.append("CREATE TABLE ");
+        sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(player.TABLE+"(");
         sb.append(player.COL1+" INT PRIMARY KEY, ");
         sb.append(player.COL2+" VARCHAR(16), ");
@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append(player.COL4+" INT)");
         sqLiteDatabase.execSQL(sb.toString());
         sb = new StringBuilder();
-        sb.append("CREATE TABLE ");
+        sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(item.TABLE+"(");
         sb.append(item.COL1+" INT PRIMARY KEY, ");
         sb.append(item.COL2+" VARCHAR(50), ");
@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append(item.COL8+" INT)");
         sqLiteDatabase.execSQL(sb.toString());
         sb= new StringBuilder();
-        sb.append("CREATE TABLE ");
+        sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(inventory.TABLE+" (");
         sb.append(inventory.COL1+" INT PRIMARY KEY, ");
         sb.append(inventory.COL2+" INT, ");
