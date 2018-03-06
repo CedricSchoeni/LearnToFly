@@ -65,14 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("REFERENCES "+item.TABLE+"("+item.COL1+"))");
         sqLiteDatabase.execSQL(sb.toString());
 
-        ContentValues values = new ContentValues();
-        values.put(item.COL2,"Super Rocket 5000");
-        values.put(item.COL3,(float)100);
-        values.put(item.COL4,(float)1250);
-        values.put(item.COL5,(float)10);
-        values.put(item.COL6, R.drawable.rocket_v1);
-        values.put(item.COL7,50);
-        sqLiteDatabase.insert(item.TABLE,null,values);
+        insertBaseData(sqLiteDatabase);
     }
 
     @Override
@@ -113,6 +106,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }while(cursor.moveToNext());
         }
         return stages;
+    }
+
+    void insertBaseData(SQLiteDatabase sqLiteDatabase){
+        ContentValues values = new ContentValues();
+        values.put(item.COL2,"Super Rocket 5000");
+        values.put(item.COL3,(float)100);
+        values.put(item.COL4,(float)1250);
+        values.put(item.COL5,(float)10);
+        values.put(item.COL6, R.drawable.rocket_v1);
+        values.put(item.COL7,50);
+        sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+        values.put(item.COL2,"Super Rocket 5001");
+        values.put(item.COL3,(float)125);
+        values.put(item.COL4,(float)1050);
+        values.put(item.COL5,(float)15);
+        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL7,66);
+        sqLiteDatabase.insert(item.TABLE,null,values);
     }
 
 
