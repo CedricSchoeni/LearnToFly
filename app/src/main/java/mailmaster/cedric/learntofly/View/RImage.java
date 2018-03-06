@@ -86,5 +86,31 @@ public class RImage implements RObject {
         position.set(v.x, v.y);
     }
 
+    /**
+     * This method combines two Bitmaps into one and returns that bitmap.
+     * @param bmp1 the first bitmap, this is the base layer the 2nd bitmap gets put ontop of
+     * @param bmp2 the 2nd bitmap, this one gets put on the x: 0 and y:0 pixels of bmp1
+     * @return Bitmap bmp1 with bmp2 on top of the bmp1.
+     */
+    public static Bitmap combine(Bitmap bmp1, Bitmap bmp2) {
+        if(bmp1.getWidth()<bmp2.getWidth() || bmp1.getHeight()<bmp2.getHeight())return bmp1;
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        canvas.drawBitmap(bmp1, new Matrix(), null);
+        canvas.drawBitmap(bmp2, 0, 0, null);
+        return bmOverlay;
+    }
+
+    //Do not use for now.
+    public static Bitmap combineTemp(Bitmap bmp1, Bitmap bmp2, int x, int y, boolean left) {
+        x = (left) ? x : x+bmp2.getWidth();
+       //y = (top) ? y : y+bmp2.getHeight();
+        if(bmp1.getWidth()<bmp2.getWidth() || bmp1.getHeight()<bmp2.getHeight())return bmp1;
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        canvas.drawBitmap(bmp1, new Matrix(), null);
+        canvas.drawBitmap(bmp2, x, y, null);
+        return bmOverlay;
+    }
 
 }
