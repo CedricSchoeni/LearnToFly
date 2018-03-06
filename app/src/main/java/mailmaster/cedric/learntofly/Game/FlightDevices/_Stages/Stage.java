@@ -20,8 +20,8 @@ public class Stage implements FlightDevice{
     private String name="Rocket";
     private int id=0;
     private int price=0;
-    private RObject model;// = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
-
+    private RObject model=null;// = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
+    private int drawable=0;
 
     @Override
     public RImage getModel() {
@@ -81,7 +81,9 @@ public class Stage implements FlightDevice{
 
     public void setModel(int drawableID) {
         if(MainActivity.context!=null)
-        this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, drawableID), drawableID);
+            this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, drawableID), drawableID);
+        else
+            this.setDrawable(drawableID);
     }
 
     public String getName() {
@@ -106,5 +108,13 @@ public class Stage implements FlightDevice{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getDrawable() {
+        return drawable;
+    }
+
+    public void setDrawable(int drawable) {
+        this.drawable = drawable;
     }
 }

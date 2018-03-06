@@ -43,6 +43,8 @@ public class Shop extends AppCompatActivity {
         List<Stage> stages = dbhelper.getAllStages();
         dataModels= new ArrayList<>();
         dataModels.add(new DataModel("Empty","none","none","none"));
+        dataModels.add(new DataModel("Empty","none","none","none"));
+        dataModels.add(new DataModel("Empty","none","none","none"));
         for (int i = 0; i < stages.size(); i++) {
             Stage stage = stages.get(i);
             dataModels.add(new DataModel(stage.getName(),
