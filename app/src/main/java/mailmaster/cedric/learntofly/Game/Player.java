@@ -12,6 +12,7 @@ import mailmaster.cedric.learntofly.Game._Launchers.Launchers;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v2;
 import mailmaster.cedric.learntofly.Game.FlightDevices.FlightDevice;
+import mailmaster.cedric.learntofly.MainActivity;
 import mailmaster.cedric.learntofly.Physics.FVector;
 import mailmaster.cedric.learntofly.View.RObject;
 import mailmaster.cedric.learntofly.View.Renderer;
@@ -34,7 +35,6 @@ public class Player extends PhysicsObject implements MovableObject {
         boosts = new ArrayList<FlightDevice>();
         this.model = model;
 
-
         stages.add(new Stage());
         stages.add(new Stage());
         stages.add(new Stage());
@@ -43,9 +43,10 @@ public class Player extends PhysicsObject implements MovableObject {
         boosts.add(new Boost());
         boosts.add(new Boost());
         launcher = new Launcher_Canon_v1();
+    }
+    private void stages(){
 
     }
-
 
     @Override
     public void addRotation(float r) {

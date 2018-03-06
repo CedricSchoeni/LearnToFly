@@ -122,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
             do{
-                Boost boost = new Boost();
+                try{Boost boost = new Boost();
                 boost.setId(cursor.getInt(0));
                 boost.setName(cursor.getString(1));
                 boost.setPower(cursor.getFloat(2));
@@ -130,7 +130,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 boost.setMass(cursor.getFloat(4));
                 boost.setModel(cursor.getInt(5));
                 boost.setPrice(cursor.getInt(6));
-                boosts.add(boost);
+                boosts.add(boost);}catch (Exception e){exceptionHandle();}
             }while(cursor.moveToNext());
         }
         return boosts;
@@ -200,6 +200,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
     }
-
+    private void exceptionHandle(){
+        this.onUpgrade(this.getWritableDatabase(),0, 1);
+    }
 
 }
