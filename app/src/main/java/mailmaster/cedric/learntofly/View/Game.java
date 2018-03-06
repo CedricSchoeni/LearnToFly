@@ -62,7 +62,7 @@ public class Game{
 
     public FVector gamePosition = new FVector(0,0);
     public FVector screenPosition = new FVector(0,0);
-    public final float screenFactor = 0.01f; // actual position of background objects is screenFactor * gamePosition
+    public final float screenFactor = 0.15f; // actual position of background objects is screenFactor * gamePosition
 
     Handler handler;
 

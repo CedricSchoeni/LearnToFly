@@ -5,6 +5,9 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import mailmaster.cedric.learntofly.Game.FlightDevices.FlightDevice;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
+
 /**
  * Created by adriano.campiotti on 06.03.2018.
  */
@@ -73,4 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append(item.TABLE+";");
         sqLiteDatabase.execSQL(sb.toString());
     }
+
+
 }
