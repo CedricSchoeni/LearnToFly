@@ -114,6 +114,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void insertBaseData(SQLiteDatabase sqLiteDatabase){
         insertBaseStages(sqLiteDatabase);
+        insertBaseBoosts(sqLiteDatabase);
     }
     private void insertBaseStages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
@@ -137,6 +138,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     private void insertBaseBoosts(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
+        values.put(item.COL2,"Super Booster 2018");
+        values.put(item.COL3,(float)50);
+        values.put(item.COL4,(float)12500);
+        values.put(item.COL5,(float)7.5);
+        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL7,70);
+        values.put(item.COL8,0);
+        sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+        values.put(item.COL2,"Super Booster 1942");
+        values.put(item.COL3,(float)90);
+        values.put(item.COL4,(float)8500);
+        values.put(item.COL5,(float)8.8);
+        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL7,420);
+        values.put(item.COL8,0);
+        sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+        values.put(item.COL2,"Illuminated Booster v0.3B");
+        values.put(item.COL3,(float)30);
+        values.put(item.COL4,(float)15000);
+        values.put(item.COL5,(float)5);
+        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL7,70);
+        values.put(item.COL8,0);
+        sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+
+
+
     }
 
 
