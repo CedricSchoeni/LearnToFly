@@ -26,8 +26,6 @@ public class Game{
 
     private Renderer r;
 
-
-
     private int wind_delay = 2500;
     private int windTimer = 0;
     private FVector wind = new FVector(0,0);
