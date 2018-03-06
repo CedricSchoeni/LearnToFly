@@ -16,4 +16,7 @@ public interface FlightDevice {
     public boolean getActive();
     public void setActive(boolean b);
 
+    public void updateTimeCounter(float t);
+    public float getTimeCounter();
+
 }

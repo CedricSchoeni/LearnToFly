@@ -145,7 +145,6 @@ public class Renderer extends View {
             // below is whatever you want to do
             g.update();
             invalidate();
-
         }
     };
 
