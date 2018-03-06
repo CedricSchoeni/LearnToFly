@@ -22,7 +22,7 @@ public class MainMenu extends AppCompatActivity {
 
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainMenu.this,MainActivity.class);
+                Intent intent = new Intent(MainMenu.this,Shop.class);
                 startActivity(intent);
             }
         });
