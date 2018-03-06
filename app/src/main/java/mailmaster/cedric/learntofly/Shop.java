@@ -11,9 +11,12 @@ import android.widget.ListView;
 import android.widget.Toolbar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mailmaster.cedric.learntofly.CustomListView.CustomAdapter;
 import mailmaster.cedric.learntofly.CustomListView.DataModel;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage;
+import mailmaster.cedric.learntofly.SQL.DatabaseHelper;
 
 /**
  * Created by cedric.schoeni on 06.03.2018.
@@ -36,9 +39,18 @@ public class Shop extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         listView=(ListView)findViewById(R.id.list);
-
+        DatabaseHelper dbhelper = new DatabaseHelper(this);
+        List<Stage> stages = dbhelper.getAllStages();
         dataModels= new ArrayList<>();
-
+        dataModels.add(new DataModel("Empty","none","none","none"));
+        for (int i = 0; i < stages.size(); i++) {
+            Stage stage = stages.get(i);
+            dataModels.add(new DataModel(stage.getName(),
+                    "Fuel: "+stage.getFuel(),
+                    "Power:"+stage.getPower(),
+                    "Mass:"+stage.getMass()));
+        }
+        /*
         dataModels.add(new DataModel("Apple Pie", "Android 1.0", "1","September 23, 2008"));
         dataModels.add(new DataModel("Banana Bread", "Android 1.1", "2","February 9, 2009"));
         dataModels.add(new DataModel("Cupcake", "Android 1.5", "3","April 27, 2009"));
@@ -51,7 +63,7 @@ public class Shop extends AppCompatActivity {
         dataModels.add(new DataModel("Jelly Bean", "Android 4.2", "16","July 9, 2012"));
         dataModels.add(new DataModel("Kitkat", "Android 4.4", "19","October 31, 2013"));
         dataModels.add(new DataModel("Lollipop","Android 5.0","21","November 12, 2014"));
-        dataModels.add(new DataModel("Marshmallow", "Android 6.0", "23","October 5, 2015"));
+        dataModels.add(new DataModel("Marshmallow", "Android 6.0", "23","October 5, 2015"));*/
 
         adapter= new CustomAdapter(dataModels,getApplicationContext());
 

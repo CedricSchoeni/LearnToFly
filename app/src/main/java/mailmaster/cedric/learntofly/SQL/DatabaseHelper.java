@@ -1,10 +1,13 @@
 package mailmaster.cedric.learntofly.SQL;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +15,21 @@ import java.util.List;
 import mailmaster.cedric.learntofly.Game.FlightDevices.FlightDevice;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
+import mailmaster.cedric.learntofly.R;
 
 /**
  * Created by adriano.campiotti on 06.03.2018.
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
+    Context context;
     Player player = new Player();
     Item item = new Item();
     Inventory inventory = new Inventory();
     StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
-        super(context,"Player", null, 1);
+        super(context,"Item", null, 1);
+        this.context=context;
     }
 
     @Override
@@ -59,6 +64,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("FOREIGN KEY ("+inventory.COL3+") ");
         sb.append("REFERENCES "+item.TABLE+"("+item.COL1+"))");
         sqLiteDatabase.execSQL(sb.toString());
+
+        ContentValues values = new ContentValues();
+        values.put(item.COL2,"Super Rocket 5000");
+        values.put(item.COL3,(float)100);
+        values.put(item.COL4,(float)1250);
+        values.put(item.COL5,(float)10);
+        values.put(item.COL6, R.drawable.rocket_v1);
+        values.put(item.COL7,50);
+        sqLiteDatabase.insert(item.TABLE,null,values);
     }
 
     @Override
