@@ -85,6 +85,12 @@ public class RImage implements RObject {
         matrix.postTranslate(v.x - position.x, v.y - position.y);
         position.set(v.x, v.y);
     }
-
+    public static Bitmap combine(Bitmap bmp1, Bitmap bmp2) {
+        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        canvas.drawBitmap(bmp1, new Matrix(), null);
+        canvas.drawBitmap(bmp2, 0, 0, null);
+        return bmOverlay;
+    }
 
 }
