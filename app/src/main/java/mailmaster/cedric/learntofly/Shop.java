@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class Shop extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        listView=(ListView)findViewById(R.id.list);
+        listView=findViewById(R.id.list);
         //final DatabaseHelper dbhelper = new DatabaseHelper(this);
         //dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         dataModels= new ArrayList<>();
@@ -71,7 +70,7 @@ public class Shop extends AppCompatActivity {
 
         // https://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
 
-        ImageButton play = (ImageButton) findViewById(R.id.imageButton);
+        ImageButton play = findViewById(R.id.imageButton);
 
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
