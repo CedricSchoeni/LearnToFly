@@ -132,7 +132,7 @@ public class Shop extends AppCompatActivity {
                     listView.setVisibility(View.VISIBLE);
                     listView.bringToFront();
                     setStagesList();
-                    listView.setOnItemClickListener(null);//TODO make actual listener, sets correct variable with ID of selected.
+                    listView.setOnItemClickListener(null);//TODO fix display of list not updating??!!!
                 }
             });
         }else{
@@ -140,11 +140,11 @@ public class Shop extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     dataModels.clear();
-                    Log.e("boost","cleared");
+                    //Log.e("boost","cleared");
                     listView.setVisibility(View.VISIBLE);
                     listView.bringToFront();
                     setBoostsList();
-                    Log.e("boost","listed");
+                    //Log.e("boost","listed");
                     listView.setOnItemClickListener(null);
                 }
             });
