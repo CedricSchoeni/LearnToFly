@@ -29,12 +29,13 @@ public class Shop extends AppCompatActivity {
 
     ArrayList<DataModel> dataModels;
     ListView listView;
-    private static CustomAdapter adapter;
+    private CustomAdapter adapter;
     private Profile profile = new Profile();
-    private String current="";
+    private int current=-1;
     final DatabaseHelper dbhelper=new DatabaseHelper(this);
 
     //TODO get the extra info of the intent from the MainActivity into the Player class
+    //TODO add functionality upon click on an item in the listView, also listView to foreground.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,14 +88,18 @@ public class Shop extends AppCompatActivity {
             }
         });
         Button tmp = findViewById(R.id.btnStage1);
-        addFunctionality(tmp,"stage1");
-        tmp=findViewById(R.id.btnStage2);
-        addFunctionality(tmp,"stage2");
-        tmp=findViewById(R.id.btnStage3);
-        addFunctionality(tmp,"stage3");
-        tmp=findViewById(R.id.btnStage4);
-        addFunctionality(tmp,"stage4");
+        addFunctionality(tmp,1);
+        //tmp=findViewById(R.id.btnStage2);
+        addFunctionality((Button)findViewById(R.id.btnStage2),2);
+        //tmp=findViewById(R.id.btnStage3);
+        addFunctionality((Button)findViewById(R.id.btnStage3),3);
+        //tmp=findViewById(R.id.btnStage4);
+        addFunctionality((Button)findViewById(R.id.btnStage4),4);
 
+        addFunctionality((Button)findViewById(R.id.btnBoost1),5);
+        addFunctionality((Button)findViewById(R.id.btnBoost2),6);
+        addFunctionality((Button)findViewById(R.id.btnBoost3),7);
+        addFunctionality((Button)findViewById(R.id.btnBoost4),8);
 
 
     }
@@ -118,21 +123,32 @@ public class Shop extends AppCompatActivity {
                     "Mass:"+boost.getMass()));
         }
     }
-    private void addFunctionality(Button tmp, String current){
+    private void addFunctionality(Button tmp, int current){
         this.current=current;
         listView.clearChoices();
-        if(current.contains("stage"))
-            setBoostsList();
-        else
-            setStagesList();
-        tmp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listView.setVisibility(View.VISIBLE);
-                listView.bringToFront();
-            }
-        });
-    listView.setOnItemClickListener(null);
+        if(current>0&&current<=4){
+            tmp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listView.setVisibility(View.VISIBLE);
+                    listView.bringToFront();
+                    setStagesList();
+                    listView.setOnItemClickListener(null);//TODO make actual listener, sets correct variable with ID of selected.
+                }
+            });
+        }else{
+            tmp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listView.setVisibility(View.VISIBLE);
+                    listView.bringToFront();
+                    setBoostsList();
+                    listView.setOnItemClickListener(null);
+                }
+            });
+        }
+
+
     }
 
 
