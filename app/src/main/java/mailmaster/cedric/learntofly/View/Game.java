@@ -211,7 +211,14 @@ public class Game{
     }
 
     private void initForeGround(){
-        player = new Player(new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1), R.drawable.character_beta_v1), 10);
+        /*player = new Player(
+                new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
+                        RImage.combine(ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
+                                ResourceManager.drawableToBitmap(r.context, R.drawable.rocket_v1)), R.drawable.character_beta_v1), 10);*/
+        player = new Player(
+                new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
+                        ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
+                        R.drawable.character_beta_v1), 10);
     }
 
 
