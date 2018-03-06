@@ -18,13 +18,14 @@ import mailmaster.cedric.learntofly.R;
 public class ResourceManager extends AppCompatActivity {
 
 
-
+    /**
+     * Converts a drawable into a Bitmap.
+     * @param c required context to be able to convert the drawable.
+     * @param d the Resource id of the drawable being converted.
+     * @return Bitmap with the content of the drawable provided.
+     */
     public static Bitmap drawableToBitmap(Context c, int d){
         return BitmapFactory.decodeResource(c.getResources(),d);
-    }
-
-    public static void GutenTagHerrBuchsDieseKlasseIstLeiderSehrLeerKommaAberDiesStoertSieSicherNicht(){
-        return;
     }
 
 }
