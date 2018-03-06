@@ -107,6 +107,8 @@ public class Game{
         CANVAS_WIDTH = r.getWidth();
         CANVAS_HEIGHT = r.getHeight();
         lateUpdateDelay = r.FPS_DELAY * 10;
+
+
         distanceView = (TextView)r.main.findViewById(R.id.textView);
         heightView = (TextView)r.main.findViewById(R.id.textView2);
         speedView = (TextView)r.main.findViewById(R.id.textView3);
@@ -186,8 +188,6 @@ public class Game{
         handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);
     }
 
-    private void initFlight
-
     private void addListener(ImageButton b){
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -225,7 +225,7 @@ public class Game{
 
             for (int i = 0; i < player.stages.size(); i++){
                 if (player.stages.get(i).getActive())
-                    proBars.get(i).setProgress((int)(player.stages.get(i).getFuel() - player.frameCounter));
+                    proBarsStages.get(i).setProgress((int)(player.stages.get(i).getFuel() - player.frameCounter));
             }
         }
 
