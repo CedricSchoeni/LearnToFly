@@ -2,9 +2,7 @@ package mailmaster.cedric.learntofly.SQL;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -12,9 +10,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import mailmaster.cedric.learntofly.Game.FlightDevices.FlightDevice;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Boosts.Boost;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage;
-import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
 import mailmaster.cedric.learntofly.R;
 
 /**
@@ -89,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Stage> getAllStages(){
         SQLiteDatabase db = this.getReadableDatabase();
-        List<Stage> stages= new ArrayList<Stage>();
+        List<Stage> stages= new ArrayList<>();
 
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
@@ -112,10 +109,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stages;
     }
 
+    public List<Boost> getAllBoosts(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Boost> boosts= new ArrayList<>();
+
+        sb = new StringBuilder();
+        sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" WHERE "+item.COL8+" = 1");
+
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+        if(cursor.moveToFirst()){
+            do{
+                Boost boost = new Boost();
+                boost.setId(cursor.getInt(0));
+                boost.setName(cursor.getString(1));
+                boost.setPower(cursor.getFloat(2));
+                boost.setFuel(cursor.getFloat(3));
+                boost.setMass(cursor.getFloat(4));
+                boost.setModel(cursor.getInt(5));
+                boost.setPrice(cursor.getInt(6));
+                boosts.add(boost);
+            }while(cursor.moveToNext());
+        }
+        return boosts;
+    }
+
     private void insertBaseData(SQLiteDatabase sqLiteDatabase){
         insertBaseStages(sqLiteDatabase);
         insertBaseBoosts(sqLiteDatabase);
     }
+
     private void insertBaseStages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
         values.put(item.COL2,"Super Rocket 5000");
@@ -135,7 +158,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL7,66);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+        values.put(item.COL2,"North Korea Rocket");
+        values.put(item.COL3,(float)200);
+        values.put(item.COL4,(float)300);
+        values.put(item.COL5,(float)18);
+        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL7,30);
+        values.put(item.COL8,1);
+        sqLiteDatabase.insert(item.TABLE,null,values);
     }
+
     private void insertBaseBoosts(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
         values.put(item.COL2,"Super Booster 2018");
@@ -161,13 +194,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL4,(float)15000);
         values.put(item.COL5,(float)5);
         values.put(item.COL6, R.drawable.rocket_v2);
-        values.put(item.COL7,70);
+        values.put(item.COL7,40);
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
-        values.clear();
-
-
-
     }
 
 
