@@ -11,7 +11,7 @@ import mailmaster.cedric.learntofly.View.RObject;
  * Created by Cedric on 04.03.2018.
  */
 
-public class Stage_Rocket_v2 implements FlightDevice {
+public abstract class Stage_Rocket_v2 implements FlightDevice {
 
     private float frameCounter = 0;
     private boolean active = false;

@@ -13,7 +13,7 @@ import mailmaster.cedric.learntofly.View.RObject;
  * Created by Cedric on 05.03.2018.
  */
 
-public class Boost_Rocket_v1 implements FlightDevice{
+public abstract class Boost_Rocket_v1 implements FlightDevice{
 
     private float frameCounter = 0;
     private boolean active = false;

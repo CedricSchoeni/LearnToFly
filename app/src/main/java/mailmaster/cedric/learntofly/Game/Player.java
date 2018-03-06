@@ -5,6 +5,8 @@ import android.os.Handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import mailmaster.cedric.learntofly.Game.FlightDevices._Boosts.Boost;
+import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage;
 import mailmaster.cedric.learntofly.Game._Launchers.Launcher_Canon_v1;
 import mailmaster.cedric.learntofly.Game._Launchers.Launchers;
 import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage_Rocket_v1;
@@ -33,13 +35,13 @@ public class Player extends PhysicsObject implements MovableObject {
         this.model = model;
 
 
-        stages.add(new Stage_Rocket_v1());
-        stages.add(new Stage_Rocket_v2());
-        stages.add(new Stage_Rocket_v1());
+        stages.add(new Stage());
+        stages.add(new Stage());
+        stages.add(new Stage());
 
-        boosts.add(new Stage_Rocket_v1());
-        boosts.add(new Stage_Rocket_v2());
-        boosts.add(new Stage_Rocket_v2());
+        boosts.add(new Boost());
+        boosts.add(new Boost());
+        boosts.add(new Boost());
         launcher = new Launcher_Canon_v1();
 
     }

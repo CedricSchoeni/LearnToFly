@@ -14,4 +14,5 @@ class Item {
     final String COL5="mass";
     final String COL6="image";
     final String COL7="price";
+    final String COL8="type";
 }

@@ -51,7 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append(item.COL4+" FLOAT, ");
         sb.append(item.COL5+" FLOAT, ");
         sb.append(item.COL6+" INT, ");
-        sb.append(item.COL7+" INT)");
+        sb.append(item.COL7+" INT, ");
+        sb.append(item.COL8+" INT)");
         sqLiteDatabase.execSQL(sb.toString());
         sb= new StringBuilder();
         sb.append("CREATE TABLE ");
@@ -90,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" WHERE "+item.COL8+" = 1");
 
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
@@ -116,6 +118,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL5,(float)10);
         values.put(item.COL6, R.drawable.rocket_v1);
         values.put(item.COL7,50);
+        values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
         values.put(item.COL2,"Super Rocket 5001");
@@ -124,6 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL5,(float)15);
         values.put(item.COL6, R.drawable.rocket_v2);
         values.put(item.COL7,66);
+        values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
     }
 
