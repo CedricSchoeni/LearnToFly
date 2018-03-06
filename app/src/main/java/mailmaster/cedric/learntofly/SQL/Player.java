@@ -8,6 +8,7 @@ class Player {
 
     final String TABLE="Player";
     final String COL1="ID";
-    final String P_COL2="name";
-    final String P_COL3="highscore";
+    final String COL2="name";
+    final String COL3="money";
+    final String COL4="highscore";
 }
