@@ -18,38 +18,43 @@
     </GridLayout>
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Speed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="4dp"
         android:text="WindSpeed"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="0"
+        android:layout_marginTop="4dp"
         android:layout_row="1"
         android:text="Distance"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Speed"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Height"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -158,7 +163,7 @@
     <ProgressBar
         android:id="@+id/progressBar5"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="24dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginBottom="8dp"
         android:progressTint="@android:color/holo_orange_dark"
@@ -180,7 +185,7 @@
     <ProgressBar
         android:id="@+id/progressBar6"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="24dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginBottom="80dp"
         android:progressTint="@android:color/holo_orange_dark"
@@ -202,7 +207,7 @@
     <ProgressBar
         android:id="@+id/progressBar7"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="24dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginBottom="160dp"
         android:progressTint="@android:color/holo_orange_dark"
@@ -224,7 +229,7 @@
     <ProgressBar
         android:id="@+id/progressBar8"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="24dp"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:layout_marginBottom="240dp"
         android:progressTint="@android:color/holo_orange_dark"

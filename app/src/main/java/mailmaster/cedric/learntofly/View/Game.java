@@ -33,7 +33,7 @@ public class Game{
     private FVector wind = new FVector(0,0);
     private float windRotation = 0;
 
-    private final int CLOUD_DELAY = 500;
+    private int CLOUD_DELAY = 500;
     private int cloudTimer = 0;
     private final int CLOUD_LIMIT = 5;
     private List<Cloud> clouds;
@@ -85,7 +85,8 @@ public class Game{
     ProgressBar progressBar3Boost;
     ProgressBar progressBar4Boost;
 
-    List<ImageButton> buttons = new ArrayList<ImageButton>();
+    List<ImageButton> buttonsStage = new ArrayList<ImageButton>();
+    List<ImageButton> buttonsBoosts = new ArrayList<ImageButton>();
 
     ImageButton stage1;
     ImageButton stage2;
@@ -119,15 +120,20 @@ public class Game{
         stage3 = (ImageButton) r.main.findViewById(R.id.imageButton3);
         stage4 = (ImageButton) r.main.findViewById(R.id.imageButton4);
 
+        buttonsStage.add(stage1);
+        buttonsStage.add(stage2);
+        buttonsStage.add(stage3);
+        buttonsStage.add(stage4);
+
         boost1 = (ImageButton) r.main.findViewById(R.id.imageButton5);
         boost2 = (ImageButton) r.main.findViewById(R.id.imageButton6);
         boost3 = (ImageButton) r.main.findViewById(R.id.imageButton7);
         boost4 = (ImageButton) r.main.findViewById(R.id.imageButton8);
 
-        buttons.add(stage1);
-        buttons.add(stage2);
-        buttons.add(stage3);
-        buttons.add(stage4);
+        buttonsBoosts.add(boost1);
+        buttonsBoosts.add(boost2);
+        buttonsBoosts.add(boost3);
+        buttonsBoosts.add(boost4);
 
         progressBar1Stage = (ProgressBar) r.main.findViewById(R.id.progressBar1);
         progressBar2Stage= (ProgressBar) r.main.findViewById(R.id.progressBar2);
@@ -163,10 +169,12 @@ public class Game{
     private void initGame(){
         initForeGround();
         initBackground();
-        initUI();
+        initStages();
+        initBoosts();
+        handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);
     }
 
-    private void initUI(){
+    private void initStages(){
 
         for (int i = 0; i < player.stages.size(); i++){
             Drawable d = r.main.getResources().getDrawable(player.stages.get(i).getModel().imageID );
@@ -174,26 +182,55 @@ public class Game{
             proBarsStages.get(i).setMax((int) player.stages.get(i).getFuel());
             proBarsStages.get(i).setProgress((int) player.stages.get(i).getFuel());
             // add image width and height to imagebutton
-            buttons.get(i).setImageDrawable(d);
-            buttons.get(i).getLayoutParams().height = 64;
-            buttons.get(i).getLayoutParams().width = 64;
-            buttons.get(i).requestLayout();
+            buttonsStage.get(i).setImageDrawable(d);
+            buttonsStage.get(i).getLayoutParams().height = 64;
+            buttonsStage.get(i).getLayoutParams().width = 64;
+            buttonsStage.get(i).requestLayout();
             // add listener to the buttons
-            addListener(buttons.get(i));
+            addStageListener(buttonsStage.get(i));
         }
         for (int i = player.stages.size(); i < 4; i++){
             proBarsStages.get(i).setVisibility(View.GONE);
-            buttons.get(i).setVisibility(View.GONE);
+            buttonsStage.get(i).setVisibility(View.GONE);
         }
-        handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);
     }
 
-    private void addListener(ImageButton b){
+    private void addStageListener(ImageButton b){
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-               int a =temp;
                 player.startStage();
+            }
+        });
+    }
+
+    private void initBoosts(){
+
+        for (int i = 0; i < player.boosts.size(); i++){
+            Drawable d = r.main.getResources().getDrawable(player.boosts.get(i).getModel().imageID );
+            // add values to progress bars
+            proBarsBoosts.get(i).setMax((int) player.boosts.get(i).getFuel());
+            proBarsBoosts.get(i).setProgress((int) player.boosts.get(i).getFuel());
+            // add image width and height to imagebutton
+            buttonsBoosts.get(i).setImageDrawable(d);
+            buttonsBoosts.get(i).getLayoutParams().height = 64;
+            buttonsBoosts.get(i).getLayoutParams().width = 64;
+            buttonsBoosts.get(i).requestLayout();
+            // add listener to the buttons
+            addBoostListener(buttonsBoosts.get(i), i);
+        }
+        for (int i = player.boosts.size(); i < 4; i++){
+            proBarsBoosts.get(i).setVisibility(View.GONE);
+            buttonsBoosts.get(i).setVisibility(View.GONE);
+        }
+    }
+
+    private void addBoostListener(ImageButton b, int nr){
+        final int temp = nr;
+        b.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                player.startBoost(temp);
             }
         });
     }
@@ -226,15 +263,10 @@ public class Game{
 
     public void update(){
 
+        updateFlightDevices();
 
-        if (player.stagesActive){
-            player.update();
 
-            for (int i = 0; i < player.stages.size(); i++){
-                if (player.stages.get(i).getActive())
-                    proBarsStages.get(i).setProgress((int)(player.stages.get(i).getFuel() - player.frameCounter));
-            }
-        }
+
 
         this.gamePosition = player.updatePosition();
 
@@ -273,12 +305,13 @@ public class Game{
 
         cloudTimer += r.FPS_DELAY;
         if (cloudTimer >= CLOUD_DELAY){
+            CLOUD_DELAY = (player.getSpeed() < 10) ? 750 : (int)(75000/player.getSpeed());
+            Log.e("Speed", Float.toString(player.getSpeed()));
             cloudTimer = 0;
             if (clouds.size() < CLOUD_LIMIT){
                 int xHalf = CANVAS_WIDTH/2;
                 int x = (player.velocity.x > 0) ? (int) (Math.random() * (CANVAS_WIDTH - xHalf) + xHalf) : (int) (Math.random() * (xHalf + 250) - 250);
                 int y = (player.velocity.y > 0) ? -125 : CANVAS_HEIGHT + 125;
-                Log.e("XCloud", Integer.toString(x));
                 Cloud cloud = new Cloud(new RImage(x,y,250, 125, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.cloud_v1), R.drawable.cloud_v1));
                 r.addObjectToBackground(cloud.model);
                 clouds.add(cloud);
@@ -288,6 +321,18 @@ public class Game{
 
         checkForEnd();
 
+    }
+
+    private void updateFlightDevices(){
+        player.update();
+        for (int i = 0; i < player.stages.size(); i++){
+            if (player.stages.get(i).getActive())
+                proBarsStages.get(i).setProgress((int)(player.stages.get(i).getFuel() - player.stages.get(i).getTimeCounter()));
+        }
+        for (int i = 0; i < player.boosts.size(); i++){
+            if (player.boosts.get(i).getActive())
+                proBarsBoosts.get(i).setProgress((int)(player.boosts.get(i).getFuel() - player.boosts.get(i).getTimeCounter()));
+        }
     }
 
     private void checkForEnd(){
@@ -328,10 +373,10 @@ public class Game{
     }
 
     private void lateUpdate(){
-        String t1 = "Distance: " + Float.toString(Math.round(gamePosition.x)) + " m";
-        String t2 = "Height: " + Float.toString(Math.round(gamePosition.y)) + " m";
-        String t3 = "Speed: " + Float.toString(Math.round(player.getSpeed() * Renderer.FPS_DELAY)) + " m/s";
-        String t4 = "Wind Speed: " + Float.toString(Math.round(wind.x * Renderer.FPS_DELAY)) + " m/s";
+        String t1 = "Distance: " + String.format("%.2f", (gamePosition.x / 1000)) + " km";
+        String t2 = "Height: " + String.format("%.2f", (gamePosition.y / 1000)) + " km";
+        String t3 = "Speed: " + String.format("%.2f", (player.getSpeed() * Renderer.FPS_DELAY / 1000)) + " km/s";
+        String t4 = "Wind Speed: " +  String.format("%.2f", (wind.x * Renderer.FPS_DELAY)) + " m/s";
         distanceView.setText(t1);
         heightView.setText(t2);
         speedView.setText(t3);

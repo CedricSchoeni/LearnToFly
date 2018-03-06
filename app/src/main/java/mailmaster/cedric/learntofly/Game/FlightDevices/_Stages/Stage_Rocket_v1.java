@@ -13,11 +13,12 @@ import mailmaster.cedric.learntofly.View.RObject;
 
 public class Stage_Rocket_v1 implements FlightDevice {
 
-    public boolean active = false;
-    public float power = 50;
-    public float mass = 10;
-    public float fuel = 10000; // 1000 = 1sec
-    public RObject model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
+    private float frameCounter = 0;
+    private boolean active = false;
+    private float power = 50;
+    private float mass = 10;
+    private float fuel = 10000; // 1000 = 1sec
+    private RObject model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
 
     @Override
     public RImage getModel() {
@@ -47,5 +48,15 @@ public class Stage_Rocket_v1 implements FlightDevice {
     @Override
     public void setActive(boolean b) {
         active = b;
+    }
+
+    @Override
+    public void updateTimeCounter(float t) {
+        frameCounter += t;
+    }
+
+    @Override
+    public float getTimeCounter() {
+        return frameCounter;
     }
 }
