@@ -300,13 +300,11 @@ public class Game{
             Log.e((1+i)+"stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
             rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(stages.get(i),i+1)));
         }
-
+        rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
         for(int i=0; i < boosts.size(); i++){
             Log.e((1+i)+"boost-image"+(i+1),""+imagechooser(boosts.get(i),i+1));
             rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(boosts.get(i),i+1)));
         }
-
-        rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
         return rImage;
     }
 

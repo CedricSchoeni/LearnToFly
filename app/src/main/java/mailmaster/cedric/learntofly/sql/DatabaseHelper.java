@@ -117,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
             do{
-                Stage stage = new Stage();
+                try{Stage stage = new Stage();
                 stage.setId(cursor.getInt(0));
                 stage.setName(cursor.getString(1));
                 stage.setPower(cursor.getFloat(2));
@@ -129,7 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stage.setImage2(cursor.getInt(11));
                 stage.setImage3(cursor.getInt(12));
                 stage.setImage4(cursor.getInt(13));
-                stages.add(stage);
+                stages.add(stage);}catch (Exception e){exceptionHandle();}
                 //Log.e("stageImage1",""+stage.getImage1());
                 //Log.e("curosrImage1",""+cursor.getInt(10));
             }while(cursor.moveToNext());
@@ -193,10 +193,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 boost.setImage2(cursor.getInt(11));
                 boost.setImage3(cursor.getInt(12));
                 boost.setImage4(cursor.getInt(13));
+                /*Log.e("boostImage1",""+boost.getImage1());
+                Log.e("boostImage2",""+boost.getImage2());
+                Log.e("cursorImage3",""+cursor.getInt(11));
+                Log.e("cursorImage4",""+cursor.getInt(12));*/
                 boosts.add(boost);}catch (Exception e){exceptionHandle();}
             }while(cursor.moveToNext());
         }
         cursor.close();
+        //Log.e("BoostsLength:",""+boosts.size());
         return boosts;
     }
 
@@ -254,6 +259,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL7,30);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
+        values.clear();
+        values.put(item.COL2,"Dual Torpedo");
+        values.put(item.COL3,(float)90);
+        values.put(item.COL4,(float)8500);
+        values.put(item.COL5,(float)8.8);
+        values.put(item.COL6, R.drawable.dual_torpedo_icon);
+        values.put(item.COL7,420);
+        values.put(item.COL8,1);
+        sqLiteDatabase.insert(item.TABLE,null,values);
     }
 
     private void insertBaseBoosts(SQLiteDatabase sqLiteDatabase){
@@ -267,16 +281,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        values.put(item.COL2,"Dual Torpedo");
-        values.put(item.COL3,(float)90);
-        values.put(item.COL4,(float)8500);
-        values.put(item.COL5,(float)8.8);
-        values.put(item.COL6, R.drawable.dual_torpedo_icon);
+        values.put(item.COL2,"Burst Rocket");
+        values.put(item.COL3,(float)130);
+        values.put(item.COL4,(float)3000);
+        values.put(item.COL5,(float)6);
+        values.put(item.COL6, R.drawable.burst_rocket_icon);
         values.put(item.COL7,420);
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
-        values.clear();
-
     }
     private void insertBaseImages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
@@ -303,11 +315,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.clear();
         values.put(image.COL2,4);
         values.put(image.COL3,R.drawable.dual_torpedo_1);
-        values.put(image.COL3,R.drawable.dual_torpedo_2);
-        values.put(image.COL3,R.drawable.dual_torpedo_3);
-        values.put(image.COL3,R.drawable.dual_torpedo_4);
+        values.put(image.COL4,R.drawable.dual_torpedo_2);
+        values.put(image.COL5,R.drawable.dual_torpedo_3);
+        values.put(image.COL6,R.drawable.dual_torpedo_4);
         sqLiteDatabase.insert(image.TABLE,null,values);
         values.clear();
+        values.put(image.COL2,5);
+        values.put(image.COL3,R.drawable.burst_rocket_1);
+        values.put(image.COL4,R.drawable.burst_rocket_2);
+        values.put(image.COL5,R.drawable.burst_rocket_3);
+        values.put(image.COL6,R.drawable.burst_rocket_4);
+        sqLiteDatabase.insert(image.TABLE,null,values);
     }
     private void exceptionHandle(){
         this.onUpgrade(this.getWritableDatabase(),0, 1);
