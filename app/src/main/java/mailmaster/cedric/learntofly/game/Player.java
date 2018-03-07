@@ -5,12 +5,14 @@ import android.os.Handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import mailmaster.cedric.learntofly.MainActivity;
 import mailmaster.cedric.learntofly.game.flightdevices.boosts.Boost;
 import mailmaster.cedric.learntofly.game.flightdevices.stages.Stage;
 import mailmaster.cedric.learntofly.game.launchers.Launcher_Canon_v1;
 import mailmaster.cedric.learntofly.game.launchers.Launchers;
 import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
 import mailmaster.cedric.learntofly.physics.FVector;
+import mailmaster.cedric.learntofly.sql.DatabaseHelper;
 import mailmaster.cedric.learntofly.view.RObject;
 import mailmaster.cedric.learntofly.view.Renderer;
 
@@ -25,24 +27,34 @@ public class Player extends PhysicsObject implements MovableObject {
     public List<FlightDevice> stages;
     public List<FlightDevice> boosts;
     public Launchers launcher;
+    private MainActivity main;
+    private DatabaseHelper dbhelper;
 
-    public Player(RObject model, float mass) {
+    public Player(RObject model, float mass, MainActivity main) {
         super(mass, model.getRotation());
         stages = new ArrayList<FlightDevice>();
         boosts = new ArrayList<FlightDevice>();
         this.model = model;
-
-        stages.add(new Stage());
-        stages.add(new Stage());
-        stages.add(new Stage());
-
-        boosts.add(new Boost());
-        boosts.add(new Boost());
-        boosts.add(new Boost());
+        this.main=main;
         launcher = new Launcher_Canon_v1();
-    }
-    private void stages(){
+        dbhelper = new DatabaseHelper(main);
+        addStages();
+        addBoosts();
 
+    }
+
+    private void addStages(){
+        for(int i=1; i <5; i++){
+            int tmp=main.getIntent().getExtras().getInt("stage"+i);
+            stages.add(dbhelper.getStage(tmp));
+        }
+    }
+
+    private void addBoosts(){
+        for(int i=1; i <5; i++){
+            int tmp=main.getIntent().getExtras().getInt("boost"+i);
+            boosts.add(dbhelper.getBoost(tmp));
+        }
     }
 
     @Override

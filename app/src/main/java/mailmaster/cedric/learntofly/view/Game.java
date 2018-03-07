@@ -177,7 +177,8 @@ public class Game{
     private void initStages(){
 
         for (int i = 0; i < player.stages.size(); i++){
-            Drawable d = r.main.getResources().getDrawable(player.stages.get(i).getModel().imageID );
+
+            Drawable d = r.main.getResources().getDrawable(player.stages.get(i).getDrawable() );
             // add values to progress bars
             proBarsStages.get(i).setMax((int) player.stages.get(i).getFuel());
             proBarsStages.get(i).setProgress((int) player.stages.get(i).getFuel());
@@ -207,7 +208,7 @@ public class Game{
     private void initBoosts(){
 
         for (int i = 0; i < player.boosts.size(); i++){
-            Drawable d = r.main.getResources().getDrawable(player.boosts.get(i).getModel().imageID );
+            Drawable d = r.main.getResources().getDrawable(player.boosts.get(i).getDrawable() );
             // add values to progress bars
             proBarsBoosts.get(i).setMax((int) player.boosts.get(i).getFuel());
             proBarsBoosts.get(i).setProgress((int) player.boosts.get(i).getFuel());
@@ -261,7 +262,7 @@ public class Game{
         player = new Player(
                 new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
                         ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
-                        R.drawable.character_beta_v1), 10);
+                        R.drawable.character_beta_v1), 10, r.main);
     }
 
 

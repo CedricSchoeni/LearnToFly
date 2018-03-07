@@ -67,7 +67,7 @@ public class Renderer extends View {
 
         renderListFG = new ArrayList<RObject>();
         renderListBG = new ArrayList<RObject>();
-
+        //TODO main.getIntent().getExtras();
         handler = new Handler();
 
     }

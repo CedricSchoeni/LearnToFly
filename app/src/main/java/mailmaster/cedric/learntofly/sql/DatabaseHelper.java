@@ -25,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private Player player = new Player();
     private Item item = new Item();
     private Inventory inventory = new Inventory();
+    private Image image = new Image();
     private StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
         super(context,"Item", null, 1);
@@ -55,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sb.toString());
         sb= new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS ");
-        sb.append(inventory.TABLE+" (");
+        sb.append(inventory.TABLE+"(");
         sb.append(inventory.COL1+" INTEGER PRIMARY KEY AUTOINCREMENT, ");
         sb.append(inventory.COL2+" INT, ");
         sb.append(inventory.COL3+" INT, ");
@@ -64,7 +65,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("FOREIGN KEY ("+inventory.COL3+") ");
         sb.append("REFERENCES "+item.TABLE+"("+item.COL1+"))");
         sqLiteDatabase.execSQL(sb.toString());
-
+        sb = new StringBuilder();
+        sb.append("CREATE TABLE IF NOT EXISTS ");
+        sb.append(image.TABLE+"(");
+        sb.append(image.COL1+" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+        sb.append(image.COL2+" INT, ");
+        sb.append(image.COL3+" INT, ");
+        sb.append(image.COL4+" INT, ");
+        sb.append(image.COL5+" INT, ");
+        sb.append(image.COL6+" INT, ");
+        sb.append("FOREIGN KEY("+image.COL2+")");
+        sb.append(" REFERENCES "+item.TABLE+"("+item.COL1+"))");
         insertBaseData(sqLiteDatabase);
     }
 
@@ -103,13 +114,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stage.setPower(cursor.getFloat(2));
                 stage.setFuel(cursor.getFloat(3));
                 stage.setMass(cursor.getFloat(4));
-                stage.setModel(cursor.getInt(5));
+                stage.setModel(cursor.getInt(5),null);
                 stage.setPrice(cursor.getInt(6));
                 stages.add(stage);
             }while(cursor.moveToNext());
         }
         cursor.close();
         return stages;
+    }
+
+    public Stage getStage(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Stage stage = new Stage();
+        sb = new StringBuilder();
+        sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" WHERE "+item.COL8+" = 1 and ");
+        sb.append(item.COL1 + " = ").append(id);
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+        if(cursor.moveToFirst()){
+            stage.setId(cursor.getInt(0));
+            stage.setName(cursor.getString(1));
+            stage.setPower(cursor.getFloat(2));
+            stage.setFuel(cursor.getFloat(3));
+            stage.setMass(cursor.getFloat(4));
+            stage.setModel(cursor.getInt(5),null);
+            stage.setPrice(cursor.getInt(6));
+        }
+        cursor.close();
+        return stage;
     }
 
     public List<Boost> getAllBoosts(){
@@ -129,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 boost.setPower(cursor.getFloat(2));
                 boost.setFuel(cursor.getFloat(3));
                 boost.setMass(cursor.getFloat(4));
-                boost.setModel(cursor.getInt(5));
+                boost.setModel(cursor.getInt(5),null);
                 boost.setPrice(cursor.getInt(6));
                 boosts.add(boost);}catch (Exception e){exceptionHandle();}
             }while(cursor.moveToNext());
@@ -137,6 +169,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return boosts;
     }
+
+    public Boost getBoost(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Boost boost = new Boost();
+        sb = new StringBuilder();
+        sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" WHERE "+item.COL8+" = 0 and ");
+        sb.append(item.COL1 + " = ").append(id);
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+        if(cursor.moveToFirst()){
+            boost.setId(cursor.getInt(0));
+            boost.setName(cursor.getString(1));
+            boost.setPower(cursor.getFloat(2));
+            boost.setFuel(cursor.getFloat(3));
+            boost.setMass(cursor.getFloat(4));
+            boost.setModel(cursor.getInt(5),null);
+            boost.setPrice(cursor.getInt(6));
+        }
+        cursor.close();
+        return boost;
+    }
+
 
     private void insertBaseData(SQLiteDatabase sqLiteDatabase){
         insertBaseStages(sqLiteDatabase);
@@ -154,7 +208,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        values.put(item.COL2,"Super Rocket 5001");
+        /*values.put(item.COL2,"Super Rocket 5001");
         values.put(item.COL3,(float)125);
         values.put(item.COL4,(float)1050);
         values.put(item.COL5,(float)15);
@@ -162,7 +216,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL7,66);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
-        values.clear();
+        values.clear();*/
         values.put(item.COL2,"North Korea Rocket");
         values.put(item.COL3,(float)200);
         values.put(item.COL4,(float)300);
@@ -179,7 +233,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL3,(float)50);
         values.put(item.COL4,(float)12500);
         values.put(item.COL5,(float)7.5);
-        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL6, R.drawable.rocket_v1);
         values.put(item.COL7,70);
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
@@ -193,14 +247,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        values.put(item.COL2,"Illuminated Booster v0.3B");
+        /*values.put(item.COL2,"Illuminated Booster v0.3B");
         values.put(item.COL3,(float)30);
         values.put(item.COL4,(float)15000);
         values.put(item.COL5,(float)5);
         values.put(item.COL6, R.drawable.rocket_v2);
         values.put(item.COL7,40);
         values.put(item.COL8,0);
-        sqLiteDatabase.insert(item.TABLE,null,values);
+        sqLiteDatabase.insert(item.TABLE,null,values);*/
     }
     private void exceptionHandle(){
         this.onUpgrade(this.getWritableDatabase(),0, 1);

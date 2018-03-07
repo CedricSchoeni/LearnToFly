@@ -1,14 +1,14 @@
 package mailmaster.cedric.learntofly.game.flightdevices.stages;
 
+import android.content.Context;
+
 import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
-import mailmaster.cedric.learntofly.MainActivity;
-import mailmaster.cedric.learntofly.R;
 import mailmaster.cedric.learntofly.resources.ResourceManager;
 import mailmaster.cedric.learntofly.view.RImage;
 import mailmaster.cedric.learntofly.view.RObject;
 
 /**
- * Created by campiotti on 06.03.2018.
+ * Created by Campiotti on 06.03.2018.
  * Base Class for all Stages
  */
 
@@ -21,7 +21,7 @@ public class Stage implements FlightDevice{
     private String name="Rocket";
     private int id=0;
     private int price=0;
-    private RObject model= (MainActivity.context==null)? null : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
+    private RObject model= null;//(MainActivity.context==null)? null : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
     private int drawable=0;
     private int type=1;
 
@@ -82,9 +82,9 @@ public class Stage implements FlightDevice{
         this.fuel = fuel;
     }
     @Override
-    public void setModel(int drawableID) {
-        if(MainActivity.context!=null)
-            this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, drawableID), drawableID);
+    public void setModel(int drawableID, Context context) {
+        if(context!=null)
+            this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(context, drawableID), drawableID);
         else
             this.setDrawable(drawableID);
     }

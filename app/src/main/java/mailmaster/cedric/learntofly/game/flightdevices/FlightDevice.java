@@ -1,5 +1,7 @@
 package mailmaster.cedric.learntofly.game.flightdevices;
 
+import android.content.Context;
+
 import mailmaster.cedric.learntofly.view.RImage;
 
 /**
@@ -82,7 +84,7 @@ public interface FlightDevice {
     void setFuel(float fuel);
     void setMass(float mass);
     void setTimeCounter(float timeCounter);
-    void setModel(int drawableID);
+    void setModel(int drawableID, Context context);
     void setName(String name);
     void setId(int id);
     void setPrice(int price);

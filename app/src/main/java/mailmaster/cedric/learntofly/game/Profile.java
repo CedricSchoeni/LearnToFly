@@ -11,10 +11,10 @@ public class Profile {
     public int stage2=1;
     public int stage3=1;
     public int stage4=1;
-    public int boost1=1;
-    public int boost2=1;
-    public int boost3=1;
-    public int boost4=1;
+    public int boost1=3;
+    public int boost2=3;
+    public int boost3=3;
+    public int boost4=3;
 
 
 }

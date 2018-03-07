@@ -1,8 +1,8 @@
 package mailmaster.cedric.learntofly.game.flightdevices.boosts;
 
+import android.content.Context;
+
 import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
-import mailmaster.cedric.learntofly.MainActivity;
-import mailmaster.cedric.learntofly.R;
 import mailmaster.cedric.learntofly.resources.ResourceManager;
 import mailmaster.cedric.learntofly.view.RImage;
 import mailmaster.cedric.learntofly.view.RObject;
@@ -18,7 +18,7 @@ public class Boost implements FlightDevice{
     private float power = 50;
     private float mass = 10;
     private float fuel = 10000; // 1000 = 1sec
-    private RObject model= (MainActivity.context==null)? null : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
+    private RObject model= null;// : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
     private String name="Rocket";
     private int id=0;
     private int price=0;
@@ -82,9 +82,9 @@ public class Boost implements FlightDevice{
         return (RImage)model;
     }
     @Override
-    public void setModel(int drawableID) {
-        if(MainActivity.context!=null)
-            this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, drawableID), drawableID);
+    public void setModel(int drawableID, Context context) {
+        if(context!=null)
+            this.model = new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(context, drawableID), drawableID);
         else
             this.setDrawable(drawableID);
     }

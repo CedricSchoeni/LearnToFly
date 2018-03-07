@@ -46,7 +46,7 @@ public class Shop extends AppCompatActivity {
 
         listView=findViewById(R.id.list);
         //final DatabaseHelper dbhelper = new DatabaseHelper(this);
-        //dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
+        dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         dataModels= new ArrayList<>();
         //dataModels.add(new DataModel("Empty","none","none","none"));
         //dataModels.add(new DataModel("Empty","none","none","none"));
@@ -94,7 +94,7 @@ public class Shop extends AppCompatActivity {
                     "Fuel: "+stage.getFuel(),
                     "Power:"+stage.getPower(),
                     ""+stage.getId()));
-            Log.e("ID", Integer.toString(stage.getId()));
+            Log.e("ID", Integer.toString(stage.getDrawable()));
         }
     }
 
@@ -117,9 +117,9 @@ public class Shop extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("Item", "Hello");
                 DataModel dataModel= dataModels.get(position);
                 setProfileVal(Integer.parseInt(dataModel.getFeature()));
+                Log.e("Item", dataModel.getFeature());
                 listView.setVisibility(View.GONE);
             }
         });
