@@ -10,10 +10,10 @@ import mailmaster.cedric.learntofly.physics.PhysicEngine;
 
 public class PhysicsObject {
 
-    private FVector position; // contains x and y position of object
-    public FVector velocity; // contains xSpeed and ySpeed of object
+    private final FVector position; // contains x and y position of object
+    public final FVector velocity; // contains xSpeed and ySpeed of object
 
-    public float mass;
+    float mass;
     private float power;
     private final float MAX_POWER_EFFICIENCY = 100; // if the power is greater than this it will take exactly 5 updatePositions() to reach maxSpeed.
 
@@ -22,9 +22,9 @@ public class PhysicsObject {
     private float speedIncrement;
     private float speedDecrement;
 
-    public float rotation;
+    float rotation;
 
-    public PhysicsObject(float mass, float rotation) {
+    PhysicsObject(float mass, float rotation) {
         position = new FVector(0,0);
         velocity = new FVector(0,0);
 
@@ -119,7 +119,7 @@ public class PhysicsObject {
      * This method adds Power to the object which will result in it travelling faster
      * @param p the amout of power that will be added to the object.power
      */
-    public void addPower(float p){
+    void addPower(float p){
         this.power += p;
         updatePower();
     }
@@ -128,7 +128,7 @@ public class PhysicsObject {
      * This method subtracts Power from the object which will result in it travelling slower
      * @param p the amout of power that will be subtracted from the object.power
      */
-    public void subPower(float p){
+    void subPower(float p){
         this.power -= p;
         updatePower();
     }

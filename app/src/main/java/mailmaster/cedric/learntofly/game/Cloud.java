@@ -10,7 +10,7 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 public class Cloud implements MovableObject {
 
-    public RObject model;
+    public final RObject model;
 
     public Cloud(RObject model) {
         this.model = model;

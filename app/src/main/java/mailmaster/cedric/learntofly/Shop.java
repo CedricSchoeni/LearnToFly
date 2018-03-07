@@ -29,11 +29,11 @@ import mailmaster.cedric.learntofly.sql.DatabaseHelper;
 
 public class Shop extends AppCompatActivity {
 
-    ArrayList<DataModel> dataModels;
-    ListView listView;
-    private Profile profile = new Profile();
+    private ArrayList<DataModel> dataModels;
+    private ListView listView;
+    private final Profile profile = new Profile();
     private int current=-1;
-    final DatabaseHelper dbhelper=new DatabaseHelper(this);
+    private final DatabaseHelper dbhelper=new DatabaseHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

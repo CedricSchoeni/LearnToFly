@@ -10,8 +10,8 @@ import mailmaster.cedric.learntofly.view.Renderer;
 
 public class MainActivity extends AppCompatActivity {
 
-    public Context context;
-    GridLayout gridLayout;
+    private Context context;
+    private GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

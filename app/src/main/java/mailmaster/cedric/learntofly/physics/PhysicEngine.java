@@ -13,5 +13,5 @@ public class PhysicEngine {
     /**
      * The FVector Air_Drag simulates the effects of Air drag as air resistance
      */
-    public static FVector AIR_DRAG = new FVector(0.95f,0.95f);
+    public static final FVector AIR_DRAG = new FVector(0.95f,0.95f);
 }

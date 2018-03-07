@@ -17,10 +17,10 @@ public class RImage implements RObject {
 
 
 
-    private FVector position;
+    private final FVector position;
 
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     private float rotation;
 
@@ -29,9 +29,9 @@ public class RImage implements RObject {
     }
 
     private Bitmap image;
-    public int imageID;
+    private final int imageID;
 
-    private Matrix matrix;
+    private final Matrix matrix;
 
 
     public RImage(float xPos, float yPos, int width, int height, float rotation, Bitmap image, int id) {

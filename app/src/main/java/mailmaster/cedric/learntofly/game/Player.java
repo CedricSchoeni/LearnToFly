@@ -20,15 +20,15 @@ import mailmaster.cedric.learntofly.view.Renderer;
  */
 public class Player extends PhysicsObject implements MovableObject {
 
-    final Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
-    public RObject model;
+    public final RObject model;
 
-    public List<FlightDevice> stages;
-    public List<FlightDevice> boosts;
-    public Launchers launcher;
-    private MainActivity main;
-    private DatabaseHelper dbhelper;
+    public final List<FlightDevice> stages;
+    public final List<FlightDevice> boosts;
+    public final Launchers launcher;
+    private final MainActivity main;
+    private final DatabaseHelper dbhelper;
 
     public Player(RObject model, float mass, MainActivity main) {
         super(mass, model.getRotation());

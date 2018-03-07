@@ -21,22 +21,22 @@ import mailmaster.cedric.learntofly.MainMenu;
 
 public class Renderer extends View {
 
-    public static final int FPS = 60;
+    private static final int FPS = 60;
     public static final int FPS_DELAY = 1000 / FPS;
     public boolean playing = false;
 
 
 
-    Game g;
-    MainActivity main;
+    private Game g;
+    final MainActivity main;
 
-    Context context;
-    Handler handler;
+    final Context context;
+    private final Handler handler;
 
 
 
-    public List<RObject> renderListFG;
-    public List<RObject> renderListBG;
+    private final List<RObject> renderListFG;
+    private final List<RObject> renderListBG;
 
 
     public Renderer(Context context, MainActivity main) {
@@ -136,7 +136,7 @@ public class Renderer extends View {
     /**
      * this will call the Game.update() method and force the onDraw method every FPS_DELAY
      */
-    private Runnable periodicUpdate = new Runnable () {
+    private final Runnable periodicUpdate = new Runnable () {
         @Override
         public void run() {
             // scheduled another events to be in FPS_DELAY seconds later
@@ -153,7 +153,7 @@ public class Renderer extends View {
      * in our case if the right side is touched the character will rotate to the right side
      * same goes for the left side
      */
-    private View.OnTouchListener handleTouch = new View.OnTouchListener() {
+    private final View.OnTouchListener handleTouch = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
 

@@ -26,21 +26,21 @@ import mailmaster.cedric.learntofly.sql.DatabaseHelper;
  * This is the game class where everything related to the game will be controlled
  */
 
-public class Game{
+class Game{
 
-    private Renderer r;
+    private final Renderer r;
 
     private int wind_delay = 2500;
     private int windTimer = 0;
-    private FVector wind = new FVector(0,0);
+    private final FVector wind = new FVector(0,0);
     private float windRotation = 0;
 
     private int CLOUD_DELAY = 500;
     private int cloudTimer = 0;
-    private List<Cloud> clouds;
+    private final List<Cloud> clouds;
 
     private Player player;
-    float rotation = 0;
+    private float rotation = 0;
 
     private int endTimer = 0;
     private int oldVelocity = 0;
@@ -50,52 +50,52 @@ public class Game{
     private RObject background_image_grass_fg;
     private RObject launcher;
 
-    private int CANVAS_WIDTH;
-    private int CANVAS_HEIGHT;
+    private final int CANVAS_WIDTH;
+    private final int CANVAS_HEIGHT;
 
 
-    private int lateUpdateDelay;
+    private final int lateUpdateDelay;
     private int currentLateUpdateTick = 0;
     private boolean playing = false;
 
     private FVector gamePosition = new FVector(0,0);
-    private FVector screenPosition = new FVector(0,0);
+    private final FVector screenPosition = new FVector(0,0);
 
-    Handler handler;
+    private final Handler handler;
 
     // should have their own class that keeps track of all textviews
-    TextView distanceView;
-    TextView heightView;
-    TextView speedView;
-    TextView windView;
+    private final TextView distanceView;
+    private final TextView heightView;
+    private final TextView speedView;
+    private final TextView windView;
 
-    List<ProgressBar> proBarsStages = new ArrayList<>();
-    List<ProgressBar> proBarsBoosts = new ArrayList<>();
+    private final List<ProgressBar> proBarsStages = new ArrayList<>();
+    private final List<ProgressBar> proBarsBoosts = new ArrayList<>();
 
-    ProgressBar progressBar1Stage;
-    ProgressBar progressBar2Stage;
-    ProgressBar progressBar3Stage;
-    ProgressBar progressBar4Stage;
+    private final ProgressBar progressBar1Stage;
+    private final ProgressBar progressBar2Stage;
+    private final ProgressBar progressBar3Stage;
+    private final ProgressBar progressBar4Stage;
 
-    ProgressBar progressBar1Boost;
-    ProgressBar progressBar2Boost;
-    ProgressBar progressBar3Boost;
-    ProgressBar progressBar4Boost;
+    private final ProgressBar progressBar1Boost;
+    private final ProgressBar progressBar2Boost;
+    private final ProgressBar progressBar3Boost;
+    private final ProgressBar progressBar4Boost;
 
-    List<ImageButton> buttonsStage = new ArrayList<>();
-    List<ImageButton> buttonsBoosts = new ArrayList<>();
+    private final List<ImageButton> buttonsStage = new ArrayList<>();
+    private final List<ImageButton> buttonsBoosts = new ArrayList<>();
 
-    ImageButton stage1;
-    ImageButton stage2;
-    ImageButton stage3;
-    ImageButton stage4;
+    private final ImageButton stage1;
+    private final ImageButton stage2;
+    private final ImageButton stage3;
+    private final ImageButton stage4;
 
-    ImageButton boost1;
-    ImageButton boost2;
-    ImageButton boost3;
-    ImageButton boost4;
+    private final ImageButton boost1;
+    private final ImageButton boost2;
+    private final ImageButton boost3;
+    private final ImageButton boost4;
 
-    DatabaseHelper dbhelper;
+    private final DatabaseHelper dbhelper;
 
     int temp=0;
     public Game(Renderer r){
@@ -187,7 +187,7 @@ public class Game{
      * if less than 4 stages were selected wont show empty buttons
      */
     private void initStages(){
-        Log.e("Stages", Integer.toString(player.stages.size()));
+        //Log.e("Stages", Integer.toString(player.stages.size()));
         for (int i = 0; i < player.stages.size(); i++){
 
             Drawable d = r.main.getResources().getDrawable(player.stages.get(i).getDrawable() );
@@ -330,12 +330,12 @@ public class Game{
         List<FlightDevice> stages= getStages();
         List<FlightDevice> boosts = getBoosts();
         for(int i=0; i < stages.size(); i++){
-            Log.e((1+i)+"stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
+            //Log.e((1+i)+"stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
             rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(stages.get(i),i+1)));
         }
         rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
         for(int i=0; i < boosts.size(); i++){
-            Log.e((1+i)+"boost-image"+(i+1),""+imagechooser(boosts.get(i),i+1));
+            //Log.e((1+i)+"boost-image"+(i+1),""+imagechooser(boosts.get(i),i+1));
             rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(boosts.get(i),i+1)));
         }
         return rImage;
@@ -548,7 +548,7 @@ public class Game{
      * this runnable updates the rotation of the player character every FPS_DELAY
      * this ensures a really smooth rotation of the image
      */
-    private Runnable periodicUpdate = new Runnable () {
+    private final Runnable periodicUpdate = new Runnable () {
         @Override
         public void run() {
             handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);

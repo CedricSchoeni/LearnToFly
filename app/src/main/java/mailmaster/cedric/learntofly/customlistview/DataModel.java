@@ -10,13 +10,13 @@ import mailmaster.cedric.learntofly.game.Profile;
 
 public class DataModel {
 
-    private String name;
-    private String fuel;
-    private String power;
-    private String id;
-    private String mass;
-    private int profileID;
-    private Profile profile;
+    private final String name;
+    private final String fuel;
+    private final String power;
+    private final String id;
+    private final String mass;
+    private final int profileID;
+    private final Profile profile;
 
     public DataModel(String name, String fuel, String power, String id, String mass, int profileID, Profile profile) {
         this.name=name;

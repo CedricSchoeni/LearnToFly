@@ -6,7 +6,7 @@ package mailmaster.cedric.learntofly.game;
  * Due to there only being 2 classes which implement this Interface in the current version pretty useless.
  */
 
-public interface MovableObject {
+interface MovableObject {
 
     void addRotation(float r);
     void setRotation(float r);

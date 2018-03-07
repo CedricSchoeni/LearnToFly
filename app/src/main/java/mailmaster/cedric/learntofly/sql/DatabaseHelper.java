@@ -22,10 +22,10 @@ import mailmaster.cedric.learntofly.R;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private Player player = new Player();
-    private Item item = new Item();
-    private Inventory inventory = new Inventory();
-    private Image image = new Image();
+    private final Player player = new Player();
+    private final Item item = new Item();
+    private final Inventory inventory = new Inventory();
+    private final Image image = new Image();
     private StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
         super(context,"Item", null, 1);
