@@ -1,5 +1,6 @@
 package mailmaster.cedric.learntofly.View;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
@@ -14,9 +15,11 @@ import java.util.List;
 
 import mailmaster.cedric.learntofly.Game.Cloud;
 import mailmaster.cedric.learntofly.Game.Player;
+import mailmaster.cedric.learntofly.MainActivity;
 import mailmaster.cedric.learntofly.Physics.FVector;
 import mailmaster.cedric.learntofly.R;
 import mailmaster.cedric.learntofly.Resources.ResourceManager;
+import mailmaster.cedric.learntofly.SQL.DatabaseHelper;
 
 /**
  * Created by Cedric on 02.03.2018.
@@ -50,17 +53,17 @@ public class Game{
     private RObject background_image_grass_fg;
     private RObject launcher;
 
-    public int CANVAS_WIDTH;
-    public int CANVAS_HEIGHT;
+    private int CANVAS_WIDTH;
+    private int CANVAS_HEIGHT;
 
 
     private int lateUpdateDelay;
     private int currentLateUpdateTick = 0;
     private boolean playing = false;
 
-    public FVector gamePosition = new FVector(0,0);
-    public FVector screenPosition = new FVector(0,0);
-    public final float screenFactor = 0.15f; // actual position of background objects is screenFactor * gamePosition
+    private FVector gamePosition = new FVector(0,0);
+    private FVector screenPosition = new FVector(0,0);
+    private final float screenFactor = 0.15f; // actual position of background objects is screenFactor * gamePosition
 
     Handler handler;
 
@@ -96,6 +99,8 @@ public class Game{
     ImageButton boost3;
     ImageButton boost4;
 
+    DatabaseHelper dbhelper = new DatabaseHelper(r.main);
+
     int temp=0;
     public Game(Renderer r){
         this.r = r;
@@ -105,38 +110,38 @@ public class Game{
 
         CANVAS_WIDTH = r.getWidth();
         CANVAS_HEIGHT = r.getHeight();
-        lateUpdateDelay = r.FPS_DELAY * 10;
+        lateUpdateDelay = Renderer.FPS_DELAY * 10;
 
 
-        distanceView = (TextView)r.main.findViewById(R.id.textView);
-        heightView = (TextView)r.main.findViewById(R.id.textView2);
-        speedView = (TextView)r.main.findViewById(R.id.textView3);
-        windView = (TextView)r.main.findViewById(R.id.textView4);
+        distanceView = r.main.findViewById(R.id.textView);
+        heightView = r.main.findViewById(R.id.textView2);
+        speedView = r.main.findViewById(R.id.textView3);
+        windView = r.main.findViewById(R.id.textView4);
 
-        stage1 = (ImageButton) r.main.findViewById(R.id.imageButton1);
-        stage2 = (ImageButton) r.main.findViewById(R.id.imageButton2);
-        stage3 = (ImageButton) r.main.findViewById(R.id.imageButton3);
-        stage4 = (ImageButton) r.main.findViewById(R.id.imageButton4);
+        stage1 = r.main.findViewById(R.id.imageButton1);
+        stage2 = r.main.findViewById(R.id.imageButton2);
+        stage3 = r.main.findViewById(R.id.imageButton3);
+        stage4 = r.main.findViewById(R.id.imageButton4);
 
         buttonsStage.add(stage1);
         buttonsStage.add(stage2);
         buttonsStage.add(stage3);
         buttonsStage.add(stage4);
 
-        boost1 = (ImageButton) r.main.findViewById(R.id.imageButton5);
-        boost2 = (ImageButton) r.main.findViewById(R.id.imageButton6);
-        boost3 = (ImageButton) r.main.findViewById(R.id.imageButton7);
-        boost4 = (ImageButton) r.main.findViewById(R.id.imageButton8);
+        boost1 = r.main.findViewById(R.id.imageButton5);
+        boost2 = r.main.findViewById(R.id.imageButton6);
+        boost3 = r.main.findViewById(R.id.imageButton7);
+        boost4 = r.main.findViewById(R.id.imageButton8);
 
         buttonsBoosts.add(boost1);
         buttonsBoosts.add(boost2);
         buttonsBoosts.add(boost3);
         buttonsBoosts.add(boost4);
 
-        progressBar1Stage = (ProgressBar) r.main.findViewById(R.id.progressBar1);
-        progressBar2Stage= (ProgressBar) r.main.findViewById(R.id.progressBar2);
-        progressBar3Stage = (ProgressBar) r.main.findViewById(R.id.progressBar3);
-        progressBar4Stage = (ProgressBar) r.main.findViewById(R.id.progressBar4);
+        progressBar1Stage = r.main.findViewById(R.id.progressBar1);
+        progressBar2Stage= r.main.findViewById(R.id.progressBar2);
+        progressBar3Stage = r.main.findViewById(R.id.progressBar3);
+        progressBar4Stage = r.main.findViewById(R.id.progressBar4);
 
         proBarsStages.add(progressBar1Stage);
         proBarsStages.add(progressBar2Stage);
@@ -144,10 +149,10 @@ public class Game{
         proBarsStages.add(progressBar4Stage);
 
 
-        progressBar1Boost = (ProgressBar) r.main.findViewById(R.id.progressBar5);
-        progressBar2Boost = (ProgressBar) r.main.findViewById(R.id.progressBar6);
-        progressBar3Boost = (ProgressBar) r.main.findViewById(R.id.progressBar7);
-        progressBar4Boost = (ProgressBar) r.main.findViewById(R.id.progressBar8);
+        progressBar1Boost = r.main.findViewById(R.id.progressBar5);
+        progressBar2Boost = r.main.findViewById(R.id.progressBar6);
+        progressBar3Boost = r.main.findViewById(R.id.progressBar7);
+        progressBar4Boost = r.main.findViewById(R.id.progressBar8);
 
         proBarsBoosts.add(progressBar1Boost);
         proBarsBoosts.add(progressBar2Boost);
@@ -159,7 +164,7 @@ public class Game{
         r.startRendering();
     }
 
-    public void startGame(){
+    void startGame(){
         r.addObjectToForeground(player.model);
         player.activateLauncher();
     }
@@ -274,7 +279,7 @@ public class Game{
 
         this.gamePosition = player.updatePosition();
 
-        currentLateUpdateTick += r.FPS_DELAY;
+        currentLateUpdateTick += Renderer.FPS_DELAY;
         if (currentLateUpdateTick > lateUpdateDelay){
             currentLateUpdateTick = 0;
             lateUpdate();
@@ -284,7 +289,7 @@ public class Game{
 
         // Wind
         wind();
-        windTimer += r.FPS_DELAY;
+        windTimer += Renderer.FPS_DELAY;
         if (windTimer >= wind_delay){
             wind_delay = (int) (Math.random() * 10000) + 5000;
             windTimer = 0;
@@ -307,7 +312,7 @@ public class Game{
             }
         }
 
-        cloudTimer += r.FPS_DELAY;
+        cloudTimer += Renderer.FPS_DELAY;
         if (cloudTimer >= CLOUD_DELAY){
             CLOUD_DELAY = (player.getSpeed() < 10) ? 750 : (int)(75000/player.getSpeed());
             cloudTimer = 0;
@@ -339,7 +344,7 @@ public class Game{
     }
 
     private void checkForEnd(){
-        endTimer += r.FPS_DELAY;
+        endTimer += Renderer.FPS_DELAY;
         if (endTimer >= END_DELAY) {
             endTimer = 0;
             int currentVelocity = (int) player.velocity.mag();

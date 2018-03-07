@@ -36,7 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb = new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(player.TABLE+"(");
-        sb.append(player.COL1+" INT PRIMARY KEY, ");
+        sb.append(player.COL1+" INT PRIMARY KEY AUTOINCREMENT, ");
         sb.append(player.COL2+" VARCHAR(16), ");
         sb.append(player.COL3+" INT, ");
         sb.append(player.COL4+" INT)");
@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb = new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(item.TABLE+"(");
-        sb.append(item.COL1+" INT PRIMARY KEY, ");
+        sb.append(item.COL1+" INT PRIMARY KEY AUTOINCREMENT, ");
         sb.append(item.COL2+" VARCHAR(50), ");
         sb.append(item.COL3+" FLOAT, ");
         sb.append(item.COL4+" FLOAT, ");
@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb= new StringBuilder();
         sb.append("CREATE TABLE IF NOT EXISTS ");
         sb.append(inventory.TABLE+" (");
-        sb.append(inventory.COL1+" INT PRIMARY KEY, ");
+        sb.append(inventory.COL1+" INT PRIMARY KEY AUTOINCREMENT, ");
         sb.append(inventory.COL2+" INT, ");
         sb.append(inventory.COL3+" INT, ");
         sb.append("FOREIGN KEY ("+inventory.COL2+") ");

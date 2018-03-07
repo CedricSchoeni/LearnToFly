@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Renderer r = new Renderer(gridLayout.getContext(), this);
         context = gridLayout.getContext();
         gridLayout.addView(r);
+
     }
 
 
