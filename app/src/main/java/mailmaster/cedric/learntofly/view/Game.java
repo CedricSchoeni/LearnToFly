@@ -96,7 +96,7 @@ public class Game{
     ImageButton boost3;
     ImageButton boost4;
 
-    DatabaseHelper dbhelper = new DatabaseHelper(r.main);
+    DatabaseHelper dbhelper;
 
     int temp=0;
     public Game(Renderer r){
@@ -156,7 +156,7 @@ public class Game{
         proBarsBoosts.add(progressBar3Boost);
         proBarsBoosts.add(progressBar4Boost);
 
-
+        dbhelper = new DatabaseHelper(r.main);
         initGame();
         r.startRendering();
     }
