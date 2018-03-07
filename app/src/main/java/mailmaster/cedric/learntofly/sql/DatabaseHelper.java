@@ -29,7 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
         super(context,"Item", null, 1);
-        Context context1 = context;
     }
 
     @Override
@@ -103,6 +102,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    /**
+     * Gets all Stages found in the database and returns those as a stage list
+     * @return stage list of all stages in the database.
+     */
     public List<Stage> getAllStages(){
         SQLiteDatabase db = this.getReadableDatabase();
         List<Stage> stages= new ArrayList<>();
@@ -138,6 +141,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stages;
     }
 
+    /**
+     * Gets a single Stage by it's SQL-Database ID
+     * @param id id to use to find the specific stage
+     * @return stage which was found in the database.
+     */
     public Stage getStage(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Stage stage = new Stage();
@@ -168,6 +176,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stage;
     }
 
+    /**
+     * Gets a list of all Boosts in the database and returns them as a Boost List
+     * @return Boost List which contains all Boosts found in the Database.
+     */
     public List<Boost> getAllBoosts(){
         SQLiteDatabase db = this.getReadableDatabase();
         List<Boost> boosts= new ArrayList<>();
@@ -205,6 +217,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return boosts;
     }
 
+    /**
+     * Gets a single Boost by it's SQL-Database ID
+     * @param id ID to use to find the specific boost
+     * @return Boost boost which was found.
+     */
     public Boost getBoost(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Boost boost = new Boost();
@@ -233,7 +250,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return boost;
     }
 
-
+    /**
+     * insertBaseData inserts all the available items as well as their images into the Database.
+     * @param sqLiteDatabase database required to insert into.
+     */
     private void insertBaseData(SQLiteDatabase sqLiteDatabase){
         insertBaseStages(sqLiteDatabase);
         insertBaseBoosts(sqLiteDatabase);
