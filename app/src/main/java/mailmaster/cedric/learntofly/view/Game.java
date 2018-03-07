@@ -271,7 +271,7 @@ public class Game{
             int tmp=0;
             try{//noinspection ConstantConditions
                 tmp=r.main.getIntent().getExtras().getInt("stage"+i);}catch(Exception ignored){}
-            Log.e("stage"+i,""+tmp);
+            //Log.e("stage"+i,""+tmp);
             if(tmp>0)
                 stages.add(dbhelper.getStage(tmp));
         }
@@ -296,13 +296,16 @@ public class Game{
         List<FlightDevice> stages= getStages();
         List<FlightDevice> boosts = getBoosts();
         for(int i=0; i < stages.size(); i++){
-            Log.e(i+"-stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
-            rImage.combine(ResourceManager.drawableToBitmap(r.context,imagechooser(stages.get(i),i+1)));
+            Log.e((1+i)+"stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
+            rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(stages.get(i),i+1)));
         }
 
-        for(int i=0; i < boosts.size(); i++)
-            rImage.combine(ResourceManager.drawableToBitmap(r.context,imagechooser(boosts.get(i),i+1)));
-        rImage.combine(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
+        for(int i=0; i < boosts.size(); i++){
+            Log.e((1+i)+"boost-image"+(i+1),""+imagechooser(boosts.get(i),i+1));
+            rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,imagechooser(boosts.get(i),i+1)));
+        }
+
+        rImage.combineInternal(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
         return rImage;
     }
 

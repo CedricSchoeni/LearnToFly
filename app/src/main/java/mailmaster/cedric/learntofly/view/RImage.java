@@ -101,16 +101,22 @@ public class RImage implements RObject {
         return bmOverlay;
     }
 
-    //Do not use for now.
-    public static Bitmap combineTemp(Bitmap bmp1, Bitmap bmp2, int x, int y, boolean left) {
-        x = (left) ? x : x+bmp2.getWidth();
-       //y = (top) ? y : y+bmp2.getHeight();
-        if(bmp1.getWidth()<bmp2.getWidth() || bmp1.getHeight()<bmp2.getHeight())return bmp1;
-        Bitmap bmOverlay = Bitmap.createBitmap(bmp1.getWidth(), bmp1.getHeight(), bmp1.getConfig());
+    /**
+     * Internal version of combine method to change the Bitmap of this RImage.
+     * @param bmp2 the 2nd bitmap which gets put on top of this one.
+     */
+    public void combineInternal(Bitmap bmp2){
+        if(bmp2==null){
+            Log.e("Failed comb.","null pointer");
+            return;
+        }
+
+        if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight())return;
+        Bitmap bmOverlay = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
         Canvas canvas = new Canvas(bmOverlay);
-        canvas.drawBitmap(bmp1, new Matrix(), null);
-        canvas.drawBitmap(bmp2, x, y, null);
-        return bmOverlay;
+        canvas.drawBitmap(image, new Matrix(), null);
+        canvas.drawBitmap(bmp2, 0, 0, null);
+        image=bmOverlay;
     }
 
 }
