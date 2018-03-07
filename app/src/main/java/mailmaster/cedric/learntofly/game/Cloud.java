@@ -4,6 +4,8 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 /**
  * Created by Cedric on 03.03.2018.
+ * The class Cloud can be moved on the screen because of the MoveableObject Interface
+ * In the current Version this class is pretty useless and could just be a RImage instance.
  */
 
 public class Cloud implements MovableObject {

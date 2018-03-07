@@ -86,6 +86,10 @@ public interface FlightDevice {
     int getImage4();
     void setActive(boolean b);
 
+    /**
+     * Updates the frameCounter - If the frameCounter is above the fuel the rocket will be turned off
+     * @param t float value by which the inside timer will be updated
+     */
     void updateTimeCounter(float t);
 
     void setDrawable(int drawable);

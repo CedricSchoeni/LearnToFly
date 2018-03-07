@@ -26,6 +26,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         TextView txtName;
         TextView txtType;
         TextView txtVersion;
+        TextView txtMass;
         ImageView info;
     }
 
@@ -48,6 +49,10 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         switch (v.getId())
         {
             case R.id.item_info:
+                //Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG)
+                //      .setAction("No action", null).show();
+
+                //Log.e("SQL-ID", ""+((DataModel) object).getFeature()+"::"+((DataModel) object).getProfileID());
                 setProfileVal(dataModel);
                 break;
         }
@@ -69,7 +74,10 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder.txtName = convertView.findViewById(R.id.name);
             viewHolder.txtType = convertView.findViewById(R.id.type);
             viewHolder.txtVersion = convertView.findViewById(R.id.version_number);
+            viewHolder.txtMass = convertView.findViewById(R.id.name2);
             viewHolder.info = convertView.findViewById(R.id.item_info);
+
+
 
             convertView.setTag(viewHolder);
         } else {
@@ -80,8 +88,9 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         //result.startAnimation(animation);
 
         viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
-        viewHolder.txtType.setText(dataModel != null ? dataModel.getType() : "");
-        viewHolder.txtVersion.setText(dataModel != null ? dataModel.getVersion_number() : "");
+        viewHolder.txtType.setText(dataModel.getType());
+        viewHolder.txtVersion.setText(dataModel.getVersion_number());
+        viewHolder.txtMass.setText(dataModel.getMass());
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);
         // Return the completed view to render on screen

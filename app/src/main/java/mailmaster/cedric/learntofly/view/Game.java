@@ -24,6 +24,7 @@ import mailmaster.cedric.learntofly.sql.DatabaseHelper;
 
 /**
  * Created by Cedric on 02.03.2018.
+ * This is the game class where everything related to the game will be controlled
  */
 
 public class Game{
@@ -160,11 +161,20 @@ public class Game{
         r.startRendering();
     }
 
+    /**
+     * this is called from the renderer
+     * the launcher will be prepared and the player model added to the renderlist
+     */
     void startGame(){
         r.addObjectToForeground(player.model);
         player.activateLauncher();
     }
 
+    /**
+     * this will initialize every image for the foreground and background needed
+     * it also creates the stages and boosts selected previously in the Shop
+     * after that it starts the handler which
+     */
     private void initGame(){
         initForeGround();
         initBackground();
@@ -173,6 +183,10 @@ public class Game{
         handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);
     }
 
+    /**
+     * This method will set the ImageButtons image and their height
+     * if less than 4 stages were selected wont show empty buttons
+     */
     private void initStages(){
         Log.e("Stages", Integer.toString(player.stages.size()));
         for (int i = 0; i < player.stages.size(); i++){
@@ -195,6 +209,10 @@ public class Game{
         }
     }
 
+    /**
+     * this method adds a listener to the ImageButton b which will activate all Stages on click
+     * @param b ImageButton which will get the onClick Event
+     */
     private void addStageListener(ImageButton b){
         b.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -204,6 +222,10 @@ public class Game{
         });
     }
 
+    /**
+     * This method will set the ImageButtons image and their height
+     * if less than 4 boosts were selected wont show empty buttons
+     */
     private void initBoosts(){
 
         for (int i = 0; i < player.boosts.size(); i++){
@@ -225,6 +247,11 @@ public class Game{
         }
     }
 
+    /**
+     * this method adds a listener to the ImageButton b which will activate the boost at index nr
+     * @param b ImageButton which will get the onClick Event
+     * @param nr the index of the BoostList in the player class
+     */
     private void addBoostListener(ImageButton b, int nr){
         final int temp = nr;
         b.setOnClickListener(new View.OnClickListener() {
@@ -235,6 +262,9 @@ public class Game{
         });
     }
 
+    /**
+     * this adds multiple images to the render list for the starting area including the launcher
+     */
     private void initBackground(){
         RObject background_image = new RImage(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background), R.drawable.background);
         background_image_grass_bg = new RImage(0,0,CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background_grass_bg), R.drawable.background_grass_bg);
@@ -247,24 +277,19 @@ public class Game{
         r.addObjectToBackground(background_image_grass_fg);
     }
 
+    /**
+     * A new Player object is created
+     * the character image is a combination of up to 4boosts 4stages and 1 character
+     */
     private void initForeGround(){
-        /*player = new Player(
-                new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
-                        RImage.combine(ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
-                                ResourceManager.drawableToBitmap(r.context, R.drawable.rocket_v1)), R.drawable.character_beta_v1), 10);*/
-        /*
-        RObject ro = new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
-                ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
-                R.drawable.character_beta_v1);
-        ro = ro.combine()*/
-        /*new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
-                        ResourceManager.drawableToBitmap(r.context, R.drawable.character),
-                        R.drawable.character)*/
-
         player = new Player(constructPlayerImage(), 10, r.main);
 
     }
 
+    /**
+     * This will create a list of stages based on what the user chose in the shop
+     * @return List<FlightDevice> a list of stages
+     */
     private List<FlightDevice> getStages(){
         List<FlightDevice> stages = new ArrayList<>();
         for(int i=1; i <5; i++){
@@ -278,6 +303,10 @@ public class Game{
         return stages;
     }
 
+    /**
+     * This will create a list of boosts based on what the user chose in the shop
+     * @return List<FlightDevice> a list of boosts
+     */
     private List<FlightDevice> getBoosts(){
         List<FlightDevice> boosts = new ArrayList<>();
         for(int i=1; i <5; i++){
@@ -289,6 +318,11 @@ public class Game{
         return boosts;
     }
 
+    /**
+     * in this function the character image is built
+     * multiple bitmaps are combined to a final bitmap
+     * @return RImage the character image for the player
+     */
     private RImage constructPlayerImage(){
         Bitmap tmp = ResourceManager.drawableToBitmap(r.context, R.drawable.character);
         RImage rImage= new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,tmp.getWidth(), tmp.getHeight(), 0,
@@ -308,6 +342,13 @@ public class Game{
         return rImage;
     }
 
+    /**
+     * there are 4 versions of the boost/stage image
+     * depending on the position that the image is it has to chose the correct image
+     * @param flightDevice the flightDevice where the image is
+     * @param index position of the image
+     * @return int index
+     */
     private int imagechooser(FlightDevice flightDevice,int index){
         int tmp=-1;
         switch(index){
@@ -327,28 +368,34 @@ public class Game{
         return tmp;
     }
 
-
-
-
+    /**
+     * This method is called every r.FPS_DELAY
+     * 1: stages/boost fuel is updated -> updateFlightDevices();
+     * 2: player position is updated
+     * 3: lateUpdate is called every 10 * r.FPS_DELAY
+     * 4: background items are moved to simulate that the character is moving
+     * 5: a random wind period is started or an existing one ended - windRotation is changed accordingly
+     * 6: Clouds spawn in a delay relative to the velocity the position is calculated by the direction of travel
+     * 7: check if the game has ended
+     */
     void update(){
-
+        // 1
         updateFlightDevices();
 
-
-
-
+        // 2
         this.gamePosition = player.updatePosition();
 
+        // 3
         currentLateUpdateTick += Renderer.FPS_DELAY;
         if (currentLateUpdateTick > lateUpdateDelay){
             currentLateUpdateTick = 0;
             lateUpdate();
         }
-
+        // 4
         moveBackgroundObjects();
 
-        // Wind
-        wind();
+        // 5
+        windRotation = wind.x;
         windTimer += Renderer.FPS_DELAY;
         if (windTimer >= wind_delay){
             wind_delay = (int) (Math.random() * 10000) + 5000;
@@ -360,8 +407,7 @@ public class Game{
             }
         }
 
-
-        // Clouds
+        // 6
         Iterator<Cloud> i = clouds.iterator();
         while (i.hasNext()) {
             RObject a = i.next().model;
@@ -370,7 +416,6 @@ public class Game{
                 r.removeObjectFromBackground(a);
             }
         }
-
         cloudTimer += Renderer.FPS_DELAY;
         if (cloudTimer >= CLOUD_DELAY){
             CLOUD_DELAY = (player.getSpeed() < 10) ? 750 : (int)(75000/player.getSpeed());
@@ -387,10 +432,14 @@ public class Game{
             }
         }
 
+        // 7
         checkForEnd();
-
     }
 
+    /**
+     * player.update() - Player updates the frameCounter of each active stage/boost
+     * the progressBar changes visually
+     */
     private void updateFlightDevices(){
         player.update();
         for (int i = 0; i < player.stages.size(); i++){
@@ -403,6 +452,9 @@ public class Game{
         }
     }
 
+    /**
+     * If the target velocity is held for 2.5seconds the game will stop
+     */
     private void checkForEnd(){
         endTimer += Renderer.FPS_DELAY;
         int END_DELAY = 2500;
@@ -419,16 +471,24 @@ public class Game{
         }
     }
 
+    /**
+     * the Handler is stopped
+     */
     private void stopGame(){
         handler.removeCallbacksAndMessages(null);
     }
 
-    private void wind(){
-        windRotation = wind.x;
-    }
-
+    /**
+     * This method first calculates the position of the background images
+     * the screenFactor is relative to the actual progress of the player
+     * the position of clouds and the backgroundImages of the Launch are then updated
+     */
     private void moveBackgroundObjects(){
-        calcPosition();
+        // calculate position
+        screenPosition.set(player.getSpeedVector().x * -1, player.getSpeedVector().y);
+        float screenFactor = 0.15f;
+        screenPosition.mult(screenFactor);
+
         for (Cloud c : clouds){
             c.model.updatePosition(screenPosition);
         }
@@ -437,12 +497,12 @@ public class Game{
         launcher.updatePosition(screenPosition);
     }
 
-    private void calcPosition(){
-        screenPosition.set(player.getSpeedVector().x * -1, player.getSpeedVector().y);
-        float screenFactor = 0.15f;
-        screenPosition.mult(screenFactor);
-    }
-
+    /**
+     * The lateUpdate is called 10 times less than the update
+     * This is because the text doesn't need to be set every so often and it looks better
+     * It gets the information it needs and creates a String for that
+     * this string will then be set as TextView text
+     */
     private void lateUpdate(){
         String t1 = "Distance: " + String.format("%.2f", (gamePosition.x / 1000)) + " km";
         String t2 = "Height: " + String.format("%.2f", (gamePosition.y / 1000)) + " km";
@@ -454,28 +514,44 @@ public class Game{
         windView.setText(t4);
     }
 
+    /**
+     * The game is started by clicking on the screen
+     * This will then set off the launch
+     */
     void handlePushDown(){
         if (!r.playing){
             r.startGame();
         }
     }
 
+    /**
+     * This event is called by the Renderer OnTouchHandler whenever the player stops clicking on the screen
+     */
     void handleReleaseUp(){
         rotation = 0;
     }
 
+    /**
+     * This is also called by the Renderer OnTouchHandler but only if the left side of the screen is touched
+     */
     void leftSideClick(){
         rotation = -4f;
     }
 
+    /**
+     * This is also called by the Renderer OnTouchHandler but only if the left side of the screen is touched
+     */
     void rightSideClick(){
         rotation = 4f;
     }
 
+    /**
+     * this runnable updates the rotation of the player character every FPS_DELAY
+     * this ensures a really smooth rotation of the image
+     */
     private Runnable periodicUpdate = new Runnable () {
         @Override
         public void run() {
-            // scheduled another events to be in 10 seconds later
             handler.postDelayed(periodicUpdate, Renderer.FPS_DELAY);
             // below is whatever you want to do
             player.addRotation(rotation);

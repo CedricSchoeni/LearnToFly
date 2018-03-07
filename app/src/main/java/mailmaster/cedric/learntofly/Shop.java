@@ -48,9 +48,6 @@ public class Shop extends AppCompatActivity {
         //final DatabaseHelper dbhelper = new DatabaseHelper(this);
         dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         dataModels= new ArrayList<>();
-        //dataModels.add(new DataModel("Empty","none","none","none"));
-        //dataModels.add(new DataModel("Empty","none","none","none"));
-        //dataModels.add(new DataModel("Empty","none","none","none"));
 
         listView.setVisibility(View.INVISIBLE);
 
@@ -93,7 +90,10 @@ public class Shop extends AppCompatActivity {
             dataModels.add(new DataModel(stage.getName(),
                     "Fuel: "+stage.getFuel(),
                     "Power:"+stage.getPower(),
-                    ""+stage.getId(),profile,this.profile));
+                    ""+stage.getId(),
+                    "Mass:"+stage.getMass(),
+                    profile,
+                    this.profile));
             //Log.e("ID", Integer.toString(stage.getDrawable()));
         }
     }
@@ -105,7 +105,10 @@ public class Shop extends AppCompatActivity {
             dataModels.add(new DataModel(boost.getName(),
                     "Fuel: "+boost.getFuel(),
                     "Power:"+boost.getPower(),
-                    ""+boost.getId(),profile,this.profile));
+                    ""+boost.getId(),
+                    "Mass:"+boost.getMass(),
+                    profile,
+                    this.profile));
             //Log.e("ID",""+boost.getId());
         }
     }
