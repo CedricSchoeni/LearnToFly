@@ -68,6 +68,7 @@ public class FVector {
     /**
      * Length of the vector - Magnitude
      * a² + b² = c²
+     * @return float square root of (x² + y²)
      */
     public float mag(){
         return (float)(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));

@@ -16,7 +16,8 @@ import mailmaster.cedric.learntofly.MainActivity;
 import mailmaster.cedric.learntofly.MainMenu;
 
 /**
- * Created by adriano.campiotti on 01.03.2018.
+ * Created by cedric.schoeni on 01.03.2018.
+ * this class is responsible for bringing everything on the screen
  */
 
 
@@ -57,27 +58,48 @@ public class Renderer extends View {
         g = new Game(this);
     }
 
+    /**
+     * this adds a new object to the renderListBG
+     * @param ro RObject will be added to renderListBG
+     */
     public void addObjectToBackground(RObject ro){
         renderListBG.add(ro);
     }
 
+    /**
+     * this removes a existing object to the renderListBG
+     * @param ro RObject will be removes from renderListBG
+     */
     public void removeObjectFromBackground(RObject ro){
         renderListBG.remove(ro);
     }
 
-
+    /**
+     * this adds a new object to the renderListFG
+     * @param ro RObject will be added to renderListFG
+     */
     public void addObjectToForeground(RObject ro){
         renderListFG.add(ro);
     }
 
+    /**
+     * this removes a existing object to the renderListBG
+     * @param ro RObject will be removed from renderListBG
+     */
     public void removeObjectFromForeground(RObject ro){
         renderListFG.remove(ro);
     }
 
+    /**
+     * OnTouch Events will be registered after the execution of this method
+     */
     public void startRendering(){
         this.setOnTouchListener(handleTouch);
     }
 
+    /**
+     * After the game has initialized everything the Runnable will be activated
+     */
     public void startGame(){
         playing = true;
         g.startGame();
@@ -85,15 +107,23 @@ public class Renderer extends View {
 
     }
 
+    /**
+     * The OnTouchHandler will be removed and the view changes to the MainMenu
+     */
     public void stopGame(){
         handler.removeCallbacksAndMessages(null);
         Intent intent = new Intent(main,MainMenu.class);
         main.startActivity(intent);
     }
 
+    /**
+     * This method will be called through the invalidate(); method in the periodicUpdate
+     * It redraws every single element in the renderLists every FPS_DELAY
+     * There are 2 render lists to make sure certain objects will always be covered by the foreground elements
+     * @param canvas gridLayout in our case
+     */
     @Override
     protected void onDraw(Canvas canvas) {
-
         // draw background first to prevent unwanted overlapping
         for (RObject ro : renderListBG){
             ro.drawObject(canvas, context);
@@ -102,23 +132,16 @@ public class Renderer extends View {
         for (RObject ro : renderListFG){
             ro.drawObject(canvas, context);
         }
-
-        //activateDebugLines(canvas);
     }
 
 
-    private void activateDebugLines(Canvas c){
-        Paint p = new Paint();
-        p.setColor(Color.RED);
-        for (int i = 0; i < 15; i++){
-            c.drawLine(i * 25,0, i * 25, 600, p);
-        }
-    }
-
+    /**
+     * this will call the Game.update() method and force the onDraw method every FPS_DELAY
+     */
     private Runnable periodicUpdate = new Runnable () {
         @Override
         public void run() {
-            // scheduled another events to be in 10 seconds later
+            // scheduled another events to be in FPS_DELAY seconds later
             handler.postDelayed(periodicUpdate, FPS_DELAY);
             // below is whatever you want to do
             g.update();
@@ -126,7 +149,12 @@ public class Renderer extends View {
         }
     };
 
-
+    /**
+     * This handler will fire whenever the screen is touched
+     * it saves x and y position of the click and then determines what to do with that information
+     * in our case if the right side is touched the character will rotate to the right side
+     * same goes for the left side
+     */
     private View.OnTouchListener handleTouch = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {

@@ -17,9 +17,11 @@ import mailmaster.cedric.learntofly.view.Renderer;
 
 /**
  * Created by Cedric on 03.03.2018.
+ * This is the Player object class with all functionality to move the player
  */
-
 public class Player extends PhysicsObject implements MovableObject {
+
+    final Handler handler = new Handler();
 
     public RObject model;
 
@@ -40,8 +42,17 @@ public class Player extends PhysicsObject implements MovableObject {
         addStages();
         addBoosts();
 
+        for (FlightDevice s : stages){
+            super.mass += s.getMass();
+        }
+        for (FlightDevice s : boosts){
+            super.mass += s.getMass();
+        }
     }
 
+    /**
+     * This method adds the selected Stages to its List
+     */
     private void addStages(){
         for(int i=1; i <5; i++){
             int tmp=0;
@@ -49,10 +60,13 @@ public class Player extends PhysicsObject implements MovableObject {
                 tmp=main.getIntent().getExtras().getInt("stage"+i);}catch(Exception ignored){}
             //Log.e("stage"+i,""+tmp);
             if(tmp>0)
-            stages.add(dbhelper.getStage(tmp));
+                stages.add(dbhelper.getStage(tmp));
         }
     }
 
+    /**
+     * This method adds the selected Stages to its List
+     */
     private void addBoosts(){
         for(int i=1; i <5; i++){
             int tmp=0;
@@ -77,24 +91,38 @@ public class Player extends PhysicsObject implements MovableObject {
         super.rotation = r;
     }
 
+    /**
+     * Stages are all activated at the same time
+     * They will be activated and add their power to the PhsysicsObject
+     */
     public void startStage(){
         for (FlightDevice s : stages){
             if (!s.getActive()) {
-                super.mass += s.getMass();
                 super.addPower(s.getPower());
                 s.setActive(true);
             }
         }
     }
 
+    /**
+     * @return float speed this returns the velocity magnitude of the Velocity FVector
+     */
     public float getSpeed(){
         return super.velocity.mag();
     }
 
+    /**
+     *
+     * @return FVector velocity this returns the velocity FVector
+     */
     public FVector getSpeedVector(){
         return super.velocity;
     }
 
+    /**
+     * this method will update the frameCounter in every activated boost and stage
+     * if the frameCounter is greater than the fuel it will turn the rocket off by taking the power away
+     */
     public void update(){
         // update stages if active
         for (FlightDevice s : stages){
@@ -102,27 +130,26 @@ public class Player extends PhysicsObject implements MovableObject {
                 s.updateTimeCounter(Renderer.FPS_DELAY);
                 if (s.getFuel() <= s.getTimeCounter()) {
                     s.setActive(false);
-                    //super.mass -= s.getMass();
                     subPower(s.getPower());
                 }
             }
         }
-
+        // update boosts if active
         for (FlightDevice s : boosts){
             if (s.getActive()) {
                 s.updateTimeCounter(Renderer.FPS_DELAY);
                 if (s.getFuel() <= s.getTimeCounter()) {
                     s.setActive(false);
-                    //super.mass -= s.getMass();
                     subPower(s.getPower());
                 }
             }
         }
     }
 
-    final Handler handler = new Handler();
-
-
+    /**
+     * Launcher will activate and add a Power
+     * After the fuel is used up the power will be subtracted again
+     */
     public void activateLauncher(){
         super.addPower(launcher.getPower());
         launcher.setActive(true);
@@ -135,14 +162,15 @@ public class Player extends PhysicsObject implements MovableObject {
         }, (long)launcher.getFuel());
     }
 
+    /**
+     * Boosts can be activated separately
+     * this will activate the boost nr and add the power
+     * @param nr the position in the list
+     */
     public void startBoost(int nr){
         if (!boosts.get(nr).getActive()) {
-            super.mass += boosts.get(nr).getMass();
             super.addPower(boosts.get(nr).getPower());
             boosts.get(nr).setActive(true);
         }
     }
-
-
-
 }

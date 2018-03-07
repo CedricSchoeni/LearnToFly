@@ -12,14 +12,16 @@ public class DataModel {
     private String type;
     private String version_number;
     private String feature;
+    private String mass;
     private int profileID;
     private Profile profile;
 
-    public DataModel(String name, String type, String version_number, String feature, int profileID, Profile profile) {
+    public DataModel(String name, String type, String version_number, String feature, String mass, int profileID, Profile profile) {
         this.name=name;
         this.type=type;
         this.version_number=version_number;
         this.feature=feature;
+        this.mass = mass;
         this.profileID=profileID;
         this.profile=profile;
     }
@@ -40,7 +42,12 @@ public class DataModel {
         return feature;
     }
 
+    public String getMass() {
+        return mass;
+    }
+
     public Profile getProfile(){return profile;}
+
 
     public int getProfileID(){return profileID;}
 

@@ -5,6 +5,7 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 /**
  * Created by Cedric on 04.03.2018.
+ * Launcher interface which would allow us to have multiple different launchers to chose from
  */
 
 public interface Launchers {

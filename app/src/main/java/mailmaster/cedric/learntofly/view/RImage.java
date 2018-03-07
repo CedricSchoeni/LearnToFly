@@ -10,6 +10,7 @@ import mailmaster.cedric.learntofly.physics.FVector;
 
 /**
  * Created by cedric.schoeni on 01.03.2018.
+ * This is a Renderable Image
  */
 
 public class RImage implements RObject {
@@ -46,23 +47,38 @@ public class RImage implements RObject {
         setRotation(rotation);
     }
 
+    /**
+     * This rotates the image using a matrix
+     * The rotation goes from the center which means that the position wont change
+     * @param rotation float rotation in degrees
+     */
     public void addRotation(float rotation){
         this.rotation += rotation;
         this.matrix.setRotate(this.rotation,this.image.getWidth()/2,this.image.getHeight()/2);
         matrix.postTranslate(position.x, position.y);
     }
 
+    /**
+     * This rotates the image using a matrix
+     * The rotation goes from the center which means that the position wont change
+     * @param rotation float rotation in degrees
+     */
     public void setRotation(float rotation){
         this.rotation = rotation;
         this.matrix.setRotate(rotation,this.image.getWidth()/2,this.image.getHeight()/2);
         matrix.postTranslate(position.x, position.y);
     }
 
+    /**
+     * this draws a bitmap using our matrix which contains the rotation and position of the image
+     * @param canvas where it will be drawn to
+     * @param context context of the view
+     */
     @Override
     public void drawObject(Canvas canvas, Context context) {
-
         canvas.drawBitmap(image, matrix, null);
     }
+
 
     @Override
     public boolean outOfScreen(int width, int height, int startx, int starty) {

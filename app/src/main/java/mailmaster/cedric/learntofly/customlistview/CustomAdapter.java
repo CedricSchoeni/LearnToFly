@@ -26,6 +26,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         TextView txtName;
         TextView txtType;
         TextView txtVersion;
+        TextView txtMass;
         ImageView info;
     }
 
@@ -73,6 +74,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder.txtName = convertView.findViewById(R.id.name);
             viewHolder.txtType = convertView.findViewById(R.id.type);
             viewHolder.txtVersion = convertView.findViewById(R.id.version_number);
+            viewHolder.txtMass = convertView.findViewById(R.id.name2);
             viewHolder.info = convertView.findViewById(R.id.item_info);
 
             result=convertView;
@@ -90,6 +92,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
         viewHolder.txtType.setText(dataModel.getType());
         viewHolder.txtVersion.setText(dataModel.getVersion_number());
+        viewHolder.txtMass.setText(dataModel.getMass());
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);
         // Return the completed view to render on screen
