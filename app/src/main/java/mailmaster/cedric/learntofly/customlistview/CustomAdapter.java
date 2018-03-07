@@ -49,9 +49,6 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         switch (v.getId())
         {
             case R.id.item_info:
-                //Snackbar.make(v, "Release date " +dataModel.getId(), Snackbar.LENGTH_LONG)
-                //      .setAction("No action", null).show();
-
                 //Log.e("SQL-ID", ""+((DataModel) object).getId()+"::"+((DataModel) object).getProfileID());
                 setProfileVal(dataModel);
                 break;

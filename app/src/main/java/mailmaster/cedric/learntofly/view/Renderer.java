@@ -3,8 +3,6 @@ package mailmaster.cedric.learntofly.view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;

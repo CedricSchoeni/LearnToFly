@@ -8,6 +8,8 @@ import android.widget.ImageButton;
 
 /**
  * Created by Cedric on 04.03.2018.
+ * This is the MainMenu which is launched upon starting the app.
+ * All it contains is a background and a Button to go to the shop.
  */
 
 public class MainMenu extends AppCompatActivity {

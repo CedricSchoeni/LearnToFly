@@ -23,19 +23,18 @@ import mailmaster.cedric.learntofly.sql.DatabaseHelper;
 
 /**
  * Created by cedric.schoeni on 06.03.2018.
+ * The Shop activity contains the selection Menu prior to actually starting the game where
+ * a play can choose whatever they desire out of the available items to fill their stage and boost slots with.
  */
 
 public class Shop extends AppCompatActivity {
 
     ArrayList<DataModel> dataModels;
     ListView listView;
-    private CustomAdapter adapter;
     private Profile profile = new Profile();
     private int current=-1;
     final DatabaseHelper dbhelper=new DatabaseHelper(this);
 
-    //TODO get the extra info of the intent from the MainActivity into the Player class
-    //TODO add functionality upon click on an item in the listView, also listView to foreground.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +114,7 @@ public class Shop extends AppCompatActivity {
 
     private void setNewAdapter(){
 
-        adapter= new CustomAdapter(dataModels,getApplicationContext());
+        CustomAdapter adapter = new CustomAdapter(dataModels, getApplicationContext());
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,7 +139,7 @@ public class Shop extends AppCompatActivity {
 
                     setStagesList(current);
                     setNewAdapter();
-                    listView.setOnItemClickListener(null);//TODO fix display of list not updating??!!!
+                    listView.setOnItemClickListener(null);
                 }
             });
         }else{

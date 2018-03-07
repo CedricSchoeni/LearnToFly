@@ -2,6 +2,7 @@ package mailmaster.cedric.learntofly.physics;
 
 /**
  * Created by cedric.schoeni on 02.03.2018.
+ * The PhysicsEngine contains a few variables which are needed to simulate the effects of actual physics
  */
 
 public class PhysicEngine {

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by adriano.campiotti on 01.03.2018.
+ * The ResourceManager is a simple class which manages Resources and contains but one method to do so.
  */
 
 public class ResourceManager extends AppCompatActivity {

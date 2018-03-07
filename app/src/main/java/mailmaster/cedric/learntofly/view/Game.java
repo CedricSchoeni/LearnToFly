@@ -16,7 +16,6 @@ import java.util.List;
 import mailmaster.cedric.learntofly.game.Cloud;
 import mailmaster.cedric.learntofly.game.Player;
 import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
-import mailmaster.cedric.learntofly.game.flightdevices.stages.Stage;
 import mailmaster.cedric.learntofly.physics.FVector;
 import mailmaster.cedric.learntofly.R;
 import mailmaster.cedric.learntofly.resources.ResourceManager;

@@ -8,6 +8,7 @@ import mailmaster.cedric.learntofly.physics.FVector;
 
 /**
  * Created by cedric.schoeni on 01.03.2018.
+ * The RObject is the base interface for all Objects which need to be able to be drawn, rotated and more.
  */
 
 public interface RObject {
@@ -26,7 +27,7 @@ public interface RObject {
      * @param height screen height
      * @param startx screen start - usually 0
      * @param starty screen start - usually 0
-     * @return
+     * @return boolean true or false depending if the object is outside of the visual screen.
      */
     boolean outOfScreen(int width, int height, int startx, int starty);
 
