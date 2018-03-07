@@ -2,6 +2,8 @@ package mailmaster.cedric.learntofly.game;
 
 /**
  * Created by adriano.campiotti on 06.03.2018.
+ * The Profile class holds all the selected items from the User.
+ * Stages and Boosts 1 through 4 contain the respective SQL Primary Key IDs of the selected FlightDevice.
  */
 
 public class Profile {

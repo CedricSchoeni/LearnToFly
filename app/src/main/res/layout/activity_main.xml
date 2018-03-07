@@ -67,7 +67,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar1"
@@ -89,7 +90,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
@@ -112,7 +114,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar3"
@@ -135,7 +138,8 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintStart_toStartOf="@+id/gridLayout" />
+        app:layout_constraintStart_toStartOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar4"
@@ -158,7 +162,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar5"
@@ -180,7 +185,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar6"
@@ -202,7 +208,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar7"
@@ -224,7 +231,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/gridLayout"
-        app:layout_constraintEnd_toEndOf="@+id/gridLayout" />
+        app:layout_constraintEnd_toEndOf="@+id/gridLayout"
+        android:contentDescription="TODO" />
 
     <ProgressBar
         android:id="@+id/progressBar8"

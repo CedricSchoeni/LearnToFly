@@ -4,6 +4,8 @@ import mailmaster.cedric.learntofly.game.Profile;
 
 /**
  * Created by Cedric on 06.03.2018.
+ * The DataModel class holds the info of a single entry in the row_item list
+ * and is used by the DataAdapter to be successfully displayed.
  */
 
 public class DataModel {
