@@ -46,7 +46,7 @@ public class Shop extends AppCompatActivity {
 
         listView=findViewById(R.id.list);
         //final DatabaseHelper dbhelper = new DatabaseHelper(this);
-        //dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
+        dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         dataModels= new ArrayList<>();
         //dataModels.add(new DataModel("Empty","none","none","none"));
         //dataModels.add(new DataModel("Empty","none","none","none"));

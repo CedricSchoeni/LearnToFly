@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mailmaster.cedric.learntofly.MainActivity;
-import mailmaster.cedric.learntofly.game.flightdevices.boosts.Boost;
-import mailmaster.cedric.learntofly.game.flightdevices.stages.Stage;
 import mailmaster.cedric.learntofly.game.launchers.Launcher_Canon_v1;
 import mailmaster.cedric.learntofly.game.launchers.Launchers;
 import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
@@ -33,8 +31,8 @@ public class Player extends PhysicsObject implements MovableObject {
 
     public Player(RObject model, float mass, MainActivity main) {
         super(mass, model.getRotation());
-        stages = new ArrayList<FlightDevice>();
-        boosts = new ArrayList<FlightDevice>();
+        stages = new ArrayList<>();
+        boosts = new ArrayList<>();
         this.model = model;
         this.main=main;
         launcher = new Launcher_Canon_v1();
@@ -46,8 +44,9 @@ public class Player extends PhysicsObject implements MovableObject {
 
     private void addStages(){
         for(int i=1; i <5; i++){
-
-            int tmp=main.getIntent().getExtras().getInt("stage"+i);
+            int tmp=0;
+            try{
+                tmp=main.getIntent().getExtras().getInt("stage"+i);}catch(Exception ignored){}
             Log.e("stage"+i,""+tmp);
             if(tmp>0)
             stages.add(dbhelper.getStage(tmp));
@@ -56,7 +55,8 @@ public class Player extends PhysicsObject implements MovableObject {
 
     private void addBoosts(){
         for(int i=1; i <5; i++){
-            int tmp=main.getIntent().getExtras().getInt("boost"+i);
+            int tmp=0;
+            try{tmp=main.getIntent().getExtras().getInt("boost"+i);}catch(Exception ignored){}
             if(tmp>0)
             boosts.add(dbhelper.getBoost(tmp));
         }

@@ -1,7 +1,7 @@
 package mailmaster.cedric.learntofly.customlistview;
 
 import android.content.Context;
-import android.util.Log;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mailmaster.cedric.learntofly.R;
-import mailmaster.cedric.learntofly.game.Profile;
 
 /**
  * Created by Cedric on 06.03.2018.
@@ -59,8 +58,9 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     private int lastPosition = -1;
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         // Get the data item for this position
         DataModel dataModel = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
@@ -73,10 +73,10 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.row_item, parent, false);
-            viewHolder.txtName = (TextView) convertView.findViewById(R.id.name);
-            viewHolder.txtType = (TextView) convertView.findViewById(R.id.type);
-            viewHolder.txtVersion = (TextView) convertView.findViewById(R.id.version_number);
-            viewHolder.info = (ImageView) convertView.findViewById(R.id.item_info);
+            viewHolder.txtName = convertView.findViewById(R.id.name);
+            viewHolder.txtType = convertView.findViewById(R.id.type);
+            viewHolder.txtVersion = convertView.findViewById(R.id.version_number);
+            viewHolder.info = convertView.findViewById(R.id.item_info);
 
             result=convertView;
 
@@ -90,7 +90,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         //result.startAnimation(animation);
         lastPosition = position;
 
-        viewHolder.txtName.setText(dataModel.getName());
+        viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
         viewHolder.txtType.setText(dataModel.getType());
         viewHolder.txtVersion.setText(dataModel.getVersion_number());
         viewHolder.info.setOnClickListener(this);

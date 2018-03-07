@@ -19,26 +19,6 @@ import mailmaster.cedric.learntofly.MainMenu;
  * Created by adriano.campiotti on 01.03.2018.
  */
 
-/**
- * most important code
- RObject roi1 = new RImage(85, 155, 150, 50, 225, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi2 = new RImage(155, 155, 150, 50, 315, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi3 = new RImage(155, 225, 150, 50, 45, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi4 = new RImage(85, 225, 150, 50, 135, rm.drawableToBitmap(context, R.drawable.elkenholz));
-
- RObject roi5 = new RImage(50, 50, 150, 50, 315, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi6 = new RImage(260, 120, 150, 50, 45, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi7 = new RImage(185, 325, 150, 50, 135, rm.drawableToBitmap(context, R.drawable.elkenholz));
- RObject roi8 = new RImage(-20, 260, 150, 50, 225, rm.drawableToBitmap(context, R.drawable.elkenholz));
-
- renderList.add(roi1);
- renderList.add(roi2);
- renderList.add(roi3);
- renderList.add(roi4);
- renderList.add(roi5);
- renderList.add(roi6);
- renderList.add(roi7);
- renderList.add(roi8);*/
 
 public class Renderer extends View {
 
@@ -65,8 +45,8 @@ public class Renderer extends View {
         this.context = context;
         this.main = main;
 
-        renderListFG = new ArrayList<RObject>();
-        renderListBG = new ArrayList<RObject>();
+        renderListFG = new ArrayList<>();
+        renderListBG = new ArrayList<>();
         //TODO main.getIntent().getExtras();
         handler = new Handler();
 
@@ -177,5 +157,24 @@ public class Renderer extends View {
         }
     };
 
+/*
+  most important code
+ RObject roi1 = new RImage(85, 155, 150, 50, 225, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi2 = new RImage(155, 155, 150, 50, 315, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi3 = new RImage(155, 225, 150, 50, 45, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi4 = new RImage(85, 225, 150, 50, 135, rm.drawableToBitmap(context, R.drawable.elkenholz));
 
+ RObject roi5 = new RImage(50, 50, 150, 50, 315, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi6 = new RImage(260, 120, 150, 50, 45, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi7 = new RImage(185, 325, 150, 50, 135, rm.drawableToBitmap(context, R.drawable.elkenholz));
+ RObject roi8 = new RImage(-20, 260, 150, 50, 225, rm.drawableToBitmap(context, R.drawable.elkenholz));
+
+ renderList.add(roi1);
+ renderList.add(roi2);
+ renderList.add(roi3);
+ renderList.add(roi4);
+ renderList.add(roi5);
+ renderList.add(roi6);
+ renderList.add(roi7);
+ renderList.add(roi8);*/
 }

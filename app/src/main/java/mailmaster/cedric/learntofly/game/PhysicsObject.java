@@ -96,6 +96,7 @@ public class PhysicsObject {
 
         if (rotation > 90 && rotation < 180){
             float temp = x;
+            //noinspection SuspiciousNameCombination
             x = y;
             y = temp * - 1;
         } else if (rotation >= 180 && rotation < 270){

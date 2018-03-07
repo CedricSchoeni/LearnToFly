@@ -18,7 +18,7 @@ public class MainMenu extends AppCompatActivity {
         setContentView(R.layout.mainmenu);
 
 
-        ImageButton play = (ImageButton) findViewById(R.id.btnPlay);
+        ImageButton play = findViewById(R.id.btnPlay);
 
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -71,8 +71,8 @@ public class Game{
     TextView speedView;
     TextView windView;
 
-    List<ProgressBar> proBarsStages = new ArrayList<ProgressBar>();
-    List<ProgressBar> proBarsBoosts = new ArrayList<ProgressBar>();
+    List<ProgressBar> proBarsStages = new ArrayList<>();
+    List<ProgressBar> proBarsBoosts = new ArrayList<>();
 
     ProgressBar progressBar1Stage;
     ProgressBar progressBar2Stage;
@@ -84,8 +84,8 @@ public class Game{
     ProgressBar progressBar3Boost;
     ProgressBar progressBar4Boost;
 
-    List<ImageButton> buttonsStage = new ArrayList<ImageButton>();
-    List<ImageButton> buttonsBoosts = new ArrayList<ImageButton>();
+    List<ImageButton> buttonsStage = new ArrayList<>();
+    List<ImageButton> buttonsBoosts = new ArrayList<>();
 
     ImageButton stage1;
     ImageButton stage2;
@@ -103,7 +103,7 @@ public class Game{
     public Game(Renderer r){
         this.r = r;
 
-        clouds = new ArrayList<Cloud>();
+        clouds = new ArrayList<>();
         handler = new Handler();
 
         CANVAS_WIDTH = r.getWidth();
