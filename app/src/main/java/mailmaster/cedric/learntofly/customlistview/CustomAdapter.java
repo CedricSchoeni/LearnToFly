@@ -88,9 +88,9 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         //result.startAnimation(animation);
 
         viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
-        viewHolder.txtType.setText(dataModel.getType());
-        viewHolder.txtVersion.setText(dataModel.getVersion_number());
-        viewHolder.txtMass.setText(dataModel.getMass());
+        viewHolder.txtType.setText(dataModel != null ? dataModel.getType() : "");
+        viewHolder.txtVersion.setText(dataModel != null ? dataModel.getVersion_number() : "");
+        viewHolder.txtMass.setText(dataModel != null ? dataModel.getMass() : "");
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);
         // Return the completed view to render on screen
