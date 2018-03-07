@@ -122,8 +122,8 @@ public class Shop extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DataModel dataModel= dataModels.get(position);
-                Log.e("Item", dataModel.getFeature());
-                setProfileVal(Integer.parseInt(dataModel.getFeature()));
+                Log.e("Item", dataModel.getId());
+                setProfileVal(Integer.parseInt(dataModel.getId()));
                 listView.setVisibility(View.GONE);
             }
         });

@@ -11,18 +11,18 @@ import mailmaster.cedric.learntofly.game.Profile;
 public class DataModel {
 
     private String name;
-    private String type;
-    private String version_number;
-    private String feature;
+    private String fuel;
+    private String power;
+    private String id;
     private String mass;
     private int profileID;
     private Profile profile;
 
-    public DataModel(String name, String type, String version_number, String feature, String mass, int profileID, Profile profile) {
+    public DataModel(String name, String fuel, String power, String id, String mass, int profileID, Profile profile) {
         this.name=name;
-        this.type=type;
-        this.version_number=version_number;
-        this.feature=feature;
+        this.fuel = fuel;
+        this.power = power;
+        this.id = id;
         this.mass = mass;
         this.profileID=profileID;
         this.profile=profile;
@@ -32,16 +32,16 @@ public class DataModel {
         return name;
     }
 
-    public String getType() {
-        return type;
+    public String getFuel() {
+        return fuel;
     }
 
-    public String getVersion_number() {
-        return version_number;
+    public String getPower() {
+        return power;
     }
 
-    public String getFeature() {
-        return feature;
+    public String getId() {
+        return id;
     }
 
     public String getMass() {

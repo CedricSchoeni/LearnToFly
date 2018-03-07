@@ -24,8 +24,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     // View lookup cache
     private static class ViewHolder {
         TextView txtName;
-        TextView txtType;
-        TextView txtVersion;
+        TextView txtFuel;
+        TextView txtPower;
         TextView txtMass;
         ImageView info;
     }
@@ -49,10 +49,10 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         switch (v.getId())
         {
             case R.id.item_info:
-                //Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG)
+                //Snackbar.make(v, "Release date " +dataModel.getId(), Snackbar.LENGTH_LONG)
                 //      .setAction("No action", null).show();
 
-                //Log.e("SQL-ID", ""+((DataModel) object).getFeature()+"::"+((DataModel) object).getProfileID());
+                //Log.e("SQL-ID", ""+((DataModel) object).getId()+"::"+((DataModel) object).getProfileID());
                 setProfileVal(dataModel);
                 break;
         }
@@ -72,8 +72,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.row_item, parent, false);
             viewHolder.txtName = convertView.findViewById(R.id.name);
-            viewHolder.txtType = convertView.findViewById(R.id.type);
-            viewHolder.txtVersion = convertView.findViewById(R.id.version_number);
+            viewHolder.txtFuel = convertView.findViewById(R.id.fuel);
+            viewHolder.txtPower = convertView.findViewById(R.id.power);
             viewHolder.txtMass = convertView.findViewById(R.id.name2);
             viewHolder.info = convertView.findViewById(R.id.item_info);
 
@@ -88,8 +88,8 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         //result.startAnimation(animation);
 
         viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
-        viewHolder.txtType.setText(dataModel != null ? dataModel.getType() : "");
-        viewHolder.txtVersion.setText(dataModel != null ? dataModel.getVersion_number() : "");
+        viewHolder.txtFuel.setText(dataModel != null ? dataModel.getFuel() : "");
+        viewHolder.txtPower.setText(dataModel != null ? dataModel.getPower() : "");
         viewHolder.txtMass.setText(dataModel != null ? dataModel.getMass() : "");
         viewHolder.info.setOnClickListener(this);
         viewHolder.info.setTag(position);
@@ -104,28 +104,28 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
     private void setProfileVal(DataModel dataModel){
         switch(dataModel.getProfileID()){
             case 1:
-                dataModel.getProfile().stage1=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().stage1=Integer.parseInt(dataModel.getId());
                 break;
             case 2:
-                dataModel.getProfile().stage2=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().stage2=Integer.parseInt(dataModel.getId());
                 break;
             case 3:
-                dataModel.getProfile().stage3=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().stage3=Integer.parseInt(dataModel.getId());
                 break;
             case 4:
-                dataModel.getProfile().stage4=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().stage4=Integer.parseInt(dataModel.getId());
                 break;
             case 5:
-                dataModel.getProfile().boost1=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().boost1=Integer.parseInt(dataModel.getId());
                 break;
             case 6:
-                dataModel.getProfile().boost2=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().boost2=Integer.parseInt(dataModel.getId());
                 break;
             case 7:
-                dataModel.getProfile().boost3=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().boost3=Integer.parseInt(dataModel.getId());
                 break;
             case 8:
-                dataModel.getProfile().boost4=Integer.parseInt(dataModel.getFeature());
+                dataModel.getProfile().boost4=Integer.parseInt(dataModel.getId());
                 break;
         }
     }
