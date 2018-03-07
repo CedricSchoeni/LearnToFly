@@ -25,7 +25,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/btnStage1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/btnStage2"
@@ -35,7 +36,8 @@
         android:layout_marginTop="58dp"
         android:text="@string/btnStage2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/btnStage3"
@@ -45,7 +47,8 @@
         android:layout_marginTop="108dp"
         android:text="@string/btnStage3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/btnStage4"
@@ -55,7 +58,8 @@
         android:layout_marginTop="158dp"
         android:text="@string/btnStage4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/btnBoost1"
@@ -65,7 +69,8 @@
         android:layout_marginTop="8dp"
         android:text="@string/btnBoost1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp" />
 
     <Button
         android:id="@+id/btnBoost2"
@@ -75,7 +80,8 @@
         android:layout_marginTop="58dp"
         android:text="@string/btnBoost2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp" />
 
     <Button
         android:id="@+id/btnBoost3"
@@ -85,7 +91,8 @@
         android:layout_marginTop="108dp"
         android:text="@string/btnBoost3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp" />
 
     <Button
         android:id="@+id/btnBoost4"
@@ -95,7 +102,8 @@
         android:layout_marginTop="158dp"
         android:text="@string/btnBoost4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="8dp" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
