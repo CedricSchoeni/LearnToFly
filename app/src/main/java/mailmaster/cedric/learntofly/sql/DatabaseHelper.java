@@ -259,7 +259,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertBaseBoosts(sqLiteDatabase);
         insertBaseImages(sqLiteDatabase);
     }
-    
+
     private void insertBaseStages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
         values.put(item.COL2,"Super Red Rockets");
