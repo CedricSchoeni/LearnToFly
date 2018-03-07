@@ -6,7 +6,7 @@ package mailmaster.cedric.learntofly.game;
 
 public interface MovableObject {
 
-    public void addRotation(float r);
-    public void setRotation(float r);
+    void addRotation(float r);
+    void setRotation(float r);
 
 }

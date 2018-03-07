@@ -12,16 +12,16 @@ import mailmaster.cedric.learntofly.physics.FVector;
 
 public interface RObject {
 
-    public void drawObject(Canvas canvas, Context context);
-    public boolean outOfScreen(int width, int height, int startx, int starty);
-    public void updatePosition(FVector v);
-    public void setPosition(FVector v);
+    void drawObject(Canvas canvas, Context context);
+    boolean outOfScreen(int width, int height, int startx, int starty);
+    void updatePosition(FVector v);
+    void setPosition(FVector v);
 
-    public float getRotation();
-    public void addRotation(float rotation);
-    public void setRotation(float rotation);
+    float getRotation();
+    void addRotation(float rotation);
+    void setRotation(float rotation);
 
-    public Bitmap combine(Bitmap bmp2);
+    Bitmap combine(Bitmap bmp2);
 
 
 }

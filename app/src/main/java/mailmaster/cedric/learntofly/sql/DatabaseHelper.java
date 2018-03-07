@@ -108,6 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stages.add(stage);
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return stages;
     }
 
@@ -133,6 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 boosts.add(boost);}catch (Exception e){exceptionHandle();}
             }while(cursor.moveToNext());
         }
+        cursor.close();
         return boosts;
     }
 

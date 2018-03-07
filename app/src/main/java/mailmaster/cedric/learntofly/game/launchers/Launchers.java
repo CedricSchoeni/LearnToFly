@@ -9,12 +9,12 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 public interface Launchers {
 
-    public RImage getModel();
-    public void setModel(RObject model);
+    RImage getModel();
+    void setModel(RObject model);
 
-    public float getPower();
-    public float getFuel();
-    public boolean getActive();
-    public void setActive(boolean b);
+    float getPower();
+    float getFuel();
+    boolean getActive();
+    void setActive(boolean b);
 
 }
