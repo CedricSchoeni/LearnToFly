@@ -133,6 +133,7 @@ public class Shop extends AppCompatActivity {
                 public void onClick(View view) {
                     dataModels.clear();
                     listView.setVisibility(View.VISIBLE);
+
                     setStagesList();
                     setNewAdapter();
                     listView.setOnItemClickListener(null);//TODO fix display of list not updating??!!!
@@ -144,6 +145,7 @@ public class Shop extends AppCompatActivity {
                 public void onClick(View view) {
                     dataModels.clear();
                     listView.setVisibility(View.VISIBLE);
+
                     setBoostsList();
                     setNewAdapter();
                     listView.setOnItemClickListener(null);
