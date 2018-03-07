@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mailmaster.cedric.learntofly.R;
+import mailmaster.cedric.learntofly.game.Profile;
 
 /**
  * Created by Cedric on 06.03.2018.
@@ -49,7 +50,9 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
             case R.id.item_info:
                 //Snackbar.make(v, "Release date " +dataModel.getFeature(), Snackbar.LENGTH_LONG)
                 //      .setAction("No action", null).show();
-                Log.e("Image", "Hello");
+
+                //Log.e("SQL-ID", ""+((DataModel) object).getFeature()+"::"+((DataModel) object).getProfileID());
+                setProfileVal(dataModel);
                 break;
         }
     }
@@ -94,5 +97,34 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
         viewHolder.info.setTag(position);
         // Return the completed view to render on screen
         return convertView;
+    }
+
+    private void setProfileVal(DataModel dataModel){
+        switch(dataModel.getProfileID()){
+            case 1:
+                dataModel.getProfile().stage1=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 2:
+                dataModel.getProfile().stage2=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 3:
+                dataModel.getProfile().stage3=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 4:
+                dataModel.getProfile().stage4=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 5:
+                dataModel.getProfile().boost1=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 6:
+                dataModel.getProfile().boost2=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 7:
+                dataModel.getProfile().boost3=Integer.parseInt(dataModel.getFeature());
+                break;
+            case 8:
+                dataModel.getProfile().boost4=Integer.parseInt(dataModel.getFeature());
+                break;
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -130,6 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append("SELECT * FROM "+item.TABLE);
         sb.append(" WHERE "+item.COL8+" = 1 and ");
         sb.append(item.COL1 + " = ").append(id);
+        //Log.e("getStage(id:",id+")");
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
             stage.setId(cursor.getInt(0));
@@ -139,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             stage.setMass(cursor.getFloat(4));
             stage.setModel(cursor.getInt(5),null);
             stage.setPrice(cursor.getInt(6));
+            //Log.e("Drawable:",""+cursor.getInt(5));
         }
         cursor.close();
         return stage;

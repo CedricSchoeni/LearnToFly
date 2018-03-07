@@ -2,6 +2,7 @@ package mailmaster.cedric.learntofly.view;
 
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -175,7 +176,7 @@ public class Game{
     }
 
     private void initStages(){
-
+        Log.e("Stages", Integer.toString(player.stages.size()));
         for (int i = 0; i < player.stages.size(); i++){
 
             Drawable d = r.main.getResources().getDrawable(player.stages.get(i).getDrawable() );

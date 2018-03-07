@@ -1,6 +1,7 @@
 package mailmaster.cedric.learntofly.game;
 
 import android.os.Handler;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,10 @@ public class Player extends PhysicsObject implements MovableObject {
 
     private void addStages(){
         for(int i=1; i <5; i++){
+
             int tmp=main.getIntent().getExtras().getInt("stage"+i);
+            Log.e("stage"+i,""+tmp);
+            if(tmp>0)
             stages.add(dbhelper.getStage(tmp));
         }
     }
@@ -53,6 +57,7 @@ public class Player extends PhysicsObject implements MovableObject {
     private void addBoosts(){
         for(int i=1; i <5; i++){
             int tmp=main.getIntent().getExtras().getInt("boost"+i);
+            if(tmp>0)
             boosts.add(dbhelper.getBoost(tmp));
         }
     }
