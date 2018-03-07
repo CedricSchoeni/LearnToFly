@@ -47,26 +47,11 @@ public class Shop extends AppCompatActivity {
         //final DatabaseHelper dbhelper = new DatabaseHelper(this);
         //dbhelper.onUpgrade(dbhelper.getWritableDatabase(),0,1);
         dataModels= new ArrayList<>();
-        dataModels.add(new DataModel("Empty","none","none","none"));
-        dataModels.add(new DataModel("Empty","none","none","none"));
-        dataModels.add(new DataModel("Empty","none","none","none"));
+        //dataModels.add(new DataModel("Empty","none","none","none"));
+        //dataModels.add(new DataModel("Empty","none","none","none"));
+        //dataModels.add(new DataModel("Empty","none","none","none"));
 
         listView.setVisibility(View.INVISIBLE);
-        adapter= new CustomAdapter(dataModels,getApplicationContext());
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                DataModel dataModel= dataModels.get(position);
-                setProfileVal(Integer.parseInt(dataModel.getFeature()));
-                //Snackbar.make(view, dataModel.getName()+"\n"+dataModel.getType()+" API: "+dataModel.getVersion_number(), Snackbar.LENGTH_LONG)
-                //        .setAction("No action", null).show();
-                //Log.e("Item", "Hello");
-            }
-        });
-
 
         // https://www.journaldev.com/10416/android-listview-with-custom-adapter-example-tutorial
 
@@ -86,15 +71,12 @@ public class Shop extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Button tmp = findViewById(R.id.btnStage1);
         addFunctionality(tmp,1);
-        //tmp=findViewById(R.id.btnStage2);
         addFunctionality((Button)findViewById(R.id.btnStage2),2);
-        //tmp=findViewById(R.id.btnStage3);
         addFunctionality((Button)findViewById(R.id.btnStage3),3);
-        //tmp=findViewById(R.id.btnStage4);
         addFunctionality((Button)findViewById(R.id.btnStage4),4);
-
         addFunctionality((Button)findViewById(R.id.btnBoost1),5);
         addFunctionality((Button)findViewById(R.id.btnBoost2),6);
         addFunctionality((Button)findViewById(R.id.btnBoost3),7);
@@ -102,6 +84,7 @@ public class Shop extends AppCompatActivity {
 
 
     }
+
     private void setStagesList(){
         List<Stage> stages = dbhelper.getAllStages();
         for (int i = 0; i < stages.size(); i++) {
@@ -110,8 +93,10 @@ public class Shop extends AppCompatActivity {
                     "Fuel: "+stage.getFuel(),
                     "Power:"+stage.getPower(),
                     ""+stage.getId()));
+            Log.e("ID", Integer.toString(stage.getId()));
         }
     }
+
     private void setBoostsList(){
         List<Boost> boosts = dbhelper.getAllBoosts();
         for (int i = 0; i < boosts.size(); i++) {
@@ -122,6 +107,23 @@ public class Shop extends AppCompatActivity {
                     ""+boost.getId()));
         }
     }
+
+    private void setNewAdapter(){
+
+        adapter= new CustomAdapter(dataModels,getApplicationContext());
+        listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("Item", "Hello");
+                DataModel dataModel= dataModels.get(position);
+                setProfileVal(Integer.parseInt(dataModel.getFeature()));
+                listView.setVisibility(View.GONE);
+            }
+        });
+    }
+
     private void addFunctionality(Button tmp, int current){
         this.current=current;
         if(current>0&&current<=4){
@@ -130,8 +132,8 @@ public class Shop extends AppCompatActivity {
                 public void onClick(View view) {
                     dataModels.clear();
                     listView.setVisibility(View.VISIBLE);
-                    listView.bringToFront();
                     setStagesList();
+                    setNewAdapter();
                     listView.setOnItemClickListener(null);//TODO fix display of list not updating??!!!
                 }
             });
@@ -140,11 +142,9 @@ public class Shop extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     dataModels.clear();
-                    //Log.e("boost","cleared");
                     listView.setVisibility(View.VISIBLE);
-                    listView.bringToFront();
                     setBoostsList();
-                    //Log.e("boost","listed");
+                    setNewAdapter();
                     listView.setOnItemClickListener(null);
                 }
             });
