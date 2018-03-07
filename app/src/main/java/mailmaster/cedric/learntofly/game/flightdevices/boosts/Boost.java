@@ -24,6 +24,7 @@ public class Boost implements FlightDevice{
     private int price=0;
     private int drawable=0;
     private int type=0;
+    private int image1=0,image2=0,image3=0,image4=0;
     @Override
     public float getTimeCounter() {
         return frameCounter;
@@ -137,5 +138,37 @@ public class Boost implements FlightDevice{
     @Override
     public void setType(int type) {
         this.type = type;
+    }
+    @Override
+    public int getImage1() {
+        return image1;
+    }
+    @Override
+    public void setImage1(int image1) {
+        this.image1 = image1;
+    }
+    @Override
+    public int getImage2() {
+        return image2;
+    }
+    @Override
+    public void setImage2(int image2) {
+        this.image2 = image2;
+    }
+    @Override
+    public int getImage3() {
+        return image3;
+    }
+    @Override
+    public void setImage3(int image3) {
+        this.image3 = image3;
+    }
+    @Override
+    public int getImage4() {
+        return image4;
+    }
+    @Override
+    public void setImage4(int image4) {
+        this.image4 = image4;
     }
 }

@@ -75,6 +75,15 @@ public interface FlightDevice {
      * @return float TimeCounter/FrameCounter of the FlightDevice.
      */
     float getTimeCounter();
+
+    /**
+     * These images 1 to 4 contain the different positions images' drawable ids.
+     * @return int drawable id of that position's image.
+     */
+    int getImage1();
+    int getImage2();
+    int getImage3();
+    int getImage4();
     void setActive(boolean b);
 
     void updateTimeCounter(float t);
@@ -89,4 +98,9 @@ public interface FlightDevice {
     void setId(int id);
     void setPrice(int price);
     void setType(int type);
+    void setImage1(int image1);
+    void setImage2(int image2);
+    void setImage3(int image3);
+    void setImage4(int image4);
+
 }

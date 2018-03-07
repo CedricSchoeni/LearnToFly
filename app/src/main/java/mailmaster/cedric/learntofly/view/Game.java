@@ -1,5 +1,6 @@
 package mailmaster.cedric.learntofly.view;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.Log;
@@ -14,6 +15,8 @@ import java.util.List;
 
 import mailmaster.cedric.learntofly.game.Cloud;
 import mailmaster.cedric.learntofly.game.Player;
+import mailmaster.cedric.learntofly.game.flightdevices.FlightDevice;
+import mailmaster.cedric.learntofly.game.flightdevices.stages.Stage;
 import mailmaster.cedric.learntofly.physics.FVector;
 import mailmaster.cedric.learntofly.R;
 import mailmaster.cedric.learntofly.resources.ResourceManager;
@@ -254,17 +257,78 @@ public class Game{
                 ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
                 R.drawable.character_beta_v1);
         ro = ro.combine()*/
+        /*new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
+                        ResourceManager.drawableToBitmap(r.context, R.drawable.character),
+                        R.drawable.character)*/
 
-        player = new Player(
-                new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
-                        ResourceManager.drawableToBitmap(r.context, R.drawable.character_beta_v1),
-                        R.drawable.character_beta_v1), 10, r.main);
+        player = new Player(constructPlayerImage(), 10, r.main);
+
+    }
+
+    private List<FlightDevice> getStages(){
+        List<FlightDevice> stages = new ArrayList<>();
+        for(int i=1; i <5; i++){
+            int tmp=0;
+            try{//noinspection ConstantConditions
+                tmp=r.main.getIntent().getExtras().getInt("stage"+i);}catch(Exception ignored){}
+            Log.e("stage"+i,""+tmp);
+            if(tmp>0)
+                stages.add(dbhelper.getStage(tmp));
+        }
+        return stages;
+    }
+
+    private List<FlightDevice> getBoosts(){
+        List<FlightDevice> boosts = new ArrayList<>();
+        for(int i=1; i <5; i++){
+            int tmp=0;
+            try{tmp=r.main.getIntent().getExtras().getInt("boost"+i);}catch(Exception ignored){}
+            if(tmp>0)
+                boosts.add(dbhelper.getBoost(tmp));
+        }
+        return boosts;
+    }
+
+    private RImage constructPlayerImage(){
+        RImage rImage= new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
+                ResourceManager.drawableToBitmap(r.context, R.drawable.character),
+                R.drawable.character);
+        List<FlightDevice> stages= getStages();
+        List<FlightDevice> boosts = getBoosts();
+        for(int i=0; i < stages.size(); i++){
+            Log.e(i+"-stage-image"+(i+1),""+imagechooser(stages.get(i),i+1));
+            rImage.combine(ResourceManager.drawableToBitmap(r.context,imagechooser(stages.get(i),i+1)));
+        }
+
+        for(int i=0; i < boosts.size(); i++)
+            rImage.combine(ResourceManager.drawableToBitmap(r.context,imagechooser(boosts.get(i),i+1)));
+        rImage.combine(ResourceManager.drawableToBitmap(r.context,R.drawable.character));
+        return rImage;
+    }
+
+    private int imagechooser(FlightDevice flightDevice,int index){
+        int tmp=-1;
+        switch(index){
+            case 1:
+                tmp=flightDevice.getImage1();
+                break;
+            case 2:
+                tmp=flightDevice.getImage2();
+                break;
+            case 3:
+                tmp=flightDevice.getImage3();
+                break;
+            case 4:
+                tmp=flightDevice.getImage4();
+                break;
+        }
+        return tmp;
     }
 
 
 
 
-    public void update(){
+    void update(){
 
         updateFlightDevices();
 
@@ -388,21 +452,21 @@ public class Game{
         windView.setText(t4);
     }
 
-    public void handlePushDown(){
+    void handlePushDown(){
         if (!r.playing){
             r.startGame();
         }
     }
 
-    public void handleReleaseUp(){
+    void handleReleaseUp(){
         rotation = 0;
     }
 
-    public void leftSideClick(){
+    void leftSideClick(){
         rotation = -4f;
     }
 
-    public void rightSideClick(){
+    void rightSideClick(){
         rotation = 4f;
     }
 

@@ -24,6 +24,7 @@ public class Stage implements FlightDevice{
     private RObject model= null;//(MainActivity.context==null)? null : new RImage(0,0,64,64, 0, ResourceManager.drawableToBitmap(MainActivity.context, R.drawable.rocket_v1), R.drawable.rocket_v1);
     private int drawable=0;
     private int type=1;
+    private int image1=0,image2=0,image3=0,image4=0;
 
     @Override
     public RImage getModel() {
@@ -129,5 +130,37 @@ public class Stage implements FlightDevice{
     @Override
     public void setType(int type) {
         this.type = type;
+    }
+    @Override
+    public int getImage1() {
+        return image1;
+    }
+    @Override
+    public void setImage1(int image1) {
+        this.image1 = image1;
+    }
+    @Override
+    public int getImage2() {
+        return image2;
+    }
+    @Override
+    public void setImage2(int image2) {
+        this.image2 = image2;
+    }
+    @Override
+    public int getImage3() {
+        return image3;
+    }
+    @Override
+    public void setImage3(int image3) {
+        this.image3 = image3;
+    }
+    @Override
+    public int getImage4() {
+        return image4;
+    }
+    @Override
+    public void setImage4(int image4) {
+        this.image4 = image4;
     }
 }

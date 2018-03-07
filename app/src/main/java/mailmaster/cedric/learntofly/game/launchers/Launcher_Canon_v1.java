@@ -9,10 +9,10 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 public class Launcher_Canon_v1 implements Launchers{
 
-    public boolean active = false;
-    public float power = 5000;
-    public float fuel = 2000; // 1000 = 1sec
-    public RObject model;
+    private boolean active = false;
+    private float power = 2000;
+    private float fuel = 2000; // 1000 = 1sec
+    private RObject model;
 
     @Override
     public RImage getModel() {

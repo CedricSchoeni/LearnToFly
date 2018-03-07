@@ -45,9 +45,9 @@ public class Player extends PhysicsObject implements MovableObject {
     private void addStages(){
         for(int i=1; i <5; i++){
             int tmp=0;
-            try{
+            try{//noinspection ConstantConditions
                 tmp=main.getIntent().getExtras().getInt("stage"+i);}catch(Exception ignored){}
-            Log.e("stage"+i,""+tmp);
+            //Log.e("stage"+i,""+tmp);
             if(tmp>0)
             stages.add(dbhelper.getStage(tmp));
         }

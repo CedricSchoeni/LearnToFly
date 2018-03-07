@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.Log;
 
 import mailmaster.cedric.learntofly.physics.FVector;
 
@@ -87,6 +88,11 @@ public class RImage implements RObject {
      * @return Bitmap image with bmp2 on top of the image.
      */
     public Bitmap combine(Bitmap bmp2) {
+        if(bmp2==null){
+            Log.e("Failed comb.","null pointer");
+            return image;
+        }
+
         if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight())return image;
         Bitmap bmOverlay = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
         Canvas canvas = new Canvas(bmOverlay);

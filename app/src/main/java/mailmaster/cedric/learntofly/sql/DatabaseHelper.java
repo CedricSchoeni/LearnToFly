@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sb.append(image.COL6+" INT, ");
         sb.append("FOREIGN KEY("+image.COL2+")");
         sb.append(" REFERENCES "+item.TABLE+"("+item.COL1+"))");
+        sqLiteDatabase.execSQL(sb.toString());
         insertBaseData(sqLiteDatabase);
     }
 
@@ -86,12 +88,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(sb.toString());
         sb = new StringBuilder();
         sb.append("DROP TABLE IF EXISTS ");
+        sb.append(image.TABLE);
+        sqLiteDatabase.execSQL(sb.toString());
+        sb = new StringBuilder();
+        sb.append("DROP TABLE IF EXISTS ");
         sb.append(player.TABLE);
         sqLiteDatabase.execSQL(sb.toString());
         sb = new StringBuilder();
         sb.append("DROP TABLE IF EXISTS ");
         sb.append(item.TABLE);
         sqLiteDatabase.execSQL(sb.toString());
+
 
         onCreate(sqLiteDatabase);
     }
@@ -102,6 +109,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" JOIN "+image.TABLE+" ON ");
+        sb.append(item.TABLE+"."+item.COL1+"=");
+        sb.append(image.TABLE+"."+image.COL2);
         sb.append(" WHERE "+item.COL8+" = 1");
 
         Cursor cursor = db.rawQuery(sb.toString(), null);
@@ -115,7 +125,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stage.setMass(cursor.getFloat(4));
                 stage.setModel(cursor.getInt(5),null);
                 stage.setPrice(cursor.getInt(6));
+                stage.setImage1(cursor.getInt(10));
+                stage.setImage2(cursor.getInt(11));
+                stage.setImage3(cursor.getInt(12));
+                stage.setImage4(cursor.getInt(13));
                 stages.add(stage);
+                //Log.e("stageImage1",""+stage.getImage1());
+                //Log.e("curosrImage1",""+cursor.getInt(10));
             }while(cursor.moveToNext());
         }
         cursor.close();
@@ -127,8 +143,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Stage stage = new Stage();
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" JOIN "+image.TABLE+" ON ");
+        sb.append(item.TABLE+"."+item.COL1+"=");
+        sb.append(image.TABLE+"."+image.COL2);
         sb.append(" WHERE "+item.COL8+" = 1 and ");
-        sb.append(item.COL1 + " = ").append(id);
+        sb.append(item.TABLE+"."+item.COL1 + " = ").append(id);
         //Log.e("getStage(id:",id+")");
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
@@ -139,6 +158,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             stage.setMass(cursor.getFloat(4));
             stage.setModel(cursor.getInt(5),null);
             stage.setPrice(cursor.getInt(6));
+            stage.setImage1(cursor.getInt(10));
+            stage.setImage2(cursor.getInt(11));
+            stage.setImage3(cursor.getInt(12));
+            stage.setImage4(cursor.getInt(13));
             //Log.e("Drawable:",""+cursor.getInt(5));
         }
         cursor.close();
@@ -151,8 +174,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" JOIN "+image.TABLE+" ON ");
+        sb.append(item.TABLE+"."+item.COL1+"=");
+        sb.append(image.TABLE+"."+image.COL2);
         sb.append(" WHERE "+item.COL8+" = 0");
-
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
             do{
@@ -164,6 +189,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 boost.setMass(cursor.getFloat(4));
                 boost.setModel(cursor.getInt(5),null);
                 boost.setPrice(cursor.getInt(6));
+                boost.setImage1(cursor.getInt(10));
+                boost.setImage2(cursor.getInt(11));
+                boost.setImage3(cursor.getInt(12));
+                boost.setImage4(cursor.getInt(13));
                 boosts.add(boost);}catch (Exception e){exceptionHandle();}
             }while(cursor.moveToNext());
         }
@@ -176,8 +205,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Boost boost = new Boost();
         sb = new StringBuilder();
         sb.append("SELECT * FROM "+item.TABLE);
+        sb.append(" JOIN "+image.TABLE+" ON ");
+        sb.append(item.TABLE+"."+item.COL1+"=");
+        sb.append(image.TABLE+"."+image.COL2);
         sb.append(" WHERE "+item.COL8+" = 0 and ");
-        sb.append(item.COL1 + " = ").append(id);
+        sb.append(item.TABLE+"."+item.COL1 + " = ").append(id);
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if(cursor.moveToFirst()){
             boost.setId(cursor.getInt(0));
@@ -187,6 +219,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             boost.setMass(cursor.getFloat(4));
             boost.setModel(cursor.getInt(5),null);
             boost.setPrice(cursor.getInt(6));
+            boost.setImage1(cursor.getInt(10));
+            boost.setImage2(cursor.getInt(11));
+            boost.setImage3(cursor.getInt(12));
+            boost.setImage4(cursor.getInt(13));
         }
         cursor.close();
         return boost;
@@ -196,33 +232,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void insertBaseData(SQLiteDatabase sqLiteDatabase){
         insertBaseStages(sqLiteDatabase);
         insertBaseBoosts(sqLiteDatabase);
+        insertBaseImages(sqLiteDatabase);
     }
 
     private void insertBaseStages(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
-        values.put(item.COL2,"Super Rocket 5000");
-        values.put(item.COL3,(float)100);
+        values.put(item.COL2,"Super Red Rockets");
+        values.put(item.COL3,(float)85);
         values.put(item.COL4,(float)1250);
-        values.put(item.COL5,(float)10);
-        values.put(item.COL6, R.drawable.rocket_v1);
+        values.put(item.COL5,(float)12);
+        values.put(item.COL6, R.drawable.rocket_icon);
         values.put(item.COL7,50);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        /*values.put(item.COL2,"Super Rocket 5001");
-        values.put(item.COL3,(float)125);
-        values.put(item.COL4,(float)1050);
-        values.put(item.COL5,(float)15);
-        values.put(item.COL6, R.drawable.rocket_v2);
-        values.put(item.COL7,66);
-        values.put(item.COL8,1);
-        sqLiteDatabase.insert(item.TABLE,null,values);
-        values.clear();*/
-        values.put(item.COL2,"North Korea Rocket");
-        values.put(item.COL3,(float)200);
-        values.put(item.COL4,(float)300);
-        values.put(item.COL5,(float)18);
-        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL2,"Magical Blue Rockets");
+        values.put(item.COL3,(float)60);
+        values.put(item.COL4,(float)2000);
+        values.put(item.COL5,(float)8);
+        values.put(item.COL6, R.drawable.rocket_blue_icon);
         values.put(item.COL7,30);
         values.put(item.COL8,1);
         sqLiteDatabase.insert(item.TABLE,null,values);
@@ -230,32 +258,56 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void insertBaseBoosts(SQLiteDatabase sqLiteDatabase){
         ContentValues values = new ContentValues();
-        values.put(item.COL2,"Super Booster 2018");
+        values.put(item.COL2,"Apache Propellers");
         values.put(item.COL3,(float)50);
-        values.put(item.COL4,(float)12500);
-        values.put(item.COL5,(float)7.5);
-        values.put(item.COL6, R.drawable.rocket_v1);
+        values.put(item.COL4,(float)15000);
+        values.put(item.COL5,(float)5);
+        values.put(item.COL6, R.drawable.propeller_icon);
         values.put(item.COL7,70);
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        values.put(item.COL2,"Super Booster 1942");
+        values.put(item.COL2,"Dual Torpedo");
         values.put(item.COL3,(float)90);
         values.put(item.COL4,(float)8500);
         values.put(item.COL5,(float)8.8);
-        values.put(item.COL6, R.drawable.rocket_v2);
+        values.put(item.COL6, R.drawable.dual_torpedo_icon);
         values.put(item.COL7,420);
         values.put(item.COL8,0);
         sqLiteDatabase.insert(item.TABLE,null,values);
         values.clear();
-        /*values.put(item.COL2,"Illuminated Booster v0.3B");
-        values.put(item.COL3,(float)30);
-        values.put(item.COL4,(float)15000);
-        values.put(item.COL5,(float)5);
-        values.put(item.COL6, R.drawable.rocket_v2);
-        values.put(item.COL7,40);
-        values.put(item.COL8,0);
-        sqLiteDatabase.insert(item.TABLE,null,values);*/
+
+    }
+    private void insertBaseImages(SQLiteDatabase sqLiteDatabase){
+        ContentValues values = new ContentValues();
+        values.put(image.COL2,1);
+        values.put(image.COL3,R.drawable.rocket_1);
+        values.put(image.COL4,R.drawable.rocket_2);
+        values.put(image.COL5,R.drawable.rocket_3);
+        values.put(image.COL6,R.drawable.rocket_4);
+        sqLiteDatabase.insert(image.TABLE,null,values);
+        values.clear();
+        values.put(image.COL2,2);
+        values.put(image.COL3,R.drawable.rocket_blue_1);
+        values.put(image.COL4,R.drawable.rocket_blue_2);
+        values.put(image.COL5,R.drawable.rocket_blue_3);
+        values.put(image.COL6,R.drawable.rocket_blue_4);
+        sqLiteDatabase.insert(image.TABLE,null,values);
+        values.clear();
+        values.put(image.COL2,3);
+        values.put(image.COL3,R.drawable.propeller_1);
+        values.put(image.COL4,R.drawable.propeller_2);
+        values.put(image.COL5,R.drawable.propeller_3);
+        values.put(image.COL6,R.drawable.propeller_4);
+        sqLiteDatabase.insert(image.TABLE,null,values);
+        values.clear();
+        values.put(image.COL2,4);
+        values.put(image.COL3,R.drawable.dual_torpedo_1);
+        values.put(image.COL3,R.drawable.dual_torpedo_2);
+        values.put(image.COL3,R.drawable.dual_torpedo_3);
+        values.put(image.COL3,R.drawable.dual_torpedo_4);
+        sqLiteDatabase.insert(image.TABLE,null,values);
+        values.clear();
     }
     private void exceptionHandle(){
         this.onUpgrade(this.getWritableDatabase(),0, 1);
