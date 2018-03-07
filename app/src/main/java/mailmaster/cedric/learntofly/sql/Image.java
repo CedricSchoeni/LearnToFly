@@ -7,7 +7,7 @@ package mailmaster.cedric.learntofly.sql;
  */
 
 class Image {
-    final String TABLE="image";
+    final String TABLE="Image";
     final String COL1="ID";
     final String COL2="itemFK";
     final String COL3="image1";
