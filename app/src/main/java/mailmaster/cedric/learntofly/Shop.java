@@ -13,12 +13,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import mailmaster.cedric.learntofly.CustomListView.CustomAdapter;
-import mailmaster.cedric.learntofly.CustomListView.DataModel;
-import mailmaster.cedric.learntofly.Game.FlightDevices._Boosts.Boost;
-import mailmaster.cedric.learntofly.Game.FlightDevices._Stages.Stage;
-import mailmaster.cedric.learntofly.Game.Profile;
-import mailmaster.cedric.learntofly.SQL.DatabaseHelper;
+import mailmaster.cedric.learntofly.customlistview.CustomAdapter;
+import mailmaster.cedric.learntofly.customlistview.DataModel;
+import mailmaster.cedric.learntofly.game.flightdevices.boosts.Boost;
+import mailmaster.cedric.learntofly.game.flightdevices.stages.Stage;
+import mailmaster.cedric.learntofly.game.Profile;
+import mailmaster.cedric.learntofly.sql.DatabaseHelper;
+
 
 /**
  * Created by cedric.schoeni on 06.03.2018.

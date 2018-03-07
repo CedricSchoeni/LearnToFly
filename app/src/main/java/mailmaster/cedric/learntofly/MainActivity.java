@@ -1,18 +1,12 @@
 package mailmaster.cedric.learntofly;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.GridLayout;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import mailmaster.cedric.learntofly.View.Renderer;
+import mailmaster.cedric.learntofly.view.Renderer;
 
 public class MainActivity extends AppCompatActivity {
 
