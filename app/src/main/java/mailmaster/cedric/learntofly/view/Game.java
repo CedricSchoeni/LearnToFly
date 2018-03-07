@@ -290,8 +290,9 @@ public class Game{
     }
 
     private RImage constructPlayerImage(){
-        RImage rImage= new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,88, 88, 0,
-                ResourceManager.drawableToBitmap(r.context, R.drawable.character),
+        Bitmap tmp = ResourceManager.drawableToBitmap(r.context, R.drawable.character);
+        RImage rImage= new RImage(CANVAS_WIDTH/2 - 44,CANVAS_HEIGHT*1.75f/3 - 44,tmp.getWidth(), tmp.getHeight(), 0,
+                tmp,
                 R.drawable.character);
         List<FlightDevice> stages= getStages();
         List<FlightDevice> boosts = getBoosts();

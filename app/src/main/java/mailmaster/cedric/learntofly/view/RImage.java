@@ -89,11 +89,16 @@ public class RImage implements RObject {
      */
     public Bitmap combine(Bitmap bmp2) {
         if(bmp2==null){
-            Log.e("Failed comb.","null pointer");
+            Log.e("Failed combo","null pointer");
             return image;
         }
 
-        if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight())return image;
+        if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight()){
+            Log.e("Failed combo","bmp2 larger than image");
+            Log.e("width image - bmp2",image.getWidth()+"-"+bmp2.getWidth());
+            Log.e("height image - bmp2",image.getHeight()+"-"+bmp2.getHeight());
+            return image;
+        }
         Bitmap bmOverlay = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
         Canvas canvas = new Canvas(bmOverlay);
         canvas.drawBitmap(image, new Matrix(), null);
@@ -105,13 +110,18 @@ public class RImage implements RObject {
      * Internal version of combine method to change the Bitmap of this RImage.
      * @param bmp2 the 2nd bitmap which gets put on top of this one.
      */
-    public void combineInternal(Bitmap bmp2){
+    void combineInternal(Bitmap bmp2){
         if(bmp2==null){
             Log.e("Failed comb.","null pointer");
             return;
         }
 
-        if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight())return;
+        if(image.getWidth()<bmp2.getWidth() || image.getHeight()<bmp2.getHeight()){
+            Log.e("Failed combo","bmp2 larger than image");
+            Log.e("width image - bmp2",image.getWidth()+"-"+bmp2.getWidth());
+            Log.e("height image - bmp2",image.getHeight()+"-"+bmp2.getHeight());
+            return;
+        }
         Bitmap bmOverlay = Bitmap.createBitmap(image.getWidth(), image.getHeight(), image.getConfig());
         Canvas canvas = new Canvas(bmOverlay);
         canvas.drawBitmap(image, new Matrix(), null);
