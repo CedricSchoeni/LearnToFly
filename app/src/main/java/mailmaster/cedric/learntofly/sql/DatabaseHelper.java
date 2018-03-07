@@ -21,7 +21,6 @@ import mailmaster.cedric.learntofly.R;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private Context context;
     private Player player = new Player();
     private Item item = new Item();
     private Inventory inventory = new Inventory();
@@ -29,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private StringBuilder sb = new StringBuilder();
     public DatabaseHelper(Context context) {
         super(context,"Item", null, 1);
-        this.context=context;
+        Context context1 = context;
     }
 
     @Override

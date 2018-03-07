@@ -34,19 +34,15 @@ public class Game{
 
     private int CLOUD_DELAY = 500;
     private int cloudTimer = 0;
-    private final int CLOUD_LIMIT = 5;
     private List<Cloud> clouds;
 
     private Player player;
     float rotation = 0;
 
-    private final int END_DELAY = 2500;
     private int endTimer = 0;
     private int oldVelocity = 0;
-    private final int END_VELOCITY = 2; // this value changes with the fps - 30fps = ??
 
 
-    private RObject background_image;
     private RObject background_image_grass_bg;
     private RObject background_image_grass_fg;
     private RObject launcher;
@@ -61,7 +57,6 @@ public class Game{
 
     private FVector gamePosition = new FVector(0,0);
     private FVector screenPosition = new FVector(0,0);
-    private final float screenFactor = 0.15f; // actual position of background objects is screenFactor * gamePosition
 
     Handler handler;
 
@@ -238,7 +233,7 @@ public class Game{
     }
 
     private void initBackground(){
-        background_image = new RImage(0,0,CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background), R.drawable.background);
+        RObject background_image = new RImage(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background), R.drawable.background);
         background_image_grass_bg = new RImage(0,0,CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background_grass_bg), R.drawable.background_grass_bg);
         background_image_grass_fg = new RImage(0,0,CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.background_grass_fg), R.drawable.background_grass_fg);
         player.launcher.setModel(new RImage(0,0,CANVAS_WIDTH, CANVAS_HEIGHT, 0, ResourceManager.drawableToBitmap(r.context, R.drawable.canon_background), R.drawable.canon_background));
@@ -293,8 +288,7 @@ public class Game{
             wind_delay = (int) (Math.random() * 10000) + 5000;
             windTimer = 0;
             if (wind.x == 0){
-                float x = (float)(Math.random() * 3)- 1.5f;
-                wind.x = x;
+                wind.x = (float)(Math.random() * 3)- 1.5f;
             } else {
                 wind.x = 0;
             }
@@ -315,6 +309,7 @@ public class Game{
         if (cloudTimer >= CLOUD_DELAY){
             CLOUD_DELAY = (player.getSpeed() < 10) ? 750 : (int)(75000/player.getSpeed());
             cloudTimer = 0;
+            int CLOUD_LIMIT = 5;
             if (clouds.size() < CLOUD_LIMIT){
                 int xHalf = CANVAS_WIDTH/2;
                 int x = (player.velocity.x > 0) ? (int) (Math.random() * (CANVAS_WIDTH - xHalf) + xHalf) : (int) (Math.random() * (xHalf + 250) - 250);
@@ -344,9 +339,11 @@ public class Game{
 
     private void checkForEnd(){
         endTimer += Renderer.FPS_DELAY;
+        int END_DELAY = 2500;
         if (endTimer >= END_DELAY) {
             endTimer = 0;
             int currentVelocity = (int) player.velocity.mag();
+            int END_VELOCITY = 2;
             if (currentVelocity == oldVelocity && oldVelocity == END_VELOCITY){
                 stopGame();
                 r.stopGame();
@@ -376,6 +373,7 @@ public class Game{
 
     private void calcPosition(){
         screenPosition.set(player.getSpeedVector().x * -1, player.getSpeedVector().y);
+        float screenFactor = 0.15f;
         screenPosition.mult(screenFactor);
     }
 

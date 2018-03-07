@@ -19,7 +19,6 @@ import mailmaster.cedric.learntofly.R;
 
 public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnClickListener{
 
-    private ArrayList<DataModel> dataSet;
     Context mContext;
 
     // View lookup cache
@@ -32,7 +31,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
     public CustomAdapter(ArrayList<DataModel> data, Context context) {
         super(context, R.layout.row_item, data);
-        this.dataSet = data;
+        ArrayList<DataModel> dataSet = data;
         this.mContext=context;
 
     }
@@ -55,8 +54,6 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
                 break;
         }
     }
-
-    private int lastPosition = -1;
 
     @NonNull
     @Override
@@ -88,7 +85,7 @@ public class CustomAdapter extends ArrayAdapter<DataModel> implements View.OnCli
 
         //Animation animation = AnimationUtils.loadAnimation(mContext, (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         //result.startAnimation(animation);
-        lastPosition = position;
+        int lastPosition = position;
 
         viewHolder.txtName.setText(dataModel != null ? dataModel.getName() : "");
         viewHolder.txtType.setText(dataModel.getType());
