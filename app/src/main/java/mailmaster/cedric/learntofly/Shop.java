@@ -82,6 +82,11 @@ public class Shop extends AppCompatActivity {
 
     }
 
+    /**
+     * This sets the listView to show all Stages and also adds the correct info to
+     * determine which button was clicked upon this method being called.
+     * @param profile int number key of the button clicked, used to store data later.
+     */
     private void setStagesList(int profile){
         List<Stage> stages = dbhelper.getAllStages();
         for (int i = 0; i < stages.size(); i++) {
@@ -97,6 +102,11 @@ public class Shop extends AppCompatActivity {
         }
     }
 
+    /**
+     * This sets the listView to show all Boosts and also adds the correct info to
+     * determine which button was clicked upon this method being called.
+     * @param profile int number key of the button clicked, used to store data later.
+     */
     private void setBoostsList(int profile){
         List<Boost> boosts = dbhelper.getAllBoosts();
         for (int i = 0; i < boosts.size(); i++) {
@@ -112,6 +122,9 @@ public class Shop extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sets a new adapter with the data set in setBoostsList() & setStagesList
+     */
     private void setNewAdapter(){
 
         CustomAdapter adapter = new CustomAdapter(dataModels, getApplicationContext());
@@ -128,6 +141,10 @@ public class Shop extends AppCompatActivity {
         });
     }
 
+    /**
+     * @param tmp Button that will get the functionality
+     * @param current int used to write the data into the correct Profile variable.
+     */
     private void addFunctionality(Button tmp, final int current){
         this.current=current;
         if(current>0&&current<=4){
@@ -156,10 +173,12 @@ public class Shop extends AppCompatActivity {
             });
 
         }
-
-
-
     }
+
+    /**
+     * This method determines which profile variable needs to be set to the ID
+     * @param ID id of the item in the db received button click event
+     */
     private void setProfileVal(int ID){
         switch(this.current){
             case 1:

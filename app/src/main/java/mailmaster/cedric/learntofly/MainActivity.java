@@ -8,6 +8,12 @@ import android.widget.GridLayout;
 
 import mailmaster.cedric.learntofly.view.Renderer;
 
+/**
+ * Created by cedric.schoeni on 03.03.2018
+ * This is the main Activity
+ * It will create a new View and add it to the gridLayout
+ * in this view the Renderer will display all information
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Context context;
