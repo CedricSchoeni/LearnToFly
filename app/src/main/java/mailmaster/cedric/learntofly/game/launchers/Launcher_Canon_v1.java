@@ -5,7 +5,7 @@ import mailmaster.cedric.learntofly.view.RObject;
 
 /**
  * Created by Cedric on 04.03.2018.
- * This class is a fillerclass which should be replaced with a Launcher template class that would allow us
+ * This class is a filler-class which should be replaced with a Launcher template class that would allow us
  * to instantiate different launchers - due to limited time we left this class at this state
  */
 
