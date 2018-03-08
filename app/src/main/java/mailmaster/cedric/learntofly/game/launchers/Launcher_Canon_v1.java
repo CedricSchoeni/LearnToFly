@@ -12,7 +12,7 @@ import mailmaster.cedric.learntofly.view.RObject;
 public class Launcher_Canon_v1 implements Launchers{
 
     private boolean active = false;
-    private final float power = 2000;
+    private final float power = 500;
     private final float fuel = 2000; // 1000 = 1sec
     private RObject model;
 
